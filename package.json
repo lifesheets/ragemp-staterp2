@@ -1,0 +1,18 @@
+{
+    "name": "wixcore",
+    "version": "1.0.0",
+    "description": "Files for the build of the game mod for the RAGEMP 1.1 platform.",
+    "main": "index.js",
+    "author": "ua.lifesheets <ua.lifesheetst@outlook.com>",
+    "license": "MIT",
+    "scripts": {
+        "start": "nodemon --watch packages --watch client_packages --exec \"./ragemp-server.exe\"",
+        "build": "npm run build:handlers && npm run build:interface",
+        "build:interface": "cd interface && npm run build",
+        "build:handlers": "cd handlers && npm run build"
+    },
+    "dependencies": {
+        "dotenv": "^16.0.3",
+        "nodemon": "^2.0.20"
+    }
+}
