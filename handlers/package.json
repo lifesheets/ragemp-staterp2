@@ -1,0 +1,21 @@
+{
+  "name": "wixcore-handlers",
+  "version": "1.0.0",
+  "description": "Files for the client part of the game mod for the RAGEMP 1.1 platform.",
+  "main": "index.js",
+  "author": "ua.lifesheetst@outlook.com",
+  "license": "MIT",
+  "scripts": {
+    "build": "webpack --mode production",
+    "watch": "webpack --mode production --watch --progress"
+  },
+  "dependencies": {
+    "@sucrase/webpack-loader": "^2.0.0",
+    "sucrase": "^3.29.0",
+    "webpack": "^5.75.0",
+    "webpack-cli": "^5.0.1"
+  },
+  "devDependencies": {
+    "@types/ragemp-c": "github:CocaColaBear/types-ragemp-c#v2.0"
+  }
+}

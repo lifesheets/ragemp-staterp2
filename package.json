@@ -1,18 +1,32 @@
 {
-    "name": "wixcore",
-    "version": "1.0.0",
-    "description": "Files for the build of the game mod for the RAGEMP 1.1 platform.",
-    "main": "index.js",
-    "author": "ua.lifesheets <ua.lifesheetst@outlook.com>",
-    "license": "MIT",
-    "scripts": {
-        "start": "nodemon --watch packages --watch client_packages --exec \"./ragemp-server.exe\"",
-        "build": "npm run build:handlers && npm run build:interface",
-        "build:interface": "cd interface && npm run build",
-        "build:handlers": "cd handlers && npm run build"
-    },
-    "dependencies": {
-        "dotenv": "^16.0.3",
-        "nodemon": "^2.0.20"
-    }
+  "name": "wixcore",
+  "version": "1.0.0",
+  "description": "Files for the build of the game mod for the RAGEMP 1.1 platform.",
+  "homepage": "https://github.com/wixcore/ragemp#readme",
+  "main": "index.js",
+  "author": "ua.lifesheetst@outlook.com",
+  "license": "MIT",
+  "scripts": {
+    "start": "nodemon --watch packages --watch client_packages --exec \"./ragemp-server.exe\"",
+    "build": "npm run build:handlers && npm run build:interface",
+    "build:interface": "cd interface && npm run build",
+    "build:handlers": "cd handlers && npm run build"
+  },
+  "dependencies": {
+    "dotenv": "^16.0.3",
+    "mysql": "^2.18.1",
+    "nodemon": "^2.0.20",
+    "webhook-discord": "^3.7.8"
+  },
+  "devDependencies": {
+    "@types/ragemp-s": "github:CocaColaBear/types-ragemp-s#v1.0",
+    "@types/ragemp-c": "github:CocaColaBear/types-ragemp-c#v2.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/wixcore/ragemp.git"
+  },
+  "bugs": {
+    "url": "https://github.com/wixcore/ragemp/issues"
+  }
 }
