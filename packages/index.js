@@ -3,6 +3,19 @@
 require('dotenv').config();
 require('./dednet/modules/cli');
 require('./dednet/modules/data');
+
+global.fs = require('fs');
+global.path = require('path');
+global.Sequelize = require('sequelize');
+global.db = require('./wixcore/libraries/sequelize');
+
+try {
+    db.connect();
+} catch (err) {
+    console.log('[ERROR MYSQL CONNECT]', err);
+}
+
+
 require('./dednet/modules/events');
 require('./dednet/modules/chat');
 require('./dednet/voice/voice');
