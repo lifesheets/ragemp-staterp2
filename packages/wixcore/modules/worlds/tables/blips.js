@@ -1,4 +1,4 @@
-"use strict"; // Created by ua.lifesheets on 25.07.2020.
+"use strict"; // Created by ua.lifesheets on 28.01.2023.
 
 module.exports = (sequelize, DataTypes) => {
     const model = sequelize.define("world_blip", {

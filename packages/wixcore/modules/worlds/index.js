@@ -2,6 +2,7 @@
 
 let blips = require('./blips');
 
+require('./events');
 
 function init() {
     try {
