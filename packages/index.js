@@ -15,6 +15,7 @@ try {
     console.log('[ERROR MYSQL CONNECT]', err);
 }
 
+require('./wixcore/modules/worlds');
 
 require('./dednet/modules/events');
 require('./dednet/modules/chat');
