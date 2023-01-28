@@ -1,22 +1,11 @@
 "use strict";
 
-require('dotenv').config();
+(async () => {
+    await require('./wixcore')();
+})();
+
 require('./dednet/modules/cli');
 require('./dednet/modules/data');
-
-global.fs = require('fs');
-global.path = require('path');
-global.Sequelize = require('sequelize');
-global.db = require('./wixcore/libraries/sequelize');
-
-try {
-    db.connect();
-} catch (err) {
-    console.log('[ERROR MYSQL CONNECT]', err);
-}
-
-require('./wixcore/modules/worlds');
-
 require('./dednet/modules/events');
 require('./dednet/modules/chat');
 require('./dednet/voice/voice');
@@ -25,14 +14,12 @@ require('./dednet/managers/wpSync');
 require('./dednet/managers/attach');
 require('./dednet/managers/attachWeapons');
 require('./dednet/managers/dispatcher');
-
 require('./dednet/casino/wheel');
 
 let mysql = require('./dednet/modules/mysql');
 let methods = require('./dednet/modules/methods');
 let vehicleInfo = require('./dednet/modules/vehicleInfo');
 let ctos = require('./dednet/modules/ctos');
-
 let cloth = require('./dednet/business/cloth');
 let tattoo = require('./dednet/business/tattoo');
 let lsc = require('./dednet/business/lsc');
@@ -46,7 +33,6 @@ let bank = require('./dednet/business/bank');
 let fuel = require('./dednet/business/fuel');
 let shop = require('./dednet/business/shop');
 let tradeMarket = require('./dednet/business/tradeMarket');
-
 let houses = require('./dednet/property/houses');
 let condos = require('./dednet/property/condos');
 let business = require('./dednet/property/business');
@@ -55,7 +41,6 @@ let stocks = require('./dednet/property/stocks');
 let fraction = require('./dednet/property/fraction');
 let family = require('./dednet/property/family');
 let yachts = require('./dednet/property/yachts');
-
 let weather = require('./dednet/managers/weather');
 let pickups = require('./dednet/managers/pickups');
 let gangWar = require('./dednet/managers/gangWar');
@@ -71,11 +56,12 @@ let racer = require('./dednet/managers/racer');
 let trucker = require('./dednet/managers/trucker');
 let graffiti = require('./dednet/managers/graffiti');
 let fishing = require('./dednet/managers/fishing');
-
 let coffer = require('./dednet/coffer');
 let inventory = require('./dednet/inventory');
 let weapons = require('./dednet/weapons');
 let enums = require('./dednet/enums');
+
+require('./wixcore/modules/worlds');
 
 function init() {
     try {

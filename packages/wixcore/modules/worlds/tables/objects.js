@@ -1,7 +1,7 @@
 "use strict"; // Created by ua.lifesheets on 28.01.2023.
 
 module.exports = (sequelize, DataTypes) => {
-    const model = sequelize.define("world_object", {
+    const model = sequelize.define("WorldObject", {
         id: {
             type: DataTypes.INTEGER(11),
             primaryKey: true,
