@@ -25,7 +25,7 @@ module.exports = {
         this.loadModels();
     },
     loadModels: function () {
-        console.log("[INFO] Завантаження моделей бази даних ...");
+        console.log("[INFO] Loading database models ...");
         // Завантаження моделей для модулів
         fs.readdirSync(path.dirname(__dirname) + '\\modules\\').forEach(catalog => {
             if (fs.existsSync(path.dirname(__dirname) + '\\modules\\' + catalog + '\\tables')) {
@@ -42,6 +42,6 @@ module.exports = {
             }
         }
         this.sequelize.sync();
-        console.log("[DONE] Підключення до бази даних вдалося.");
+        console.log("[DONE] The connection to the database was successful.");
     }
 };

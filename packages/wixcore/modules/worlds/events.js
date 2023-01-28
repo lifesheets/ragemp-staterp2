@@ -1,7 +1,7 @@
 "use strict"; // Created by ua.lifesheets on 28.01.2023.
 
 mp.events.add("packagesLoaded", async () => {
-    var list = await WixCore.db.Models.WorldObject.findAll();
+    var list = await WixCore.MySQL.Models.WorldObject.findAll();
     if (list === null) return;
     list.forEach(arg => {
         if (arg.status === 'N') return;
@@ -11,5 +11,5 @@ mp.events.add("packagesLoaded", async () => {
             rotation: arg.rotation
         });
     });
-    console.log(`[INFO] Об'єкти для світу завантажено: [${list.length}]`);
+    console.log(`[INFO] Objects for the world have been loaded: [${list.length}]`);
 });

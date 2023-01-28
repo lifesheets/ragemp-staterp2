@@ -3,7 +3,7 @@
 let blips = exports;
 
 blips.init = async function () {
-    var list = await WixCore.db.Models.WorldBlip.findAll();
+    var list = await WixCore.MySQL.Models.WorldBlip.findAll();
     list.forEach(arg => {
         var position = new mp.Vector3(arg.position.x, arg.position.y, arg.position.z);
         mp.blips.new(arg.type, position,
@@ -15,5 +15,5 @@ blips.init = async function () {
                 dimension: arg.dimension
             });
     });
-    console.log(`[INFO] Титули для карти світу завантажено [${list.length}]`);
+    console.log(`[INFO] Blips of the world are loaded [${list.length}]`);
 };
