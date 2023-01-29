@@ -798,7 +798,7 @@ ems.createSmall = function (id = 0) {
         }
     }
     catch (e) {
-        methods.debug(e);
+        WixCore.Debug.Server(e);
     }
 };
 
@@ -830,7 +830,7 @@ ems.removeObject = function (id) {
         }
     }
     catch (e) {
-        methods.debug(e);
+        WixCore.Debug.Server(e);
     }
 };
 
@@ -862,7 +862,7 @@ ems.attachObject = function (player, id) {
         }
     }
     catch (e) {
-        methods.debug(e);
+        WixCore.Debug.Server(e);
     }
 };
 
@@ -891,6 +891,6 @@ ems.vehicleUnload = function (player) {
         }
     }
     catch (e) {
-        methods.debug(e);
+        WixCore.Debug.Server(e);
     }
 };

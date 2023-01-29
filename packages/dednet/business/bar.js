@@ -29,7 +29,7 @@ bar.listFree = [
 ];
 
 bar.loadAll = function() {
-    methods.debug('bar.loadAll');
+    WixCore.Debug.Server('bar.loadAll');
     bar.list.forEach(function (item) {
         let shopPos = new mp.Vector3(item[0], item[1], item[2]);
         switch (item[3]) {
@@ -71,7 +71,7 @@ bar.loadAll = function() {
 };
 
 bar.getInRadius = function(pos, radius = 2, dim = 0) {
-    methods.debug('bar.getInRadius');
+    WixCore.Debug.Server('bar.getInRadius');
     let shopId = -1;
     bar.list.forEach(function (item, idx) {
         let shopPos = new mp.Vector3(item[0], item[1], item[2]);
@@ -87,7 +87,7 @@ bar.getInRadius = function(pos, radius = 2, dim = 0) {
 };
 
 bar.checkPosForOpenMenu = function(player) {
-    methods.debug('bar.checkPosForOpenMenu');
+    WixCore.Debug.Server('bar.checkPosForOpenMenu');
     try {
         let playerPos = player.position;
         let shopId = bar.getInRadius(playerPos, 2, player.dimension);
@@ -104,12 +104,12 @@ bar.checkPosForOpenMenu = function(player) {
         player.call('client:menuList:showBarMenu', [shopId, business.getPrice(shopId)]);
     }
     catch (e) {
-        methods.debug(e);
+        WixCore.Debug.Server(e);
     }
 };
 
 bar.findNearest = function(pos) {
-    methods.debug('shop.findNearest');
+    WixCore.Debug.Server('shop.findNearest');
     let prevPos = new mp.Vector3(9999, 9999, 9999);
     bar.list.forEach(function (item) {
         let shopPos = new mp.Vector3(item[0], item[1], item[2]);

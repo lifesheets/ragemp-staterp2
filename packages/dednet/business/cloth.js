@@ -16,7 +16,7 @@ cloth.maskShop2 = new mp.Vector3(5081.2587890625, -5755.23486328125, 14.82964420
 cloth.printShopPos = new mp.Vector3(-1339.9146728515625, -1268.3306884765625, 3.8951973915100098);
 
 cloth.loadAll = function(){
-    methods.debug('barberShop.loadAll');
+    WixCore.Debug.Server('barberShop.loadAll');
 
     /*methods.createBlip(cloth.printShopPos, 72, 0, 0.8, 'Print Shop');
     methods.createCpVector(cloth.printShopPos, 'Нажмите ~g~E~s~ чтобы открыть меню', 1, -1, [33, 150, 243, 100]);*/
@@ -71,7 +71,7 @@ cloth.loadAll = function(){
 };
 
 cloth.checkPosForOpenMenu = function (player) {
-    methods.debug('barberShop.checkPosForOpenMenu');
+    WixCore.Debug.Server('barberShop.checkPosForOpenMenu');
     try {
         let playerPos = player.position;
 
@@ -158,12 +158,12 @@ cloth.checkPosForOpenMenu = function (player) {
         }
     }
     catch (e) {
-        methods.debug(e);
+        WixCore.Debug.Server(e);
     }
 };
 
 cloth.findNearest = function(pos) {
-    methods.debug('cloth.findNearest');
+    WixCore.Debug.Server('cloth.findNearest');
     let prevPos = new mp.Vector3(9999, 9999, 9999);
     shopList.forEach(function (item,) {
         if (item[0] === 3 || item[0] === 4 || item[0] === 999)
@@ -176,17 +176,17 @@ cloth.findNearest = function(pos) {
 };
 
 cloth.changeProp = function (player, body, clothId, color) {
-    methods.debug('barberShop.changeProp');
+    WixCore.Debug.Server('barberShop.changeProp');
     try {
         user.setProp(player, body, clothId, color);
     }
     catch (e) {
-        methods.debug(e);
+        WixCore.Debug.Server(e);
     }
 };
 
 cloth.buyProp = function (player, price, body, clothId, color, itemName, shopId, isFree, payType = 0) {
-    methods.debug('barberShop.buyProp');
+    WixCore.Debug.Server('barberShop.buyProp');
 
     if (price < 0)
         return;
@@ -279,7 +279,7 @@ cloth.buyProp = function (player, price, body, clothId, color, itemName, shopId,
 };
 
 cloth.change = function (player, body, cloth, color, torso, torsoColor, parachute, parachuteColor) {
-    methods.debug('barberShop.change');
+    WixCore.Debug.Server('barberShop.change');
     if (body == 11)
     {
         if (torso == -1) torso = 0;
@@ -294,13 +294,13 @@ cloth.change = function (player, body, cloth, color, torso, torsoColor, parachut
 };
 
 cloth.getClothBagName = function (idx) {
-    methods.debug('cloth.getClothBagName');
+    WixCore.Debug.Server('cloth.getClothBagName');
     let names = ['Черная', 'Синяя', 'Желтая', 'Розовая', 'Зелёная', 'Оранжевая', 'Фиолетовая', 'Светло-розовая', 'Красно-синяя', 'Голубая', 'Цифра', 'Флора', 'Синяя флора', 'Узор', 'Пустынная', 'Камо', 'Белая'];
     return names[idx];
 };
 
 cloth.buy = function (player, price, body, cloth, color, torso, torsoColor, parachute, parachuteColor, itemName = "Одежда", shopId = 0, isFree = false, payType = 0) {
-    methods.debug('cloth.buy');
+    WixCore.Debug.Server('cloth.buy');
     if (!user.isLogin(player))
         return;
 
@@ -440,14 +440,14 @@ cloth.buy = function (player, price, body, cloth, color, torso, torsoColor, para
 };
 
 cloth.changeMask = function (player, clothId, color) {
-    methods.debug('barberShop.buy');
+    WixCore.Debug.Server('barberShop.buy');
     if (!user.isLogin(player))
         return;
     user.setComponentVariation(player, 1, clothId, color);
 };
 
 cloth.buyMask = function (player, price, maskId, shopId, payType = 0) {
-    methods.debug('barberShop.buy', price, maskId, shopId);
+    WixCore.Debug.Server('barberShop.buy', price, maskId, shopId);
     if (!user.isLogin(player))
         return;
 
@@ -518,7 +518,7 @@ cloth.buyPrint = function(player, collection, overlay, price, shopId, payType) {
                 inventory.updateItemParams(row['id'], JSON.stringify(params));
             }
             catch (e) {
-                methods.debug(e);
+                WixCore.Debug.Server(e);
             }
         });
     });

@@ -62,7 +62,7 @@ timer.min10Timer = function() {
             }
         }
         catch (e) {
-            methods.debug(e);
+            WixCore.Debug.Server(e);
         }
     });
 
@@ -124,12 +124,12 @@ timer.min60Timer = function() {
                         Container.Data.Reset(i, "isMail2" + j);
                 }
                 catch (e) {
-                    methods.debug(e);
+                    WixCore.Debug.Server(e);
                 }
             }
         }
         catch (e) {
-            methods.debug(e);
+            WixCore.Debug.Server(e);
         }
     }*/
 
@@ -162,7 +162,7 @@ timer.min60Timer = function() {
                             user.resetById(user.getId(p), 'isMail2' + j);
                     }
                     catch (e) {
-                        methods.debug(e);
+                        WixCore.Debug.Server(e);
                     }
                 }
             }
@@ -324,7 +324,7 @@ timer.sec10Timer = function() {
                 vehicles.set(v.id, 'afkLastPos', v.position);
             }
             catch (e) {
-                methods.debug(e);
+                WixCore.Debug.Server(e);
             }
         }
     });
@@ -380,7 +380,7 @@ timer.sec5Timer = function() {
                 }
             }
             catch (e) {
-                methods.debug(e);
+                WixCore.Debug.Server(e);
             }
         }
     });

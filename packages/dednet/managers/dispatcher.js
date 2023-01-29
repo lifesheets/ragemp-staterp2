@@ -22,15 +22,15 @@ dispatcher.sendPos = function (title, desc, pos, withCoord = true, phone = 0) {
         return;
     }
 
-    methods.debug('dispatcher.sendPos');
-    let time = methods.digitFormat(weather.getHour()) + ':' + methods.digitFormat(weather.getMin());
+    WixCore.Debug.Server('dispatcher.sendPos');
+    let time = WixCore.Function.DigitFormat(weather.getHour()) + ':' + WixCore.Function.DigitFormat(weather.getMin());
     mp.players.forEach(function (player) {
         try {
             if (user.isFib(player) || user.isEms(player) || user.isSapd(player) || user.isSheriff(player) || user.isUsmc(player))
                 player.call("client:dispatcher:addDispatcherList", [title, desc, time, pos.x, pos.y, pos.z, withCoord, phone.toString()]);
         }
         catch (e) {
-            methods.debug(e);
+            WixCore.Debug.Server(e);
         }
     });
 };
@@ -39,8 +39,8 @@ dispatcher.sendLocalPos = function (title, desc, pos, fractionId, withCoord = tr
     if (methods.isBlackout()) {
         return;
     }
-    methods.debug('dispatcher.sendLocalPos');
-    let time = methods.digitFormat(weather.getHour()) + ':' + methods.digitFormat(weather.getMin());
+    WixCore.Debug.Server('dispatcher.sendLocalPos');
+    let time = WixCore.Function.DigitFormat(weather.getHour()) + ':' + WixCore.Function.DigitFormat(weather.getMin());
     mp.players.forEach(function (player) {
         if (user.get(player,'fraction_id') == fractionId)
             player.call("client:dispatcher:addDispatcherList", [title, desc, time, pos.x, pos.y, pos.z, withCoord]);
@@ -73,8 +73,8 @@ dispatcher.sendTaxiPos = function (title, desc, pos, wpos, price, phone = 0) {
     if (taxiList.length > 50)
         taxiList.pop();
 
-    methods.debug('dispatcher.sendTaxiPos');
-    let time = methods.digitFormat(weather.getHour()) + ':' + methods.digitFormat(weather.getMin());
+    WixCore.Debug.Server('dispatcher.sendTaxiPos');
+    let time = WixCore.Function.DigitFormat(weather.getHour()) + ':' + WixCore.Function.DigitFormat(weather.getMin());
     mp.players.forEach(function (player) {
         if (methods.distanceToPos(player.position, pos) < 1000) {
             if (user.get(player, 'taxi_lic') && user.get(player, 'isTaxi') && player.vehicle)
@@ -93,8 +93,8 @@ dispatcher.sendMechPos = function (title, desc, pos, phone = 0) {
     if (mechList.length > 50)
         mechList.pop();
 
-    methods.debug('dispatcher.sendMechPos');
-    let time = methods.digitFormat(weather.getHour()) + ':' + methods.digitFormat(weather.getMin());
+    WixCore.Debug.Server('dispatcher.sendMechPos');
+    let time = WixCore.Function.DigitFormat(weather.getHour()) + ':' + WixCore.Function.DigitFormat(weather.getMin());
     mp.players.forEach(function (player) {
         if (methods.distanceToPos(player.position, pos) < 1000) {
             if (player.vehicle && player.vehicle.getVariable('job') === 5)
@@ -177,7 +177,7 @@ mp.events.add("playerEnterVehicle", (player, vehicle, seat) => {
         }
     }
     catch (e) {
-        methods.debug(e);
+        WixCore.Debug.Server(e);
     }
 });
 
@@ -211,6 +211,6 @@ mp.events.add("playerExitVehicle", (player, vehicle) => {
         }
     }
     catch (e) {
-        methods.debug(e);
+        WixCore.Debug.Server(e);
     }
 });

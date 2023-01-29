@@ -69,7 +69,7 @@ shop.list = [
 ];
 
 shop.loadAll = function() {
-    methods.debug('shop.loadAll');
+    WixCore.Debug.Server('shop.loadAll');
     let prevId = 0;
     shop.list.forEach(function (item) {
         let shopPos = new mp.Vector3(item[0], item[1], item[2]);
@@ -105,7 +105,7 @@ shop.loadAll = function() {
 };
 
 shop.getInRadius = function(pos, radius = 2) {
-    methods.debug('shop.fuel');
+    WixCore.Debug.Server('shop.fuel');
     let shopId = -1;
     shop.list.forEach(function (item, idx) {
         let shopPos = new mp.Vector3(item[0], item[1], item[2]);
@@ -116,7 +116,7 @@ shop.getInRadius = function(pos, radius = 2) {
 };
 
 shop.getInRadiusItem = function(pos, radius = 2) {
-    methods.debug('shop.fuel');
+    WixCore.Debug.Server('shop.fuel');
     let shopId = null;
     shop.list.forEach(function (item, idx) {
         let shopPos = new mp.Vector3(item[0], item[1], item[2]);
@@ -127,7 +127,7 @@ shop.getInRadiusItem = function(pos, radius = 2) {
 };
 
 shop.findNearest = function(pos) {
-    methods.debug('shop.findNearest');
+    WixCore.Debug.Server('shop.findNearest');
     let prevPos = new mp.Vector3(9999, 9999, 9999);
     shop.list.forEach(function (item) {
         let shopPos = new mp.Vector3(item[0], item[1], item[2]);
@@ -138,7 +138,7 @@ shop.findNearest = function(pos) {
 };
 
 shop.findNearestById = function(pos, id) {
-    methods.debug('shop.findNearest');
+    WixCore.Debug.Server('shop.findNearest');
     let prevPos = new mp.Vector3(9999, 9999, 9999);
     shop.list.forEach(function (item) {
         if (item[4] !== id)
@@ -151,7 +151,7 @@ shop.findNearestById = function(pos, id) {
 };
 
 shop.checkPosForOpenMenu = function(player) {
-    methods.debug('shop.checkPosForOpenMenu');
+    WixCore.Debug.Server('shop.checkPosForOpenMenu');
     try {
         let playerPos = player.position;
         let shopItem = shop.getInRadiusItem(playerPos, 2);
@@ -187,12 +187,12 @@ shop.checkPosForOpenMenu = function(player) {
         }
     }
     catch (e) {
-        methods.debug(e);
+        WixCore.Debug.Server(e);
     }
 };
 
 shop.buy = function(player, itemId, price, shopId, payType = 0) {
-    methods.debug('shop.buy');
+    WixCore.Debug.Server('shop.buy');
 
     if (!user.isLogin(player))
         return;

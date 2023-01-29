@@ -6,7 +6,7 @@ let coffer = exports;
 let containerId = 99999;
 
 coffer.load = function() {
-    methods.debug('coffer.load');
+    WixCore.Debug.Server('coffer.load');
     mysql.executeQuery(`SELECT * FROM official_bank`, function (err, rows, fields) {
 
         rows.forEach(function(item) {
@@ -28,14 +28,14 @@ coffer.load = function() {
             Container.Data.Set(containerId + item['id'], 'stock_armour', item['stock_armour']);
             Container.Data.Set(containerId + item['id'], 'stock_other', item['stock_other']);
 
-            methods.debug(`Coffer loaded: ${methods.moneyFormat(item['money'])} | ${item['name']} | ${item['score']}`);
+            WixCore.Debug.Server(`Coffer loaded: ${methods.moneyFormat(item['money'])} | ${item['name']} | ${item['score']}`);
         });
     });
 };
 
 coffer.save = function (id) {
 
-    methods.debug('coffer.save', id);
+    WixCore.Debug.Server('coffer.save', id);
 
     id = methods.parseInt(id);
 
@@ -54,7 +54,7 @@ coffer.save = function (id) {
 };
 
 coffer.saveAll = function () {
-    methods.debug('coffer.saveAll');
+    WixCore.Debug.Server('coffer.saveAll');
     for (let i = 0; i < 20; i++)
         coffer.save(i);
 };

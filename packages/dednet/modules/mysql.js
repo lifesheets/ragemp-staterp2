@@ -173,7 +173,7 @@ setInterval(function() {
                 }
             }
             catch (e) {
-                methods.debug(e);
+                WixCore.Debug.Server(e);
             }
 
         });
@@ -183,7 +183,7 @@ setInterval(function() {
 
 mysql.getTime = function() {
     let dateTime = new Date();
-    return `${methods.digitFormat(dateTime.getHours())}:${methods.digitFormat(dateTime.getMinutes())}:${methods.digitFormat(dateTime.getSeconds())}`;
+    return `${WixCore.Function.DigitFormat(dateTime.getHours())}:${WixCore.Function.DigitFormat(dateTime.getMinutes())}:${WixCore.Function.DigitFormat(dateTime.getSeconds())}`;
 };
 
 mysql.isTestServer = function() {
@@ -223,7 +223,7 @@ mysql.executeQuery = async function (query, values, callback) {
 
                         try {
                             const postQuery = new Date().getTime();
-                            methods.debug(query, `Async time: ${postQuery - preQuery}ms`);
+                            WixCore.Debug.Server(query, `Async time: ${postQuery - preQuery}ms`);
                         }
                         catch (e) {}
 
@@ -268,15 +268,15 @@ mysql.executeQueryOld = function(query, values, callback) {
                         callback(err);
                 }
                 const end = new Date().getTime();
-                methods.debug(`${query}`, `Time: ${end - start}ms`);
+                WixCore.Debug.Server(`${query}`, `Time: ${end - start}ms`);
             }
             catch (e) {
-                methods.debug('ERROR SQL DONE', e);
+                WixCore.Debug.Server('ERROR SQL DONE', e);
             }
         });
     }
     catch (e) {
-        methods.debug('ERROR SQL', e);
+        WixCore.Debug.Server('ERROR SQL', e);
     }
 };
 

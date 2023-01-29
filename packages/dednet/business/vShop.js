@@ -64,7 +64,7 @@ vShop.loadAllShopVehicles = () => {
 };
 
 vShop.getInRadius = function(pos, radius = 2) {
-    methods.debug('gun.getInRadius');
+    WixCore.Debug.Server('gun.getInRadius');
     let shopId = -1;
     enums.carShopList.forEach(function (item, idx) {
         if (item.id == 0)
@@ -77,7 +77,7 @@ vShop.getInRadius = function(pos, radius = 2) {
 };
 
 vShop.checkPosForOpenMenu = function(player) {
-    methods.debug('gun.checkPosForOpenMenu');
+    WixCore.Debug.Server('gun.checkPosForOpenMenu');
     try {
         let playerPos = player.position;
         let shopId = vShop.getInRadius(playerPos, 2);
@@ -110,12 +110,12 @@ vShop.checkPosForOpenMenu = function(player) {
         });
     }
     catch (e) {
-        methods.debug(e);
+        WixCore.Debug.Server(e);
     }
 };
 
 vShop.findNearest = function(pos) {
-    methods.debug('gun.findNearest');
+    WixCore.Debug.Server('gun.findNearest');
     let prevPos = new mp.Vector3(9999, 9999, 9999);
     gun.list.forEach(function (item,) {
         let shopPos = new mp.Vector3(item[0], item[1], item[2]);
@@ -260,7 +260,7 @@ vShop.buy = function(player, model, color1, color2, shopId, payType) {
                 }, 2000);
             }
             catch (e) {
-                methods.debug(e);
+                WixCore.Debug.Server(e);
             }
         });
     });

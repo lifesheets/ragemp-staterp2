@@ -34,7 +34,7 @@ let gangList = [];
 let warPool = new Map();
 
 gangWar.loadAll = function() {
-    methods.debug('gangWar.loadAll');
+    WixCore.Debug.Server('gangWar.loadAll');
     mysql.executeQuery(`SELECT * FROM gang_war`, function (err, rows, fields) {
 
         rows.forEach(row => {
@@ -70,7 +70,7 @@ gangWar.loadAll = function() {
 };
 
 gangWar.save = function(id, ownerId, name) {
-    methods.debug('gangWar.save');
+    WixCore.Debug.Server('gangWar.save');
     gangWar.set(id, 'fraction_id', ownerId);
     gangWar.set(id, 'fraction_name', name);
     gangWar.set(id, 'timestamp', methods.getTimeStamp());
@@ -116,7 +116,7 @@ gangWar.startWar = function(zoneId, attack, def, isArmor, count) {
     if (isStartTimer)
         return;
 
-    methods.debug('gangWar.startWar');
+    WixCore.Debug.Server('gangWar.startWar');
 
     isStartTimer = true;
     timerCounter = 300;
@@ -145,7 +145,7 @@ gangWar.startWar = function(zoneId, attack, def, isArmor, count) {
 };
 
 gangWar.addWar = function(player, zoneId, count, armorIndex, gunIndex, timeIndex) {
-    methods.debug('gangWar.addWar');
+    WixCore.Debug.Server('gangWar.addWar');
     if (!user.isLogin(player))
         return;
 
@@ -234,7 +234,7 @@ gangWar.addWar = function(player, zoneId, count, armorIndex, gunIndex, timeIndex
 };
 
 gangWar.dropTimer = function(player) {
-    methods.debug('gangWar.dropTimer');
+    WixCore.Debug.Server('gangWar.dropTimer');
     if (!user.isLogin(player) && !user.isAdmin(player))
         return;
 

@@ -8,7 +8,7 @@ let carWash = exports;
 carWash.list = [[-700.0402, -932.4921, 17.34011], [22.56987, -1391.852, 27.91351], [170.6151, -1718.647, 27.88343]];
 
 carWash.loadAll = function() {
-    methods.debug('carWash.loadAll');
+    WixCore.Debug.Server('carWash.loadAll');
     carWash.list.forEach(function (item) {
         let shopPos = new mp.Vector3(item[0], item[1], item[2]);
         methods.createBlip(shopPos, 100, 0, 0.6);
@@ -17,7 +17,7 @@ carWash.loadAll = function() {
 };
 
 carWash.getInRadius = function(pos, radius = 2) {
-    methods.debug('carWash.getInRadius');
+    WixCore.Debug.Server('carWash.getInRadius');
     let shopId = -1;
     carWash.list.forEach(function (item, idx) {
         let shopPos = new mp.Vector3(item[0], item[1], item[2]);
@@ -28,7 +28,7 @@ carWash.getInRadius = function(pos, radius = 2) {
 };
 
 carWash.checkPosForOpenMenu = function(player) {
-    methods.debug('carWash.checkPosForOpenMenu');
+    WixCore.Debug.Server('carWash.checkPosForOpenMenu');
     try {
         let playerPos = player.position;
         let shopId = carWash.getInRadius(playerPos, 2);
@@ -61,12 +61,12 @@ carWash.checkPosForOpenMenu = function(player) {
             player.notify('~r~Необходимо находиться в транспорте');
     }
     catch (e) {
-        methods.debug(e);
+        WixCore.Debug.Server(e);
     }
 };
 
 carWash.findNearest = function(pos) {
-    methods.debug('shop.findNearest');
+    WixCore.Debug.Server('shop.findNearest');
     let prevPos = new mp.Vector3(9999, 9999, 9999);
     carWash.list.forEach(function (item) {
         let shopPos = new mp.Vector3(item[0], item[1], item[2]);

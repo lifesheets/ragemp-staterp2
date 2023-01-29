@@ -41,7 +41,7 @@ let limitUser = 20;
 let limitUserMax = 40;
 
 mafiaWar.loadAll = function() {
-    methods.debug('mafiaWar.loadAll');
+    WixCore.Debug.Server('mafiaWar.loadAll');
     mysql.executeQuery(`SELECT * FROM mafia_war`, function (err, rows, fields) {
 
         rows.forEach(row => {
@@ -61,13 +61,13 @@ mafiaWar.loadAll = function() {
 };
 
 mafiaWar.save = function(id, ownerId) {
-    methods.debug('mafiaWar.save');
+    WixCore.Debug.Server('mafiaWar.save');
     mafiaWar.set(id, 'ownerId', ownerId);
     mysql.executeQuery("UPDATE mafia_war SET owner_id = '" + ownerId + "' where id = '" + id + "'");
 };
 
 mafiaWar.getZoneId = function(position) {
-    methods.debug('mafiaWar.getZoneId');
+    WixCore.Debug.Server('mafiaWar.getZoneId');
     if (methods.distanceToPos(position, warPos1) < warPosRadius1)
         return 1;
     if (methods.distanceToPos(position, warPos2) < warPosRadius2)
@@ -78,7 +78,7 @@ mafiaWar.getZoneId = function(position) {
 };
 
 mafiaWar.startWar = function(id) {
-    methods.debug('mafiaWar.startWar');
+    WixCore.Debug.Server('mafiaWar.startWar');
     /*if (!user.isLogin(player))
         return;
 

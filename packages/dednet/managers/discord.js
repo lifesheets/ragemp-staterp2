@@ -128,7 +128,7 @@ discord.sendWork = function (url, player, dscrd, text) {
                 });
             }
             catch (e) {
-                methods.debug(e);
+                WixCore.Debug.Server(e);
             }
         }
 

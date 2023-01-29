@@ -66,7 +66,7 @@ require('./wixcore/modules/worlds');
 
 function init() {
     try {
-        methods.debug('INIT GAMEMODE');
+        WixCore.Debug.Server('INIT GAMEMODE');
 
         mysql.executeQuery('UPDATE users SET is_online=\'0\', st_order_atm_d=\'0\', st_order_drug_d=\'0\', st_order_lamar_d=\'0\' WHERE 1');
 
@@ -142,7 +142,7 @@ function init() {
         }, 10000);
     }
     catch (e) {
-        methods.debug('ERROR INIT', e);
+        WixCore.Debug.Server('ERROR INIT', e);
     }
 }
 

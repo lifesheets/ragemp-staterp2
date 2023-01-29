@@ -27,7 +27,7 @@ let user = exports;
 
 user.createAccount = function(player, login, pass, email) {
 
-    methods.debug('user.createAccount');
+    WixCore.Debug.Server('user.createAccount');
 
     if (!mp.players.exists(player))
         return;
@@ -106,7 +106,7 @@ let skin = {
 user.createUser = function(player, name, surname, age, promocode, referer, national) {
     if (!mp.players.exists(player))
         return;
-    methods.debug('user.createUser');
+    WixCore.Debug.Server('user.createUser');
 
     user.doesExistUser(name + ' ' + surname, function (cb) {
 
@@ -136,7 +136,7 @@ user.createUser = function(player, name, surname, age, promocode, referer, natio
                 catch (e) {}
 
                 user.showCustomNotify(player, 'Пожалуйста подожите...');
-                let newAge = `${methods.digitFormat(weather.getDay())}.${methods.digitFormat(weather.getMonth())}.${(weather.getFullYear() - age)}`;
+                let newAge = `${WixCore.Function.DigitFormat(weather.getDay())}.${WixCore.Function.DigitFormat(weather.getMonth())}.${(weather.getFullYear() - age)}`;
 
                 let sql = "INSERT INTO users (name, age, social, national, money, promocode, referer, skin, parachute, parachute_color, body_color, leg_color, foot_color, body, leg, foot, login_ip, login_date, reg_ip, reg_timestamp, vip_type, vip_time) VALUES ('" + name + ' ' + surname +
                     "', '" + newAge + "', '" + player.socialClub + "', '" + national + "', '" + money + "', '" + promocode + "', '" + referer + "', '" + JSON.stringify(skin) + "', '0', '44', '" + methods.getRandomInt(0, 5) + "', '" + methods.getRandomInt(0, 15) + "', '" + methods.getRandomInt(0, 15) + "', '0', '1', '1', '" + player.ip + "', '" + methods.getTimeStamp() + "', '" + player.ip + "', '" + methods.getTimeStamp() + "', '" + vipType + "', '" + vipTime + "')";
@@ -159,7 +159,7 @@ user.createUser = function(player, name, surname, age, promocode, referer, natio
 
 user.loginAccount = function(player, login, pass) {
 
-    methods.debug('user.loginAccount');
+    WixCore.Debug.Server('user.loginAccount');
     if (!mp.players.exists(player))
         return false;
     user.validateAccount(player, login, pass, function (callback) {
@@ -182,7 +182,7 @@ user.loginAccount = function(player, login, pass) {
                         return;
                     if (err) {
                         player.call('client:events:loginAccount:success', [JSON.stringify(players)]);
-                        methods.debug(err);
+                        WixCore.Debug.Server(err);
                     }
                     else {
 
@@ -273,14 +273,14 @@ user.loginAccount = function(player, login, pass) {
                                 players.push({name: row['name'], skin: row['skin'], tattoo: row['tattoo'], cloth: JSON.stringify(cloth), age: methods.parseFloat(row['online_time'] * 8.5 / 60).toFixed(1), money: row['money'] + row['money_bank'], sex: sex, spawnList: spawnList, lastLogin: methods.unixTimeStampToDate(row['login_date'])})
                             }
                             catch (e) {
-                                methods.debug(e);
+                                WixCore.Debug.Server(e);
                             }
                         });
                         player.call('client:events:loginAccount:success', [JSON.stringify(players)]);
                     }
                 }
                 catch (e) {
-                    methods.debug('ERROR: ' + player.socialClub, e);
+                    WixCore.Debug.Server('ERROR: ' + player.socialClub, e);
                 }
             });
         }
@@ -292,7 +292,7 @@ user.loginAccount = function(player, login, pass) {
 
 user.loginUser = function(player, name, spawn = 'Стандарт') {
 
-    methods.debug('user.loginAccount');
+    WixCore.Debug.Server('user.loginAccount');
     if (!mp.players.exists(player))
         return false;
     user.validateUser(name, function (callback) {
@@ -312,7 +312,7 @@ user.loginUser = function(player, name, spawn = 'Стандарт') {
 
 user.save = function(player, withReset = false) {
     return new Promise(resolve => {
-        methods.debug('user.saveAccount');
+        WixCore.Debug.Server('user.saveAccount');
 
         if (!mp.players.exists(player)) {
             resolve(false);
@@ -404,7 +404,7 @@ user.save = function(player, withReset = false) {
 
 user.saveName = function(player, newName) {
     return new Promise(resolve => {
-        methods.debug('user.saveName');
+        WixCore.Debug.Server('user.saveName');
 
         if (!mp.players.exists(player)) {
             resolve(false);
@@ -426,7 +426,7 @@ user.saveName = function(player, newName) {
 
 user.loadUser = function(player, name, spawn = 'Стандарт') {
 
-    methods.debug('user.loadUser');
+    WixCore.Debug.Server('user.loadUser');
     if (!mp.players.exists(player))
         return false;
     let selectSql = 'id';
@@ -489,7 +489,7 @@ user.loadUser = function(player, name, spawn = 'Стандарт') {
                 user.set(player, 'login_date', methods.getTimeStamp());
                 user.set(player, 'login_ip', player.ip);
             } catch (e) {
-                methods.debug(e);
+                WixCore.Debug.Server(e);
             }
 
             setTimeout(function () {
@@ -626,7 +626,7 @@ user.loadUser = function(player, name, spawn = 'Стандарт') {
 };
 
 user.loadUserSkin = function(player) {
-    methods.debug('user.loadUser');
+    WixCore.Debug.Server('user.loadUser');
     if (!mp.players.exists(player))
         return false;
     try {
@@ -648,7 +648,7 @@ user.loadUserSkin = function(player) {
 };
 
 user.spawnByName = function(player, spawn = 'Стандарт') {
-    methods.debug('user.spawnByName', spawn);
+    WixCore.Debug.Server('user.spawnByName', spawn);
     if (!user.isLogin(player))
         return false;
     user.showLoadDisplay(player);
@@ -710,7 +710,7 @@ user.spawnByName = function(player, spawn = 'Стандарт') {
             }
         }
         catch (e) {
-            methods.debug(e);
+            WixCore.Debug.Server(e);
 
             try {
                 let roleId = user.get(player, 'role') - 1;
@@ -789,16 +789,16 @@ user.updateClientCache = function(player) {
         user.set(player, 'skin', JSON.stringify(skin));
 
         player.call('client:user:updateCache', [Array.from(Container.Data.GetAll(player.id))]);
-        methods.debug('user.updateClientCache');
+        WixCore.Debug.Server('user.updateClientCache');
     }
     catch (e) {
-        methods.debug(e);
+        WixCore.Debug.Server(e);
     }
 };
 
 user.updateCharacterFace = function(player) {
 
-    methods.debug('user.updateCharacterFace');
+    WixCore.Debug.Server('user.updateCharacterFace');
     if (!mp.players.exists(player))
         return;
     try {
@@ -926,12 +926,12 @@ user.updateCharacterFace = function(player) {
                                 player.setFaceFeature(methods.parseInt(i), methods.parseFloat(item));
                             }
                             catch (e) {
-                                methods.debug(e);
+                                WixCore.Debug.Server(e);
                             }
                         })
                     } catch(e) {
-                        methods.debug('skin.SKIN_FACE_SPECIFICATIONS', e);
-                        methods.debug(skin.SKIN_FACE_SPECIFICATIONS);
+                        WixCore.Debug.Server('skin.SKIN_FACE_SPECIFICATIONS', e);
+                        WixCore.Debug.Server(skin.SKIN_FACE_SPECIFICATIONS);
                     }
                 }
             }
@@ -963,12 +963,12 @@ user.updateCharacterFace = function(player) {
                             player.setFaceFeature(methods.parseInt(i), methods.parseFloat(item));
                         }
                         catch (e) {
-                            methods.debug(e);
+                            WixCore.Debug.Server(e);
                         }
                     })
                 } catch(e) {
-                    methods.debug('skin.SKIN_FACE_SPECIFICATIONS', e);
-                    methods.debug(skin.SKIN_FACE_SPECIFICATIONS);
+                    WixCore.Debug.Server('skin.SKIN_FACE_SPECIFICATIONS', e);
+                    WixCore.Debug.Server(skin.SKIN_FACE_SPECIFICATIONS);
                 }
             }
         }
@@ -1029,8 +1029,8 @@ user.updateCharacterFace = function(player) {
 
 
     } catch (e) {
-        methods.debug('Exception: user.updateCharacterFace');
-        methods.debug(e);
+        WixCore.Debug.Server('Exception: user.updateCharacterFace');
+        WixCore.Debug.Server(e);
         setTimeout(function () {
             user.updateCharacterFace(player);
         }, 2500);
@@ -1050,7 +1050,7 @@ user.getSex = function(player) {
 
 user.updateCharacterCloth = function(player) {
 
-    methods.debug('user.updateCharacterCloth');
+    WixCore.Debug.Server('user.updateCharacterCloth');
     if (!mp.players.exists(player))
         return;
     try {
@@ -1175,13 +1175,13 @@ user.updateCharacterCloth = function(player) {
         user.clearAllProp(player); //TODO переделать
 
     } catch (e) {
-        methods.debug(e);
+        WixCore.Debug.Server(e);
     }
 };
 
 user.updateCharacterProps = function(player) {
 
-    methods.debug('user.updateCharacterProps');
+    WixCore.Debug.Server('user.updateCharacterProps');
     if (!mp.players.exists(player))
         return;
     try {
@@ -1261,12 +1261,12 @@ user.updateCharacterProps = function(player) {
             }
         }
     } catch (e) {
-        methods.debug(e);
+        WixCore.Debug.Server(e);
     }
 };
 
 user.updateTattoo = function(player) {
-    methods.debug('user.updateTattoo');
+    WixCore.Debug.Server('user.updateTattoo');
     if (!user.isLogin(player))
         return;
 
@@ -1283,7 +1283,7 @@ user.updateTattoo = function(player) {
                 });
             }
             catch (e) {
-                methods.debug(e);
+                WixCore.Debug.Server(e);
             }
         }
 
@@ -1302,16 +1302,16 @@ user.updateTattoo = function(player) {
         }
     }
     catch (e) {
-        methods.debug('user.updateTattooServ', e);
+        WixCore.Debug.Server('user.updateTattooServ', e);
     }
 };
 
 user.validateUser = function(name, callback) {
-    methods.debug('user.validateUser', name);
+    WixCore.Debug.Server('user.validateUser', name);
     mysql.executeQuery(`SELECT * FROM users WHERE name = ? LIMIT 1`, name, function (err, rows, fields) {
         if (err) {
-            methods.debug('[DATABASE | ERROR]');
-            methods.debug(err);
+            WixCore.Debug.Server('[DATABASE | ERROR]');
+            WixCore.Debug.Server(err);
             return callback(false);
         }
 
@@ -1322,12 +1322,12 @@ user.validateUser = function(name, callback) {
 };
 
 user.doesExistUser = function(name, callback) {
-    methods.debug('user.doesExistUser');
+    WixCore.Debug.Server('user.doesExistUser');
     name = methods.removeQuotes(name);
     mysql.executeQuery(`SELECT id FROM users WHERE name = '${name}' LIMIT 1`, function (err, rows, fields) {
         if (err) {
-            methods.debug('[DATABASE | ERROR]');
-            methods.debug(err);
+            WixCore.Debug.Server('[DATABASE | ERROR]');
+            WixCore.Debug.Server(err);
             return callback(true);
         }
 
@@ -1338,11 +1338,11 @@ user.doesExistUser = function(name, callback) {
 };
 
 user.doesLimitUser = function(serial, callback) {
-    methods.debug('user.doesLimitUser');
+    WixCore.Debug.Server('user.doesLimitUser');
     mysql.executeQuery(`SELECT id FROM users WHERE social = ?`, serial, function (err, rows, fields) {
         if (err) {
-            methods.debug('[DATABASE | ERROR]');
-            methods.debug(err);
+            WixCore.Debug.Server('[DATABASE | ERROR]');
+            WixCore.Debug.Server(err);
             return callback(true);
         }
 
@@ -1354,11 +1354,11 @@ user.doesLimitUser = function(serial, callback) {
 };
 
 user.validateAccount = function(player, login, pass, callback) {
-    methods.debug('user.validateAccount', login);
+    WixCore.Debug.Server('user.validateAccount', login);
     mysql.executeQuery(`SELECT password, social, login FROM accounts WHERE login = ? LIMIT 1`, login, function (err, rows, fields) {
         if (err) {
-            methods.debug('[DATABASE | ERROR]');
-            methods.debug(err);
+            WixCore.Debug.Server('[DATABASE | ERROR]');
+            WixCore.Debug.Server(err);
             return callback(false);
         }
 
@@ -1378,14 +1378,14 @@ user.validateAccount = function(player, login, pass, callback) {
 };
 
 user.doesExistAccount = function(login, email, social, callback) {
-    methods.debug('user.doesExistAccount');
+    WixCore.Debug.Server('user.doesExistAccount');
     login = methods.removeQuotes(login);
     email = methods.removeQuotes(email);
     social = methods.removeQuotes(social);
     mysql.executeQuery(`SELECT login, email, social FROM accounts WHERE login = '${login}' OR email = '${email}' OR social = '${social}' LIMIT 1`, function (err, rows, fields) {
         if (err) {
-            methods.debug('[DATABASE | ERROR]');
-            methods.debug(err);
+            WixCore.Debug.Server('[DATABASE | ERROR]');
+            WixCore.Debug.Server(err);
             return callback(1);
         }
 
@@ -1400,13 +1400,13 @@ user.doesExistAccount = function(login, email, social, callback) {
 };
 
 user.setOnlineStatus = function(player, isOnline) {
-    methods.debug('user.setOnlineStatus');
+    WixCore.Debug.Server('user.setOnlineStatus');
     if (user.isLogin(player))
         mysql.executeQuery('UPDATE users SET is_online=\'' + methods.parseInt(isOnline) + '\' WHERE id = \'' + user.getId(player) + '\'');
 };
 
 user.clearAllProp = function(player) {
-    methods.debug('user.clearAllProp');
+    WixCore.Debug.Server('user.clearAllProp');
     if (!mp.players.exists(player))
         return false;
 
@@ -1476,7 +1476,7 @@ user.getGlovesOffset = function(player, handId) {
 };
 
 user.setComponentVariation = function(player, component, drawableId, textureId) {
-    methods.debug('user.setComponentVariation', component, drawableId, textureId);
+    WixCore.Debug.Server('user.setComponentVariation', component, drawableId, textureId);
     if (!mp.players.exists(player))
         return false;
     component = methods.parseInt(component);
@@ -1498,7 +1498,7 @@ user.setComponentVariation = function(player, component, drawableId, textureId) 
                         p.call('client:syncComponentVariation', [player.id, component, drawableId, textureId])
                 }
                 catch (e) {
-                    methods.debug(e);
+                    WixCore.Debug.Server(e);
                 }
             });
         }
@@ -1518,7 +1518,7 @@ user.setComponentVariation = function(player, component, drawableId, textureId) 
 };
 
 user.setProp = function(player, slot, type, color) {
-    methods.debug('user.setProp');
+    WixCore.Debug.Server('user.setProp');
     if (!mp.players.exists(player))
         return false;
 
@@ -1537,28 +1537,28 @@ user.setProp = function(player, slot, type, color) {
 };
 
 user.clearDecorations = function(player) {
-    methods.debug('user.clearDecorations');
+    WixCore.Debug.Server('user.clearDecorations');
     if (!mp.players.exists(player))
         return false;
     player.clearDecorations();
 };
 
 user.setDecoration = function(player, slot, overlay) {
-    methods.debug('user.setDecoration');
+    WixCore.Debug.Server('user.setDecoration');
     if (!mp.players.exists(player))
         return false;
     player.setDecoration(mp.joaat(slot), mp.joaat(overlay));
 };
 
 user.hideLoadDisplay = function(player) {
-    methods.debug('user.hideLoadDisplay');
+    WixCore.Debug.Server('user.hideLoadDisplay');
     if (!mp.players.exists(player))
         return false;
     player.call('client:user:hideLoadDisplay');
 };
 
 user.showLoadDisplay = function(player) {
-    methods.debug('user.showLoadDisplay');
+    WixCore.Debug.Server('user.showLoadDisplay');
     if (!mp.players.exists(player))
         return false;
     player.call('client:user:showLoadDisplay');
@@ -1575,28 +1575,28 @@ user.addExplode = function(player, x, y, z, explosionType, damageScale, isAudibl
 };
 
 user.removeWaypoint = function(player) {
-    methods.debug('user.removeWaypoint');
+    WixCore.Debug.Server('user.removeWaypoint');
     if (!mp.players.exists(player))
         return false;
     user.setWaypoint(player.position.x, player.position.y);
 };
 
 user.setWaypoint = function(player, x, y) {
-    methods.debug('user.setWaypoint');
+    WixCore.Debug.Server('user.setWaypoint');
     if (!mp.players.exists(player))
         return false;
     player.call('client:user:setWaypoint', [x, y]);
 };
 
 user.callCef = function(player, name, params) {
-    methods.debug('user.callCef', name);
+    WixCore.Debug.Server('user.callCef', name);
     if (!mp.players.exists(player))
         return false;
     player.call('client:user:callCef', [name, params]);
 };
 
 user.cuff = function(player) {
-    methods.debug('user.cuff');
+    WixCore.Debug.Server('user.cuff');
     if (!mp.players.exists(player))
         return false;
     user.stopAnimation(player);
@@ -1616,7 +1616,7 @@ user.cuff = function(player) {
 user.unCuff = function(player) {
     if (!mp.players.exists(player))
         return false;
-    methods.debug('user.unCuff');
+    WixCore.Debug.Server('user.unCuff');
     player.call("client:handcuffs", [false]);
     player.setVariable("isBlockAnimation", false);
     player.setVariable("isCuff", false);
@@ -1625,12 +1625,12 @@ user.unCuff = function(player) {
 user.isCuff = function(player) {
     if (!user.isLogin(player))
         return false;
-    methods.debug('user.isCuff');
+    WixCore.Debug.Server('user.isCuff');
     return player.getVariable("isCuff") === true;
 };
 
 user.tie = function(player) {
-    methods.debug('user.tie');
+    WixCore.Debug.Server('user.tie');
     if (!mp.players.exists(player))
         return false;
     user.playAnimation("mp_arresting", "idle", 49);
@@ -1641,7 +1641,7 @@ user.tie = function(player) {
 };
 
 user.unTie = function(player) {
-    methods.debug('user.unTie');
+    WixCore.Debug.Server('user.unTie');
     if (!mp.players.exists(player))
         return false;
     player.call("client:handcuffs", [false]);
@@ -1652,7 +1652,7 @@ user.unTie = function(player) {
 user.isTie = function(player) {
     if (!user.isLogin(player))
         return false;
-    methods.debug('user.isTie');
+    WixCore.Debug.Server('user.isTie');
     return player.getVariable("isTie") === true;
 };
 
@@ -1741,7 +1741,7 @@ user.getFractionName = function(player) {
         return enums.fractionListId[user.get(player, 'fraction_id')].fractionNameShort;
     }
     catch (e) {
-        methods.debug(e);
+        WixCore.Debug.Server(e);
     }
     return 'Отсуствует';
 };
@@ -1753,7 +1753,7 @@ user.getFractionName2 = function(player) {
         return fraction.getName(user.get(player, 'fraction_id2'));
     }
     catch (e) {
-        methods.debug(e);
+        WixCore.Debug.Server(e);
     }
     return 'Отсуствует';
 };
@@ -1765,7 +1765,7 @@ user.getFamilyName = function(player) {
         return family.getName(user.get(player, 'family_id'));
     }
     catch (e) {
-        methods.debug(e);
+        WixCore.Debug.Server(e);
     }
     return 'Отсуствует';
 };
@@ -1781,7 +1781,7 @@ user.getDepartmentName = function(player) {
         return enums.fractionListId[user.get(player, 'fraction_id')].departmentList[user.get(player, 'rank_type')];
     }
     catch (e) {
-        methods.debug(e);
+        WixCore.Debug.Server(e);
     }
     return 'Отсуствует';
 };
@@ -1797,7 +1797,7 @@ user.getRankName = function(player) {
         return enums.fractionListId[user.get(player, 'fraction_id')].rankList[user.get(player, 'rank_type')][user.get(player, 'rank')];
     }
     catch (e) {
-        methods.debug(e);
+        WixCore.Debug.Server(e);
     }
     return 'Отсуствует';
 };
@@ -1809,7 +1809,7 @@ user.getFractionHash = function(player) {
         return enums.fractionListId[user.get(player, 'fraction_id')].hash;
     }
     catch (e) {
-        methods.debug(e);
+        WixCore.Debug.Server(e);
     }
     return 'none';
 };
@@ -1837,12 +1837,12 @@ user.ready = function(player) {
             user.resetAll(player);
         }
         catch (e) {
-            methods.debug(e);
+            WixCore.Debug.Server(e);
         }
         player.call('playerReadyDone');
     }
     catch (e) {
-        methods.debug('READY_ERROR', e.toString(), player.socialClub);
+        WixCore.Debug.Server('READY_ERROR', e.toString(), player.socialClub);
     }
 };
 
@@ -1857,7 +1857,7 @@ user.updateVehicleInfo = function(player) {
             player.call('client:updateVehicleInfo', [i, enums.vehicleInfo.slice(from < 0 ? 0 : from, to)]);
         }
     } catch (e) {
-        methods.debug(e);
+        WixCore.Debug.Server(e);
     }
 
     /*try {
@@ -1865,7 +1865,7 @@ user.updateVehicleInfo = function(player) {
             player.call('client:updateVehicleInfo', [i, enums.vehicleInfo.slice(i * 250, i * 250 + 249)]);
     }
     catch (e) {
-        methods.debug(e);
+        WixCore.Debug.Server(e);
     }*/
 };
 
@@ -1880,7 +1880,7 @@ user.updateVehicleInfo = function(player) {
             player.call('client:updateVehicleInfo', [i, enums.vehicleInfo.slice(from < 0 ? 0 : from, to)]);
         }
     } catch (e) {
-        methods.debug(e);
+        WixCore.Debug.Server(e);
     }
 };*/
 
@@ -1895,7 +1895,7 @@ user.updateVehicleInfo = function(player) {
 *
 * */
 user.showCustomNotify = function(player, text, style = 0, layout = 5, time = 5000) {
-    methods.debug('user.showCustomNotify', text);
+    WixCore.Debug.Server('user.showCustomNotify', text);
     if (!mp.players.exists(player))
         return;
     player.call('client:user:showCustomNotify', [text, style, layout, time]);
@@ -1903,7 +1903,7 @@ user.showCustomNotify = function(player, text, style = 0, layout = 5, time = 500
 };
 
 user.playSound = function(player, name, ref) {
-    methods.debug('user.playSound', name, ref);
+    WixCore.Debug.Server('user.playSound', name, ref);
     if (!mp.players.exists(player))
         return;
     player.call('client:user:playSound', [name, ref]);
@@ -1930,13 +1930,13 @@ user.getById = function(id, key) {
     try {
         return Container.Data.Get(id, key);
     } catch (e) {
-        methods.debug(e);
+        WixCore.Debug.Server(e);
     }
     return null;
 };
 
 user.set = function(player, key, val) {
-    //methods.debug('user.set');
+    //WixCore.Debug.Server('user.set');
     if (!mp.players.exists(player))
         return false;
     Container.Data.Set(player.id, key, val);
@@ -1955,13 +1955,13 @@ user.resetAll = function(player) {
 };
 
 user.get = function(player, key) {
-    //methods.debug('user.get');
+    //WixCore.Debug.Server('user.get');
     if (!mp.players.exists(player))
         return null;
     try {
         return Container.Data.Get(player.id, key);
     } catch (e) {
-        methods.debug(e);
+        WixCore.Debug.Server(e);
     }
     return null;
 };
@@ -1987,7 +1987,7 @@ user.getSvId = function(player) {
 };
 
 user.getRpName = function(player) {
-    methods.debug('user.getRpName');
+    WixCore.Debug.Server('user.getRpName');
     if (!mp.players.exists(player))
         return 'NO_NAME';
     if (user.has(player, 'name'))
@@ -2271,7 +2271,7 @@ user.getWorkLvl = function(player) {
 };
 
 user.getBankCardPrefix = function(player, bankCard = 0) {
-    methods.debug('bank.getBankCardPrefix');
+    WixCore.Debug.Server('bank.getBankCardPrefix');
     if (!user.isLogin(player))
         return;
 
@@ -2367,7 +2367,7 @@ user.sendSms = function(player, sender, title, text, pic) {
 };
 
 user.showMenu = function(player, title, desc, menuData) {
-    methods.debug('user.showMenu');
+    WixCore.Debug.Server('user.showMenu');
     if (!mp.players.exists(player))
         return false;
     player.call('client:menuList:showMenu', [title, desc, Array.from(menuData)]);
@@ -2403,7 +2403,7 @@ user.setMaxSpeed = function(player, speed) {
 };
 
 user.teleport = function(player, x, y, z, rot = 0.1) {
-    methods.debug('user.teleport');
+    WixCore.Debug.Server('user.teleport');
     if (!mp.players.exists(player))
         return false;
     if (rot == 0.1)
@@ -2412,7 +2412,7 @@ user.teleport = function(player, x, y, z, rot = 0.1) {
 };
 
 user.teleportVeh = function(player, x, y, z, rot = 0.1) {
-    methods.debug('user.teleportVeh');
+    WixCore.Debug.Server('user.teleportVeh');
     if (!mp.players.exists(player))
         return false;
     if (rot == 0.1 && player.vehicle)
@@ -2421,7 +2421,7 @@ user.teleportVeh = function(player, x, y, z, rot = 0.1) {
 };
 
 user.putInVehicle = function(player, veh, seat) {
-    methods.debug('user.putInVehicle');
+    WixCore.Debug.Server('user.putInVehicle');
     if (!mp.players.exists(player))
         return false;
     player.putIntoVehicle(veh, seat);
@@ -2429,7 +2429,7 @@ user.putInVehicle = function(player, veh, seat) {
 };
 
 user.setWaypoint = function(player, x, y) {
-    methods.debug('user.setWaypoint');
+    WixCore.Debug.Server('user.setWaypoint');
     if (!mp.players.exists(player))
         return false;
     player.call('client:user:setWaypoint', [x, y]);
@@ -2437,7 +2437,7 @@ user.setWaypoint = function(player, x, y) {
 
 user.setClipset = function(player, style) {
     try {
-        methods.debug('user.setClipset');
+        WixCore.Debug.Server('user.setClipset');
         if (!mp.players.exists(player))
             return false;
         player.data.walkingStyle = style;
@@ -2449,7 +2449,7 @@ user.setClipset = function(player, style) {
 
 user.setClipsetW = function(player, style) {
     try {
-        methods.debug('user.setClipsetW');
+        WixCore.Debug.Server('user.setClipsetW');
         if (!mp.players.exists(player))
             return false;
         player.data.walkingStyleW = style;
@@ -2473,7 +2473,7 @@ user.sendPhoneSms = function(player, sender, title, message, pic = 'CHAR_BLANK_E
 };
 
 user.sendSmsBankOperation = function(player, text, title = 'Операция со счётом', pref = 0) {
-    methods.debug('bank.sendSmsBankOperation');
+    WixCore.Debug.Server('bank.sendSmsBankOperation');
     if (!user.isLogin(player))
         return;
 
@@ -2498,14 +2498,14 @@ user.sendSmsBankOperation = function(player, text, title = 'Операция с�
         }
     }
     catch (e) {
-        methods.debug(e);
+        WixCore.Debug.Server(e);
     }
 };
 
 user.kick = function(player, reason, title = 'Вы были кикнуты.') {
     if (!mp.players.exists(player))
         return;
-    methods.debug('user.kick ' + player.socialClub + ' ' + reason);
+    WixCore.Debug.Server('user.kick ' + player.socialClub + ' ' + reason);
     player.outputChatBox('!{f44336}' + title);
     player.outputChatBox('!{f44336}Причина: !{FFFFFF}' + reason);
 
@@ -2514,7 +2514,7 @@ user.kick = function(player, reason, title = 'Вы были кикнуты.') {
 };
 
 user.kickAntiCheat = function(player, reason, title = 'Вы были кикнуты.') {
-    methods.debug('user.kickAntiCheat');
+    WixCore.Debug.Server('user.kickAntiCheat');
     if (user.isLogin(player)) {
         chat.sendToAll('Anti-Cheat Protection', `${user.getRpName(player)} (${player.id})!{${chat.clRed}} был кикнут с причиной!{${chat.clWhite}} ${reason}`, chat.clRed);
         discord.sendDeadList(user.getRpName(player), 'Был кикнут', reason, 'Anti-Cheat Protection');
@@ -2532,28 +2532,28 @@ user.getPlayerById = function(id) {
 };
 
 user.blockKeys = function(player, enable) {
-    methods.debug('user.blockKeys');
+    WixCore.Debug.Server('user.blockKeys');
     if (!mp.players.exists(player))
         return false;
     player.call('client:user:blockKeys', [enable])
 };
 
 user.unequipAllWeapons = function(player) {
-    methods.debug('user.unequipAllWeapons');
+    WixCore.Debug.Server('user.unequipAllWeapons');
     if (!mp.players.exists(player))
         return false;
     player.call('client:user:unequipAllWeapons')
 };
 
 user.freeze = function(player, enable) {
-    methods.debug('user.blockKeys');
+    WixCore.Debug.Server('user.blockKeys');
     if (!mp.players.exists(player))
         return false;
     player.call('client:user:freeze', [enable])
 };
 
 user.duelTimer = function(player) {
-    methods.debug('user.blockKeys');
+    WixCore.Debug.Server('user.blockKeys');
     if (!mp.players.exists(player))
         return false;
 
@@ -2621,7 +2621,7 @@ user.duelTimer = function(player) {
 };
 
 user.heading = function(player, rot) {
-    methods.debug('user.headingToCoord');
+    WixCore.Debug.Server('user.headingToCoord');
     if (!mp.players.exists(player))
         return false;
     let pos = player.position;
@@ -2631,13 +2631,13 @@ user.heading = function(player, rot) {
                 p.call('client:syncHeading', [player.id, rot])
         }
         catch (e) {
-            methods.debug(e);
+            WixCore.Debug.Server(e);
         }
     });
 };
 
 user.headingToCoord = function(player, x, y, z) {
-    methods.debug('user.headingToCoord');
+    WixCore.Debug.Server('user.headingToCoord');
     if (!mp.players.exists(player))
         return false;
     let pos = player.position;
@@ -2647,13 +2647,13 @@ user.headingToCoord = function(player, x, y, z) {
                 p.call('client:syncHeadingToCoord', [player.id, x, y, z])
         }
         catch (e) {
-            methods.debug(e);
+            WixCore.Debug.Server(e);
         }
     });
 };
 
 user.headingToTarget = function(player, targetId) {
-    methods.debug('user.headingToCoord');
+    WixCore.Debug.Server('user.headingToCoord');
     if (!mp.players.exists(player))
         return false;
     let pos = player.position;
@@ -2663,13 +2663,13 @@ user.headingToTarget = function(player, targetId) {
                 p.call('client:syncHeadingToTarget', [player.id, targetId])
         }
         catch (e) {
-            methods.debug(e);
+            WixCore.Debug.Server(e);
         }
     });
 };
 
 user.playScenario = function(player, name) {
-    methods.debug('user.playScenario');
+    WixCore.Debug.Server('user.playScenario');
     if (!mp.players.exists(player))
         return false;
     let pos = player.position;
@@ -2679,13 +2679,13 @@ user.playScenario = function(player, name) {
                 p.call('client:syncScenario', [player.id, name])
         }
         catch (e) {
-            methods.debug(e);
+            WixCore.Debug.Server(e);
         }
     });
 };
 
 user.stopScenario = function(player) {
-    methods.debug('user.playScenario');
+    WixCore.Debug.Server('user.playScenario');
     if (!mp.players.exists(player))
         return false;
     let pos = player.position;
@@ -2695,7 +2695,7 @@ user.stopScenario = function(player) {
                 p.call('client:syncStopScenario', [player.id])
         }
         catch (e) {
-            methods.debug(e);
+            WixCore.Debug.Server(e);
         }
     });
 };
@@ -2727,17 +2727,17 @@ user.playAnimationWithUser = function(player, target, animId) {
                 user.playAnimation(target, enums.animTarget[animId][4], enums.animTarget[animId][5], 8);
             }
             catch (e) {
-                methods.debug(e);
+                WixCore.Debug.Server(e);
             }
         }, 2100);
     }
     catch (e) {
-        methods.debug(e);
+        WixCore.Debug.Server(e);
     }
 };
 
 user.playAnimation = function(player, dict, anim, flag = 49) {
-    methods.debug('user.playAnimation');
+    WixCore.Debug.Server('user.playAnimation');
     if (!mp.players.exists(player))
         return false;
     let pos = player.position;
@@ -2747,13 +2747,13 @@ user.playAnimation = function(player, dict, anim, flag = 49) {
                 p.call('client:syncAnimation', [player.id, dict, anim, flag])
         }
         catch (e) {
-            methods.debug(e);
+            WixCore.Debug.Server(e);
         }
     });
 };
 
 user.stopAnimation = function(player) {
-    methods.debug('user.stopSyncAnimation');
+    WixCore.Debug.Server('user.stopSyncAnimation');
     if (!mp.players.exists(player))
         return false;
     let pos = player.position;
@@ -2763,13 +2763,13 @@ user.stopAnimation = function(player) {
                 p.call('client:syncStopAnimation', [player.id])
         }
         catch (e) {
-            methods.debug(e);
+            WixCore.Debug.Server(e);
         }
     });
 };
 
 user.stopAnimationNow = function(player) {
-    methods.debug('user.stopSyncAnimation');
+    WixCore.Debug.Server('user.stopSyncAnimation');
     if (!mp.players.exists(player))
         return false;
     let pos = player.position;
@@ -2779,13 +2779,13 @@ user.stopAnimationNow = function(player) {
                 p.call('client:syncStopAnimationNow', [player.id])
         }
         catch (e) {
-            methods.debug(e);
+            WixCore.Debug.Server(e);
         }
     });
 };
 
 user.setRagdoll = function(player, timeout) {
-    methods.debug('user.stopSyncAnimation');
+    WixCore.Debug.Server('user.stopSyncAnimation');
     if (!mp.players.exists(player))
         return false;
     let pos = player.position;
@@ -2795,13 +2795,13 @@ user.setRagdoll = function(player, timeout) {
                 p.call('client:syncRagdoll', [player.id, timeout])
         }
         catch (e) {
-            methods.debug(e);
+            WixCore.Debug.Server(e);
         }
     });
 };
 
 user.playDrinkAnimation = function(player) {
-    methods.debug('user.playDrinkAnimation');
+    WixCore.Debug.Server('user.playDrinkAnimation');
     user.playAnimation(player, "mp_player_intdrink", "loop_bottle", 48);
 };
 
@@ -2810,7 +2810,7 @@ user.playEatAnimation = function(player) {
 };
 
 user.playDrugAnimation = function(player) {
-    methods.debug('user.playDrugAnimation');
+    WixCore.Debug.Server('user.playDrugAnimation');
     user.playAnimation(player, "move_m@drunk@transitions", "slightly_to_idle", 8);
 };
 
@@ -2849,7 +2849,7 @@ user.stopAllScreenEffects = function(player) {
 user.addWaterLevel = function(player, level) {
     if (!user.isLogin(player))
         return;
-    methods.debug('user.addWaterLevel');
+    WixCore.Debug.Server('user.addWaterLevel');
     if (user.getWaterLevel(player) + level > 1000) {
         user.setWaterLevel(player, 1000);
         return true;
@@ -2926,35 +2926,35 @@ user.giveWeapon = function(player, weapon, pt) {
 user.giveWeaponComponent = function(player, weapon, component) {
     if (!mp.players.exists(player))
         return false;
-    methods.debug('user.giveWeaponComponent', weapon, component);
+    WixCore.Debug.Server('user.giveWeaponComponent', weapon, component);
     player.giveWeaponComponent(weapon, component);
 };
 
 user.removeWeaponComponent = function(player, weapon, component) {
     if (!mp.players.exists(player))
         return false;
-    methods.debug('user.removeWeaponComponent', weapon, component);
+    WixCore.Debug.Server('user.removeWeaponComponent', weapon, component);
     player.removeWeaponComponent(weapon, component);
 };
 
 user.removeAllWeaponComponents = function(player, weapon) {
     if (!mp.players.exists(player))
         return false;
-    methods.debug('user.removeAllWeaponComponents', weapon);
+    WixCore.Debug.Server('user.removeAllWeaponComponents', weapon);
     player.removeAllWeaponComponents(weapon);
 };
 
 user.setWeaponTint = function(player, weapon, tint) {
     if (!mp.players.exists(player))
         return false;
-    methods.debug('user.setWeaponTint', weapon, tint);
+    WixCore.Debug.Server('user.setWeaponTint', weapon, tint);
     player.setWeaponTint(weapon, tint);
 };
 
 user.removeAllWeapons = function(player) {
     if (!mp.players.exists(player))
         return false;
-    methods.debug('user.removeAllWeapons');
+    WixCore.Debug.Server('user.removeAllWeapons');
     player.call('client:user:removeAllWeapons');
 };
 
@@ -3025,7 +3025,7 @@ user.giveJobMoney = function(player, money, jobId = 0) {
 
 
 user.jail = function(player, sec, withIzol = 0) {
-    methods.debug('user.jail');
+    WixCore.Debug.Server('user.jail');
     if (!user.isLogin(player))
         return false;
     user.set(player, 'jail_time', sec);
@@ -3034,7 +3034,7 @@ user.jail = function(player, sec, withIzol = 0) {
 };
 
 user.arrest = function(player) {
-    methods.debug('user.arrest');
+    WixCore.Debug.Server('user.arrest');
     if (!user.isLogin(player))
         return false;
     if (methods.parseInt(user.get(player, 'wanted_level')) <= 0)
@@ -3047,7 +3047,7 @@ user.arrest = function(player) {
 };
 
 user.giveWanted = function(player, level, reason, officer = 'Система') {
-    methods.debug('user.giveWanted');
+    WixCore.Debug.Server('user.giveWanted');
     if (!user.isLogin(player))
         return false;
 
@@ -3149,7 +3149,7 @@ user.giveLic = function (player, lic, monthEnd = 12, desc = '') {
 user.buyLicense = function (player, type, price, month, typePay = 0) {
     if (!user.isLogin(player))
         return;
-    methods.debug('licenseCenter.buy');
+    WixCore.Debug.Server('licenseCenter.buy');
 
     if (price < 0)
         return;
@@ -3187,15 +3187,15 @@ user.buyLicense = function (player, type, price, month, typePay = 0) {
         player.notify("~r~У вас уже есть данная лицензия");
     }
     catch (e) {
-        methods.debug('Exception: licenseCenter.buy');
-        methods.debug(e);
+        WixCore.Debug.Server('Exception: licenseCenter.buy');
+        WixCore.Debug.Server(e);
     }
 };
 
 user.revive = function(player, hp = 20) {
     if (!mp.players.exists(player))
         return false;
-    methods.debug('user.revive');
+    WixCore.Debug.Server('user.revive');
     player.call('client:user:revive', [hp]);
 };
 
@@ -3319,14 +3319,14 @@ user.deleteBlip3= function(player) {
 user.useAdrenaline = function(player) {
     if (!mp.players.exists(player))
         return false;
-    methods.debug('user.useAdrenaline');
+    WixCore.Debug.Server('user.useAdrenaline');
     user.revive(player);
 };
 
 user.payDay = async function (player) {
     if (!user.isLogin(player))
         return false;
-    methods.debug('user.payDay', user.getRpName(player));
+    WixCore.Debug.Server('user.payDay', user.getRpName(player));
 
     user.set(player, 'online_time', user.get(player, 'online_time') + 1);
     user.set(player, 'online_wheel', user.get(player, 'online_wheel') + 1);
@@ -3562,7 +3562,7 @@ user.isJobBuilder = function(player) {
 };
 
 user.isGos = function(player) {
-    //methods.debug('user.isGos');
+    //WixCore.Debug.Server('user.isGos');
     return user.isLogin(player) && (user.isSapd(player) || user.isFib(player) || user.isUsmc(player) || user.isGov(player) || user.isEms(player) || user.isSheriff(player));
 };
 
@@ -3571,42 +3571,42 @@ user.isPolice = function(player) {
 };
 
 user.isGov = function(player) {
-    //methods.debug('user.isGov');
+    //WixCore.Debug.Server('user.isGov');
     return user.isLogin(player) && user.get(player, 'fraction_id') == 1;
 };
 
 user.isSapd = function(player) {
-    //methods.debug('user.isSapd');
+    //WixCore.Debug.Server('user.isSapd');
     return user.isLogin(player) && user.get(player, 'fraction_id') == 2;
 };
 
 user.isFib = function(player) {
-    //methods.debug('user.isFib');
+    //WixCore.Debug.Server('user.isFib');
     return user.isLogin(player) && user.get(player, 'fraction_id') == 3;
 };
 
 user.isUsmc = function(player) {
-    //methods.debug('user.isUsmc');
+    //WixCore.Debug.Server('user.isUsmc');
     return user.isLogin(player) && user.get(player, 'fraction_id') == 4;
 };
 
 user.isSheriff = function(player) {
-    //methods.debug('user.isSheriff');
+    //WixCore.Debug.Server('user.isSheriff');
     return user.isLogin(player) && user.get(player, 'fraction_id') == 5;
 };
 
 user.isEms = function(player) {
-    //methods.debug('user.isEms');
+    //WixCore.Debug.Server('user.isEms');
     return user.isLogin(player) && user.get(player, 'fraction_id') == 6;
 };
 
 user.isNews = function(player) {
-    //methods.debug('user.isNews');
+    //WixCore.Debug.Server('user.isNews');
     return user.isLogin(player) && user.get(player, 'fraction_id') == 7;
 };
 
 user.isCartel = function(player) {
-    //methods.debug('user.isNews');
+    //WixCore.Debug.Server('user.isNews');
     return user.isLogin(player) && user.get(player, 'fraction_id') == 8;
 };
 
@@ -3631,62 +3631,62 @@ user.isGang = function(player) {
 };
 
 user.isLeader = function(player) {
-    //methods.debug('user.isLeader');
+    //WixCore.Debug.Server('user.isLeader');
     return user.isLogin(player) && user.get(player, 'is_leader');
 };
 
 user.isSubLeader = function(player) {
-    //methods.debug('user.isSubLeader');
+    //WixCore.Debug.Server('user.isSubLeader');
     return user.isLogin(player) && user.get(player, 'is_sub_leader');
 };
 
 user.isDepLeader = function(player) {
-    //methods.debug('user.isDepLeader');
+    //WixCore.Debug.Server('user.isDepLeader');
     return user.isLogin(player) && user.get(player, 'fraction_id') > 0 && user.get(player, 'rank') === 0;
 };
 
 user.isDepSubLeader = function(player) {
-    //methods.debug('user.isDepSubLeader');
+    //WixCore.Debug.Server('user.isDepSubLeader');
     return user.isLogin(player) && user.get(player, 'fraction_id') > 0 && user.get(player, 'rank') === 1;
 };
 
 user.isLeader2 = function(player) {
-    //methods.debug('user.isLeader2');
+    //WixCore.Debug.Server('user.isLeader2');
     return user.isLogin(player) && user.get(player, 'is_leader2');
 };
 
 user.isSubLeader2 = function(player) {
-    //methods.debug('user.isSubLeader2');
+    //WixCore.Debug.Server('user.isSubLeader2');
     return user.isLogin(player) && user.get(player, 'is_sub_leader2');
 };
 
 user.isDepLeader2 = function(player) {
-    //methods.debug('user.isDepLeader2');
+    //WixCore.Debug.Server('user.isDepLeader2');
     return user.isLogin(player) && user.get(player, 'fraction_id2') > 0 && user.get(player, 'rank2') === 0;
 };
 
 user.isDepSubLeader2 = function(player) {
-    //methods.debug('user.isDepSubLeader2');
+    //WixCore.Debug.Server('user.isDepSubLeader2');
     return user.isLogin(player) && user.get(player, 'fraction_id2') > 0 && user.get(player, 'rank2') === 1;
 };
 
 user.isLeaderF = function(player) {
-    //methods.debug('user.isLeader2');
+    //WixCore.Debug.Server('user.isLeader2');
     return user.isLogin(player) && user.get(player, 'is_leaderf');
 };
 
 user.isSubLeaderF = function(player) {
-    //methods.debug('user.isSubLeader2');
+    //WixCore.Debug.Server('user.isSubLeader2');
     return user.isLogin(player) && user.get(player, 'is_sub_leaderf');
 };
 
 user.isDepLeaderF = function(player) {
-    //methods.debug('user.isDepLeader2');
+    //WixCore.Debug.Server('user.isDepLeader2');
     return user.isLogin(player) && user.get(player, 'family_id') > 0 && user.get(player, 'rankf') === 0;
 };
 
 user.isDepSubLeaderF = function(player) {
-    //methods.debug('user.isDepSubLeader2');
+    //WixCore.Debug.Server('user.isDepSubLeader2');
     return user.isLogin(player) && user.get(player, 'family_id') > 0 && user.get(player, 'rankf') === 1;
 };
 
@@ -3880,12 +3880,12 @@ user.giveVehicle = function(player, vName, withDelete = 1, withChat = false, des
                         user.save(player);
                     }
                     catch (e) {
-                        methods.debug(e);
+                        WixCore.Debug.Server(e);
                     }
                 });
             }
             catch (e) {
-                methods.debug(e);
+                WixCore.Debug.Server(e);
             }
         }, 100);
 

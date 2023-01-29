@@ -539,7 +539,7 @@ fraction.spawnSellCar = [
 let currentWarPos = [];
 
 fraction.loadAll = function() {
-    methods.debug('fraction.loadAll');
+    WixCore.Debug.Server('fraction.loadAll');
 
     mysql.executeQuery(`SELECT * FROM fraction_list`, function (err, rows, fields) {
         rows.forEach(function(item) {
@@ -581,7 +581,7 @@ fraction.loadAll = function() {
             }
         });
         count = rows.length;
-        methods.debug('All Fraction Loaded: ' + count);
+        WixCore.Debug.Server('All Fraction Loaded: ' + count);
     });
 };
 
@@ -591,7 +591,7 @@ fraction.removeTaxAndSave = function() {
     if (isRemove)
         return;
 
-    methods.debug('fraction.removeTax');
+    WixCore.Debug.Server('fraction.removeTax');
 
     let dateTime = new Date();
     if (dateTime.getHours() >= 1 && dateTime.getHours() > 6)
@@ -615,7 +615,7 @@ fraction.removeTaxAndSave = function() {
 };
 
 fraction.saveAll = function() {
-    methods.debug('fraction.saveAll');
+    WixCore.Debug.Server('fraction.saveAll');
     mysql.executeQuery(`SELECT * FROM fraction_list`, function (err, rows, fields) {
         rows.forEach(function(item) {
             fraction.save(item['id']);
@@ -624,7 +624,7 @@ fraction.saveAll = function() {
 };
 
 fraction.getCount = function() {
-    methods.debug('fraction.getCount');
+    WixCore.Debug.Server('fraction.getCount');
     return count;
 };
 
@@ -719,7 +719,7 @@ fraction.createCargoWar = function(count = 3) {
                 veh.setVariable('cargoId', b1);
             }
             catch (e) {
-                methods.debug(e);
+                WixCore.Debug.Server(e);
             }
 
         }, posVeh, fraction.warVehPos[item][3], 'Speedo4');
@@ -808,7 +808,7 @@ fraction.spawnNearCargo = function(player, isDrug = false, name = 'Speedo4', cou
             veh.setVariable('cargoId', 999);
         }
         catch (e) {
-            methods.debug(e);
+            WixCore.Debug.Server(e);
         }
 
     }, posVeh, 0, name);
@@ -828,7 +828,7 @@ fraction.spawnCargo = function(name, boxes, x, y, z, heading = 0, cargoId = 999,
             veh.setVariable('cargoId', cargoId);
         }
         catch (e) {
-            methods.debug(e);
+            WixCore.Debug.Server(e);
         }
 
     }, new mp.Vector3(x, y, z), heading, name);
@@ -886,7 +886,7 @@ fraction.spawnNearBank = function(player, type = 0) {
             }
         }
         catch (e) {
-            methods.debug(e);
+            WixCore.Debug.Server(e);
         }
 
     }, posVeh, 0, veh);
@@ -928,7 +928,7 @@ fraction.spawnNearCanabis = function(player) {
             inventory.addItem(3, countZones * 6, inventory.types.Vehicle, mp.joaat(vehicles.getNumberPlate(veh)), 1, 0, "{}");
         }
         catch (e) {
-            methods.debug(e);
+            WixCore.Debug.Server(e);
         }
 
     }, posVeh, 0, veh);
@@ -977,7 +977,7 @@ fraction.spawnNearGuns = function(player, type = 0) {
             }
         }
         catch (e) {
-            methods.debug(e);
+            WixCore.Debug.Server(e);
         }
 
     }, posVeh, 0, veh);
@@ -1048,7 +1048,7 @@ fraction.createCargoMafiaWar = function() {
                 veh.setVariable('isMafia', true);
             }
             catch (e) {
-                methods.debug(e);
+                WixCore.Debug.Server(e);
             }
 
         }, posVeh, fraction.warVehPosGhetto[item][3], 'Mule4');
@@ -1114,7 +1114,7 @@ fraction.createCargoBigWar = function() {
             veh.setVariable('cargoId', b1);
         }
         catch (e) {
-            methods.debug(e);
+            WixCore.Debug.Server(e);
         }
 
     }, posVeh, 90, 'Pounder2');
@@ -1739,7 +1739,7 @@ fraction.startGrabShopGang = function(player, itemId = 0) {
                     }
                 }
                 catch (e) {
-                    methods.debug(e);
+                    WixCore.Debug.Server(e);
                 }
             }, 180000)
         }
@@ -1749,7 +1749,7 @@ fraction.startGrabShopGang = function(player, itemId = 0) {
 fraction.save = function(id) {
 
     return new Promise((resolve) => {
-        methods.debug('fraction.save');
+        WixCore.Debug.Server('fraction.save');
 
         if (!fraction.has(id, "id")) {
             resolve();
@@ -2055,7 +2055,7 @@ fraction.createFractionDep = function(player, text) {
 };
 
 fraction.updateOwnerInfo = function (id, userId) {
-    methods.debug('fraction.updateOwnerInfo');
+    WixCore.Debug.Server('fraction.updateOwnerInfo');
     id = methods.parseInt(id);
     userId = methods.parseInt(userId);
 
@@ -2078,7 +2078,7 @@ fraction.create = function (player, id) {
         return;
 
     id = methods.parseInt(id);
-    methods.debug('fraction.create');
+    WixCore.Debug.Server('fraction.create');
 
     if (user.get(player, 'fraction_id2') > 0) {
         player.notify('~r~Вы уже состоите в организации');
@@ -2116,7 +2116,7 @@ fraction.destroy = function (player, id) {
         return;
 
     id = methods.parseInt(id);
-    methods.debug('fraction.destroy');
+    WixCore.Debug.Server('fraction.destroy');
 
     if (!user.isLeader2(player)) {
         player.notify('~r~Эта организация вам не приналдежит');
@@ -2132,7 +2132,7 @@ fraction.destroy = function (player, id) {
 
 fraction.destroyJust = function (id) {
     id = methods.parseInt(id);
-    methods.debug('fraction.destroy');
+    WixCore.Debug.Server('fraction.destroy');
 
     fraction.set(id, "name", 'Слот свободен');
     fraction.set(id, "money", 0);

@@ -41,7 +41,7 @@ let currentLightIdx = 0;
 let lightFlags = [0, 39, 88, 49, 88, 39];
 
 weather.loadAll = function() {
-    methods.debug('weather.loadAll');
+    WixCore.Debug.Server('weather.loadAll');
     mysql.executeQuery(`SELECT * FROM daynight WHERE id = 1`, function (err, rows, fields) {
 
         _year = rows[0]["year"];
@@ -53,7 +53,7 @@ weather.loadAll = function() {
         _hour = 7;
         _minute = 0;
 
-        methods.debug('WEATHER', rows[0]);
+        WixCore.Debug.Server('WEATHER', rows[0]);
 
         weather.load();
         ems1 = methods.getRandomInt(1, 59);
@@ -64,7 +64,7 @@ weather.loadAll = function() {
 };
 
 weather.load = function() {
-    methods.debug('weather.load');
+    WixCore.Debug.Server('weather.load');
     if (_month < 2 || _month > 11) //Зима
     {
         _tempNew = methods.getRandomInt(1, 4) * -1;
@@ -101,19 +101,19 @@ weather.load = function() {
 };
 
 weather.saveTimer = function() {
-    methods.debug('weather.saveTimer');
+    WixCore.Debug.Server('weather.saveTimer');
     mysql.executeQuery("UPDATE daynight SET  year = '" + _year + "', month = '" + _month + "', day = '" + _day + "', hour = '" + _hour + "', minute = '" + _minute + "' where id = '1'");
     setTimeout(weather.saveTimer, 60 * 1000);
 };
 
 weather.randomTimer = function() {
-    methods.debug('weather.randomTimer');
+    WixCore.Debug.Server('weather.randomTimer');
     weather.nextRandomWeather();
     setTimeout(weather.randomTimer, 1000 * 60 * 10 + methods.getRandomInt(5, 35));
 };
 
 weather.weatherTimer = function() {
-    methods.debug('weather.weatherTimer');
+    WixCore.Debug.Server('weather.weatherTimer');
     switch (_weatherType)
     {
         case 0:
@@ -194,7 +194,7 @@ weather.setBrokeLight = function() {
 };
 
 weather.timeSyncTimer = function() {
-    //methods.debug('weather.timeSyncTimer');
+    //WixCore.Debug.Server('weather.timeSyncTimer');
 
     try {
         _minute++;
@@ -259,9 +259,9 @@ weather.timeSyncTimer = function() {
             p.call("client:managers:weather:syncRealHour", [dateTime.getHours()]);
             p.call("client:managers:weather:syncWeatherTemp", [Math.round(_tempNew)]);
             p.call("client:managers:weather:syncWeatherWind", [_windSpeed, _windDir]);
-            p.call("client:managers:weather:syncRealFullDateTime", [`${methods.digitFormat(dateTime.getDate())}/${methods.digitFormat(dateTime.getMonth()+1)} ${methods.digitFormat(dateTime.getHours())}:${methods.digitFormat(dateTime.getMinutes())}`]);
-            p.call("client:managers:weather:syncRealTime", [`${methods.digitFormat(dateTime.getHours())}:${methods.digitFormat(dateTime.getMinutes())}`]);
-            p.call("client:managers:weather:syncRealDate", [`${methods.digitFormat(dateTime.getDate())}/${methods.digitFormat(dateTime.getMonth()+1)}`]);
+            p.call("client:managers:weather:syncRealFullDateTime", [`${WixCore.Function.DigitFormat(dateTime.getDate())}/${WixCore.Function.DigitFormat(dateTime.getMonth()+1)} ${WixCore.Function.DigitFormat(dateTime.getHours())}:${WixCore.Function.DigitFormat(dateTime.getMinutes())}`]);
+            p.call("client:managers:weather:syncRealTime", [`${WixCore.Function.DigitFormat(dateTime.getHours())}:${WixCore.Function.DigitFormat(dateTime.getMinutes())}`]);
+            p.call("client:managers:weather:syncRealDate", [`${WixCore.Function.DigitFormat(dateTime.getDate())}/${WixCore.Function.DigitFormat(dateTime.getMonth()+1)}`]);
         });
 
 
@@ -283,7 +283,7 @@ weather.timeSyncTimer = function() {
                     isVip++;
                 }
                 catch (e) {
-                    methods.debug(e);
+                    WixCore.Debug.Server(e);
                 }
             }
         }*/
@@ -634,15 +634,15 @@ weather.timeSyncTimer = function() {
             mysql.executeQuery('UPDATE users SET online_cont=\'0\' WHERE 1');
         }
     } catch (e) {
-        methods.debug(e);
+        WixCore.Debug.Server(e);
     }
     setTimeout(weather.timeSyncTimer, 8571);
 };
 
 weather.setWeather = function(weatherName) {
-    methods.debug('weather.setWeather');
+    WixCore.Debug.Server('weather.setWeather');
 
-    methods.debug('CURRENT WEATHER: ' + weatherName);
+    WixCore.Debug.Server('CURRENT WEATHER: ' + weatherName);
     /*if (weatherName == "RAIN" || weatherName == "THUNDER" || weatherName == "CLEARING")
     {
         if (methods.getRandomInt(0, 3) == 0)
@@ -652,65 +652,65 @@ weather.setWeather = function(weatherName) {
 };
 
 weather.getRpDateTime = function() {
-    methods.debug('weather.getRpDateTime');
-    return `${methods.digitFormat(_hour)}:${methods.digitFormat(_minute)}, ${methods.digitFormat(_day)}/${methods.digitFormat(_month)}/${_year}`;
+    WixCore.Debug.Server('weather.getRpDateTime');
+    return `${WixCore.Function.DigitFormat(_hour)}:${WixCore.Function.DigitFormat(_minute)}, ${WixCore.Function.DigitFormat(_day)}/${WixCore.Function.DigitFormat(_month)}/${_year}`;
 };
 
 weather.setPlayerCurrentWeather = function(player) {
-    methods.debug('weather.setPlayerCurrentWeather');
+    WixCore.Debug.Server('weather.setPlayerCurrentWeather');
     player.call("client:managers:weather:setCurrentWeather", [weather.getWeather()]);
 };
 
 weather.getWeather = function() {
-    methods.debug('weather.getWeather');
+    WixCore.Debug.Server('weather.getWeather');
     return _weather;
 };
 
 weather.getWeatherType = function() {
-    methods.debug('weather.getWeatherType');
+    WixCore.Debug.Server('weather.getWeatherType');
     return _weatherType;
 };
 
 weather.getHour = function() {
-    methods.debug('weather.getHour');
+    WixCore.Debug.Server('weather.getHour');
     return _hour;
 };
 
 weather.getMin = function() {
-    methods.debug('weather.getMin');
+    WixCore.Debug.Server('weather.getMin');
     return _minute;
 };
 
 weather.getDay = function() {
-    methods.debug('weather.getDay');
+    WixCore.Debug.Server('weather.getDay');
     return _day;
 };
 
 weather.getMonth = function() {
-    methods.debug('weather.getMonth');
+    WixCore.Debug.Server('weather.getMonth');
     return _month;
 };
 
 weather.getYear = function() {
-    methods.debug('weather.getYear');
+    WixCore.Debug.Server('weather.getYear');
     return _year - 2000;
 };
 
 weather.getFullYear = function() {
-    methods.debug('weather.getFullYear');
+    WixCore.Debug.Server('weather.getFullYear');
     return _year;
 };
 
 weather.getFullRpDate = function() {
-    return `${methods.digitFormat(_day)}/${methods.digitFormat(_month)}/${_year}`;
+    return `${WixCore.Function.DigitFormat(_day)}/${WixCore.Function.DigitFormat(_month)}/${_year}`;
 };
 
 weather.getFullRpDateFormat = function(day, month, year) {
-    return `${methods.digitFormat(day)}/${methods.digitFormat(month)}/${year}`;
+    return `${WixCore.Function.DigitFormat(day)}/${WixCore.Function.DigitFormat(month)}/${year}`;
 };
 
 weather.getFullRpTime = function() {
-    return `${methods.digitFormat(_hour)}:${methods.digitFormat(_minute)}`;
+    return `${WixCore.Function.DigitFormat(_hour)}:${WixCore.Function.DigitFormat(_minute)}`;
 };
 
 weather.strDateToTime = function(date) {
@@ -722,7 +722,7 @@ weather.strDateToTime = function(date) {
 };
 
 weather.nextRandomWeather = function() {
-    methods.debug('weather.nextRandomWeather');
+    WixCore.Debug.Server('weather.nextRandomWeather');
     weather.nextRandomWeatherByType(weather.getWeatherType());
 };
 
@@ -778,11 +778,11 @@ weather.getWeatherDesc = function(type) {
 };
 
 weather.getFullRpTime = function() {
-    return `${methods.digitFormat(_hour)}:${methods.digitFormat(_minute)}`;
+    return `${WixCore.Function.DigitFormat(_hour)}:${WixCore.Function.DigitFormat(_minute)}`;
 };
 
 weather.nextRandomWeatherByType = function(weatherType) {
-    methods.debug('weather.nextRandomWeatherByType');
+    WixCore.Debug.Server('weather.nextRandomWeatherByType');
 
     var weatherList = [
         "EXTRASUNNY",

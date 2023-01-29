@@ -22,7 +22,7 @@ let _taxMin = 10;
 let _taxDays = 21;
 
 tax.loadAll = function() {
-    methods.debug('tax.loadAll');
+    WixCore.Debug.Server('tax.loadAll');
     setInterval(tax.removeTax, methods.parseInt(60000 * 60 * 3.4));
     tax.updateTax();
 
@@ -44,7 +44,7 @@ tax.adLiveInvader = function(text) {
 };
 
 tax.sell = function() {
-    methods.debug('tax.sell');
+    WixCore.Debug.Server('tax.sell');
 
     //=============================
     //============Склады=============
@@ -321,7 +321,7 @@ tax.sell = function() {
 };
 
 tax.payTax = function(player, type, sum, score) {
-    methods.debug('tax.payTax');
+    WixCore.Debug.Server('tax.payTax');
     if (!user.isLogin(player))
         return;
 
@@ -386,7 +386,7 @@ tax.payTax = function(player, type, sum, score) {
 };
 
 tax.payTaxAll = function(player, type, sum) {
-    methods.debug('tax.payTax');
+    WixCore.Debug.Server('tax.payTax');
     if (!user.isLogin(player))
         return;
 
@@ -423,7 +423,7 @@ tax.payTaxAll = function(player, type, sum) {
 };
 
 tax.removeTax = function() {
-    methods.debug('tax.removeTax');
+    WixCore.Debug.Server('tax.removeTax');
 
     mysql.executeQuery("UPDATE houses SET tax_money = tax_money - (round((price * '" + _currentTax + "' + '" + _taxMin +  "') / '7', 0)) WHERE user_id > 0");
     mysql.executeQuery("UPDATE condos SET tax_money = tax_money - (round((price * '" + _currentTax + "' + '" + _taxMin +  "') / '7', 0)) WHERE user_id > 0");
@@ -440,7 +440,7 @@ tax.removeTax = function() {
 };
 
 tax.updateTax = function() {
-    methods.debug('tax.updateTax');
+    WixCore.Debug.Server('tax.updateTax');
 
     mysql.executeQuery(`SELECT * FROM condos WHERE user_id > '0'`, function (err, rows, fields) {
         rows.forEach(item => {

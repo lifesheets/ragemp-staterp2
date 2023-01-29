@@ -18,7 +18,7 @@ let family = exports;
 let count = 0;
 
 family.loadAll = function() {
-    methods.debug('family.loadAll');
+    WixCore.Debug.Server('family.loadAll');
 
     mysql.executeQuery(`SELECT * FROM family_list`, function (err, rows, fields) {
         rows.forEach(function(item) {
@@ -36,12 +36,12 @@ family.loadAll = function() {
             family.set(item['id'], 'exp', item['exp']);
         });
         count = rows.length;
-        methods.debug('All Family Loaded: ' + count);
+        WixCore.Debug.Server('All Family Loaded: ' + count);
     });
 };
 
 family.loadById = function(id) {
-    methods.debug('family.loadById');
+    WixCore.Debug.Server('family.loadById');
 
     mysql.executeQuery(`SELECT * FROM family_list WHERE id = '${id}'`, function (err, rows, fields) {
         rows.forEach(function(item) {
@@ -63,7 +63,7 @@ family.loadById = function(id) {
 };
 
 family.saveAll = function() {
-    methods.debug('family.saveAll');
+    WixCore.Debug.Server('family.saveAll');
     mysql.executeQuery(`SELECT * FROM family_list`, function (err, rows, fields) {
         rows.forEach(function(item) {
             family.save(item['id']);
@@ -72,14 +72,14 @@ family.saveAll = function() {
 };
 
 family.getCount = function() {
-    methods.debug('family.getCount');
+    WixCore.Debug.Server('family.getCount');
     return count;
 };
 
 family.save = function(id) {
 
     return new Promise((resolve) => {
-        methods.debug('family.save');
+        WixCore.Debug.Server('family.save');
 
         if (!family.has(id, "id")) {
             resolve();
@@ -366,7 +366,7 @@ family.createFractionDep = function(player, text) {
 };
 
 family.updateOwnerInfo = function (id, userId) {
-    methods.debug('family.updateOwnerInfo');
+    WixCore.Debug.Server('family.updateOwnerInfo');
     id = methods.parseInt(id);
     userId = methods.parseInt(userId);
 
@@ -384,7 +384,7 @@ family.create = function (player, name) {
     if (!user.isLogin(player))
         return;
 
-    methods.debug('family.create');
+    WixCore.Debug.Server('family.create');
 
     if (user.get(player, 'family_id') > 0) {
         player.notify('~r~Вы уже состоите в семье');
@@ -441,7 +441,7 @@ family.destroy = function (player, id) {
         return;
 
     id = methods.parseInt(id);
-    methods.debug('family.destroy');
+    WixCore.Debug.Server('family.destroy');
 
     if (!user.isLeaderF(player)) {
         player.notify('~r~Эта семья вам не приналдежит');
@@ -460,7 +460,7 @@ family.destroy = function (player, id) {
 
 family.destroyJust = function (id) {
     id = methods.parseInt(id);
-    methods.debug('family.destroy');
+    WixCore.Debug.Server('family.destroy');
     mysql.executeQuery("UPDATE users SET family_id = '" + 0 + "' where family_id = '" + id + "'");
     mp.players.forEach(p => {
         if (!user.isLogin(p))

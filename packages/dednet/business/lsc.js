@@ -80,7 +80,7 @@ lsc.list = [
 ];
 
 lsc.loadAll = function() {
-    methods.debug('lsc.loadAll');
+    WixCore.Debug.Server('lsc.loadAll');
     lsc.list.forEach(function (item) {
         let shopPos = new mp.Vector3(item[0], item[1], item[2]);
 
@@ -99,7 +99,7 @@ lsc.loadAll = function() {
 };
 
 lsc.getInRadius = function(pos, radius = 2) {
-    methods.debug('lsc.getInRadius');
+    WixCore.Debug.Server('lsc.getInRadius');
     let shopId = -1;
     lsc.list.forEach(function (item, idx) {
         let shopPos = new mp.Vector3(item[0], item[1], item[2]);
@@ -110,7 +110,7 @@ lsc.getInRadius = function(pos, radius = 2) {
 };
 
 lsc.checkPosForOpenMenu = function(player) {
-    methods.debug('lsc.checkPosForOpenMenu');
+    WixCore.Debug.Server('lsc.checkPosForOpenMenu');
     try {
         let playerPos = player.position;
         let shopId = -1;
@@ -135,18 +135,18 @@ lsc.checkPosForOpenMenu = function(player) {
                     player.call('client:menuList:showLscMenu', [shopId, business.getPrice(shopId)]);
                 }
                 catch (e) {
-                    methods.debug(e);
+                    WixCore.Debug.Server(e);
                 }
             }
         });
     }
     catch (e) {
-        methods.debug(e);
+        WixCore.Debug.Server(e);
     }
 };
 
 lsc.findNearest = function(pos) {
-    methods.debug('lsc.findNearest');
+    WixCore.Debug.Server('lsc.findNearest');
     let prevPos = new mp.Vector3(9999, 9999, 9999);
     lsc.list.forEach(function (item,) {
         let shopPos = new mp.Vector3(item[0], item[1], item[2]);
@@ -157,7 +157,7 @@ lsc.findNearest = function(pos) {
 };
 
 lsc.repair = function(player, price, shopId, payType) {
-    methods.debug('lsc.repair');
+    WixCore.Debug.Server('lsc.repair');
     if (!user.isLogin(player))
         return;
     let veh = player.vehicle;
@@ -195,7 +195,7 @@ lsc.repair = function(player, price, shopId, payType) {
 };
 
 lsc.buyNeon = function(player, price, shopId, payType) {
-    methods.debug('lsc.buyNeon');
+    WixCore.Debug.Server('lsc.buyNeon');
     if (!user.isLogin(player))
         return;
     let veh = player.vehicle;
@@ -247,7 +247,7 @@ lsc.buyNeon = function(player, price, shopId, payType) {
 };
 
 lsc.buyTyreColor = function(player, price, idx, shopId, payType) {
-    methods.debug('lsc.buyNeon');
+    WixCore.Debug.Server('lsc.buyNeon');
     if (!user.isLogin(player))
         return;
     let veh = player.vehicle;
@@ -297,7 +297,7 @@ lsc.buyTyreColor = function(player, price, idx, shopId, payType) {
 };
 
 lsc.buyLight = function(player, price, shopId, payType) {
-    methods.debug('lsc.buyLight');
+    WixCore.Debug.Server('lsc.buyLight');
     if (!user.isLogin(player))
         return;
     let veh = player.vehicle;
@@ -345,7 +345,7 @@ lsc.buyLight = function(player, price, shopId, payType) {
 };
 
 lsc.buySpecial = function(player, price, shopId, payType) {
-    methods.debug('lsc.buyNeon');
+    WixCore.Debug.Server('lsc.buyNeon');
     if (!user.isLogin(player))
         return;
     let veh = player.vehicle;
@@ -388,7 +388,7 @@ lsc.buySpecial = function(player, price, shopId, payType) {
 };
 
 lsc.buyNumber = function(player, shopId, newNumber, payType) {
-    methods.debug('lsc.buyNumber');
+    WixCore.Debug.Server('lsc.buyNumber');
     if (!user.isLogin(player))
         return;
     let veh = player.vehicle;
@@ -507,7 +507,7 @@ lsc.buyNumber = function(player, shopId, newNumber, payType) {
                     user.showCustomNotify(player, 'Вы изменили номер', 2, 9);
                 }
                 catch (e) {
-                    methods.debug(e);
+                    WixCore.Debug.Server(e);
                 }
                 return;
             }
@@ -517,7 +517,7 @@ lsc.buyNumber = function(player, shopId, newNumber, payType) {
 };
 
 lsc.showTun = function(player, modType, idx) {
-    methods.debug('lsc.showTun', modType, idx);
+    WixCore.Debug.Server('lsc.showTun', modType, idx);
     if (!user.isLogin(player))
         return;
     let veh = player.vehicle;
@@ -541,7 +541,7 @@ lsc.showTun = function(player, modType, idx) {
 };
 
 lsc.buySTun = function(player, modType, idx, price, shopId, itemName, payType) {
-    methods.debug('lsc.buySTun');
+    WixCore.Debug.Server('lsc.buySTun');
     if (!user.isLogin(player))
         return;
 
@@ -615,7 +615,7 @@ lsc.buySTun = function(player, modType, idx, price, shopId, itemName, payType) {
 
 
 lsc.buySFix = function(player, idx, price, shopId, itemName, payType) {
-    methods.debug('lsc.buySTun');
+    WixCore.Debug.Server('lsc.buySTun');
     if (!user.isLogin(player))
         return;
 
@@ -658,7 +658,7 @@ lsc.buySFix = function(player, idx, price, shopId, itemName, payType) {
 };
 
 lsc.resetSTun = function(player, modType) {
-    methods.debug('lsc.resetSTun');
+    WixCore.Debug.Server('lsc.resetSTun');
     if (!user.isLogin(player))
         return;
 
@@ -695,7 +695,7 @@ lsc.resetSTun = function(player, modType) {
 };
 
 lsc.buyTun = function(player, modType, idx, price, shopId, itemName, payType) {
-    methods.debug('lsc.buyTun');
+    WixCore.Debug.Server('lsc.buyTun');
     if (!user.isLogin(player))
         return;
 
@@ -765,7 +765,7 @@ lsc.showNumberType = function(player, idx) {
 };
 
 lsc.buyNumberType = function(player, idx, price, shopId, payType) {
-    methods.debug('lsc.buyColor1');
+    WixCore.Debug.Server('lsc.buyColor1');
     if (!user.isLogin(player))
         return;
 
@@ -887,7 +887,7 @@ lsc.showColor6 = function(player, idx) {
 };
 
 lsc.buyColor1 = function(player, idx, price, shopId, itemName, payType) {
-    methods.debug('lsc.buyColor1');
+    WixCore.Debug.Server('lsc.buyColor1');
     if (!user.isLogin(player))
         return;
 
@@ -945,7 +945,7 @@ lsc.buyColor1 = function(player, idx, price, shopId, itemName, payType) {
 };
 
 lsc.buyColor2 = function(player, idx, price, shopId, itemName, payType) {
-    methods.debug('lsc.buyColor2');
+    WixCore.Debug.Server('lsc.buyColor2');
     if (!user.isLogin(player))
         return;
     if (user.getMoney(player, payType) < price) {
@@ -982,7 +982,7 @@ lsc.buyColor2 = function(player, idx, price, shopId, itemName, payType) {
 };
 
 lsc.buyColor3 = function(player, idx, price, shopId, itemName, payType) {
-    methods.debug('lsc.buyColor3');
+    WixCore.Debug.Server('lsc.buyColor3');
     if (!user.isLogin(player))
         return;
     if (user.getMoney(player, payType) < price) {
@@ -1019,7 +1019,7 @@ lsc.buyColor3 = function(player, idx, price, shopId, itemName, payType) {
 };
 
 lsc.buyColor4 = function(player, idx, price, shopId, itemName, payType) {
-    methods.debug('lsc.buyColor4');
+    WixCore.Debug.Server('lsc.buyColor4');
     if (!user.isLogin(player))
         return;
     if (user.getMoney(player, payType) < price) {
@@ -1056,7 +1056,7 @@ lsc.buyColor4 = function(player, idx, price, shopId, itemName, payType) {
 };
 
 lsc.buyColor5 = function(player, idx, price, shopId, itemName, payType) {
-    methods.debug('lsc.buyColor5');
+    WixCore.Debug.Server('lsc.buyColor5');
     if (!user.isLogin(player))
         return;
     if (user.getMoney(player, payType) < price) {
@@ -1093,7 +1093,7 @@ lsc.buyColor5 = function(player, idx, price, shopId, itemName, payType) {
 };
 
 lsc.buyColor6 = function(player, idx, price, shopId, itemName, payType) {
-    methods.debug('lsc.buyColor6');
+    WixCore.Debug.Server('lsc.buyColor6');
     if (!user.isLogin(player))
         return;
     if (user.getMoney(player, payType) < price) {
@@ -1130,7 +1130,7 @@ lsc.buyColor6 = function(player, idx, price, shopId, itemName, payType) {
 };
 
 lsc.checkValidNumber = function(number) {
-    methods.debug('lsc.checkValidNumber');
+    WixCore.Debug.Server('lsc.checkValidNumber');
     number = number.toUpperCase();
     let chars = "1234567890ABCDEFGHIJKLMNOPQRSTUVWXYZ";
 

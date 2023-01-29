@@ -44,13 +44,13 @@ vehicles.processVehicleManager = () =>
     {
         try {
             let vehicle = mp.vehicles.new.apply(mp.vehicles, creation.args);
-            //methods.debug('processVehicleManager', creation.args);
+            //WixCore.Debug.Server('processVehicleManager', creation.args);
             vSync.setEngineState(vehicle, false);
             attach.initFunctions(vehicle);
             cbs.push([vehicle, creation.cb]);
         }
         catch (e) {
-            methods.debug(e);
+            WixCore.Debug.Server(e);
         }
         //await methods.sleep(100);
     }
@@ -63,7 +63,7 @@ vehicles.processVehicleManager = () =>
             removal.destroy();
         }
         catch (e) {
-            methods.debug(e);
+            WixCore.Debug.Server(e);
         }
     }
 
@@ -75,13 +75,13 @@ vehicles.processVehicleManager = () =>
             cb[1](cb[0]);
         }
         catch (e) {
-            methods.debug(e);
+            WixCore.Debug.Server(e);
         }
     }
 };
 
 vehicles.loadAllTimers = () => {
-    methods.debug('vehicles.loadAllTimers');
+    WixCore.Debug.Server('vehicles.loadAllTimers');
     setInterval(vehicles.processVehicleManager, 600);
 };
 
@@ -97,7 +97,7 @@ vehicles.loadAllUserVehicles = (userId) => {
                 }, 1500 * idx++);
             }
             catch (e) {
-                methods.debug('vehicles.loadUserById', e)
+                WixCore.Debug.Server('vehicles.loadUserById', e)
             }
         });
     });
@@ -110,7 +110,7 @@ vehicles.loadUserById = (id) => {
                 vehicles.loadUserVehicleByRow(item);
             }
             catch (e) {
-                methods.debug('vehicles.loadUserById', e)
+                WixCore.Debug.Server('vehicles.loadUserById', e)
             }
         });
     });
@@ -266,7 +266,7 @@ vehicles.spawnPlayerCar = (id) => {
             vehicles.setTunning(veh);
         }
         catch (e) {
-            methods.debug(e);
+            WixCore.Debug.Server(e);
         }
 
     }, spawnPos, spawnRot, vehicles.get(id, 'name'));
@@ -603,7 +603,7 @@ vehicles.spawnFractionCar = (id) => {
                     spawnRot = parkInfo.rot;
                 }
                 catch (e) {
-                    methods.debug('ERROR', e);
+                    WixCore.Debug.Server('ERROR', e);
                 }
             }
         }
@@ -658,7 +658,7 @@ vehicles.spawnFractionCar = (id) => {
                     }
                 }
                 catch (e) {
-                    methods.debug(e);
+                    WixCore.Debug.Server(e);
                 }
             }
 
@@ -670,7 +670,7 @@ vehicles.spawnFractionCar = (id) => {
         }, spawnPos, spawnRot, info.name);
     }
     catch (e) {
-        methods.debug(e);
+        WixCore.Debug.Server(e);
     }
 };
 
@@ -712,7 +712,7 @@ vehicles.removePlayerVehicle = (userId) => {
 vehicles.save = (id) => {
 
     return new Promise((resolve) => {
-        methods.debug('vehicles.save');
+        WixCore.Debug.Server('vehicles.save');
 
         if (!vehicles.has(id, "id")) {
             resolve();
@@ -771,27 +771,27 @@ vehicles.save = (id) => {
 };
 
 vehicles.set = function(id, key, val) {
-    //methods.debug(`vehicles.set ${id} ${key} ${val} | `);
+    //WixCore.Debug.Server(`vehicles.set ${id} ${key} ${val} | `);
     Container.Data.Set(offset + methods.parseInt(id), key, val);
 };
 
 vehicles.get = function(id, key) {
-    //methods.debug('vehicles.get');
+    //WixCore.Debug.Server('vehicles.get');
     return Container.Data.Get(offset + methods.parseInt(id), key);
 };
 
 vehicles.has = function(id, key) {
-    //methods.debug('vehicles.get');
+    //WixCore.Debug.Server('vehicles.get');
     return Container.Data.Has(offset + methods.parseInt(id), key);
 };
 
 vehicles.reset = function(id, key) {
-    //methods.debug('vehicles.get');
+    //WixCore.Debug.Server('vehicles.get');
     return Container.Data.Reset(offset + methods.parseInt(id), key);
 };
 
 vehicles.getData = function(id) {
-    //methods.debug('vehicles.getData');
+    //WixCore.Debug.Server('vehicles.getData');
     return Container.Data.GetAll(offset + methods.parseInt(id));
 };
 
@@ -827,7 +827,7 @@ vehicles.getFractionDay = function(price) {
 };
 
 vehicles.park = function(id, x, y, z, rot, dimension) {
-    methods.debug('vehicles.park');
+    WixCore.Debug.Server('vehicles.park');
     rot = methods.parseFloat(rot);
     vehicles.set(id, 'x', methods.parseFloat(x));
     vehicles.set(id, 'y', methods.parseFloat(y));
@@ -838,7 +838,7 @@ vehicles.park = function(id, x, y, z, rot, dimension) {
 };
 
 vehicles.parkFraction = function(id, x, y, z, rot) {
-    methods.debug('vehicles.parkFraction');
+    WixCore.Debug.Server('vehicles.parkFraction');
      mysql.executeQuery("UPDATE cars_fraction SET x = '" + methods.parseFloat(x) + "', y = '" + methods.parseFloat(y) + "', z = '" + methods.parseFloat(z) + "', rot = '" + methods.parseFloat(rot) + "' where id = '" + methods.parseInt(id) + "'");
 
     vehicles.fractionList.forEach((item, i) => {
@@ -852,7 +852,7 @@ vehicles.parkFraction = function(id, x, y, z, rot) {
 };
 
 vehicles.setColorFraction = function(id, color) {
-    methods.debug('vehicles.setColorFraction');
+    WixCore.Debug.Server('vehicles.setColorFraction');
     mysql.executeQuery("UPDATE cars_fraction SET color = '" + methods.parseInt(color) + "' where id = '" + methods.parseInt(id) + "'");
     vehicles.fractionList.forEach((item, i) => {
         if (item.id == id) {
@@ -863,17 +863,17 @@ vehicles.setColorFraction = function(id, color) {
 
 vehicles.updatePrice = function(id, newPrice) {
     try {
-        methods.debug('vehicles.updatePrice');
+        WixCore.Debug.Server('vehicles.updatePrice');
         mysql.executeQuery("UPDATE cars SET price = '" + methods.parseInt(newPrice) + "' where id = '" + methods.parseInt(id) + "'");
     }
     catch (e) {
-        methods.debug(e);
+        WixCore.Debug.Server(e);
     }
     try {
         vehicles.set(id, 'price', methods.parseInt(newPrice));
     }
     catch (e) {
-        methods.debug(e);
+        WixCore.Debug.Server(e);
     }
 };
 
@@ -903,7 +903,7 @@ vehicles.respawn = (vehicle) => {
             if (!vehicles.exists(vehicle))
                 return;
            try {
-               methods.debug('vehicles.respawn');
+               WixCore.Debug.Server('vehicles.respawn');
                let containerId = vehicle.getVariable('container');
                if (containerId != undefined && vehicle.getVariable('user_id') > 0)
                    vehicles.spawnPlayerCar(containerId);
@@ -921,7 +921,7 @@ vehicles.respawn = (vehicle) => {
         }, 100)
     }
     catch (e) {
-        methods.debug(e);
+        WixCore.Debug.Server(e);
     }
 };
 
@@ -932,7 +932,7 @@ vehicles.respawn2 = (vehicle, player) => {
         return;
 
     try {
-        methods.debug('vehicles.respawn');
+        WixCore.Debug.Server('vehicles.respawn');
 
         let containerId = vehicle.getVariable('container');
         if (containerId != undefined && vehicle.getVariable('user_id') > 0)
@@ -975,7 +975,7 @@ vehicles.respawn2 = (vehicle, player) => {
         vehicles.respawn(vehicle);
     }
     catch (e) {
-        methods.debug(e);
+        WixCore.Debug.Server(e);
     }
 };
 
@@ -997,7 +997,7 @@ vehicles.respawnById = (id) => {
 };
 
 vehicles.findVehicleByNumber = (number) => {
-    methods.debug('vehicles.findVehicleByNumber');
+    WixCore.Debug.Server('vehicles.findVehicleByNumber');
     let returnVehicle = null;
     mp.vehicles.forEach((vehicle) => {
         if (!vehicles.exists(vehicle))
@@ -1009,7 +1009,7 @@ vehicles.findVehicleByNumber = (number) => {
 };
 
 vehicles.getOccupants = (vehicle) => {
-    methods.debug('vehicles.getOccupants');
+    WixCore.Debug.Server('vehicles.getOccupants');
     let players = [];
     mp.players.forEach((p) => {
         try {
@@ -1040,7 +1040,7 @@ vehicles.setFuel = (veh, fuel) => {
         veh.setVariable('fuel', fuel);
     }
     catch (e) {
-        methods.debug('SetFUEL', e);
+        WixCore.Debug.Server('SetFUEL', e);
     }
 };
 
@@ -1053,7 +1053,7 @@ vehicles.setNumberPlate = (veh, number) => {
         veh.setVariable('numberPlate', number);
     }
     catch (e) {
-        methods.debug('setNumberPlate', e);
+        WixCore.Debug.Server('setNumberPlate', e);
     }
 };
 
@@ -1076,7 +1076,7 @@ vehicles.getFuel = (veh) => {
 };
 
 vehicles.checkVehiclesFuel = () => {
-    //methods.debug('vehicles.checkVehiclesFuel');
+    //WixCore.Debug.Server('vehicles.checkVehiclesFuel');
     mp.vehicles.forEach(function (veh) {
 
         if (!vehicles.exists(veh))
@@ -1144,7 +1144,7 @@ vehicles.checkVehiclesFuel = () => {
 };
 
 vehicles.generateNumber = function (length = 8) {
-    methods.debug('vehicles.generateNumber');
+    WixCore.Debug.Server('vehicles.generateNumber');
     let text = "";
     let possible = "1234567890ABCDEFGHIJKLMNOPQRSTUVWXYZ";
     for (let i = 0; i < length; i++)
@@ -1177,7 +1177,7 @@ vehicles.updateOwnerInfo = function (id, userId, userName) {
             }
         }
         catch (e) {
-            methods.debug(e);
+            WixCore.Debug.Server(e);
         }
     });
 
@@ -1212,13 +1212,13 @@ vehicles.delete = function (id) {
             }
         }
         catch (e) {
-            methods.debug(e);
+            WixCore.Debug.Server(e);
         }
     });
 };
 
 vehicles.sell = function (player, slot) {
-    methods.debug('vehicles.sell');
+    WixCore.Debug.Server('vehicles.sell');
     if (!user.isLogin(player))
         return;
 
@@ -1342,13 +1342,13 @@ vehicles.setTunning = (veh) => {
                             }
                         }
                         catch (e) {
-                            methods.debug('vehicles.setTunning1', e);
+                            WixCore.Debug.Server('vehicles.setTunning1', e);
                         }
                     }, 500);
                 }
             }
             catch (e) {
-                methods.debug('vehicles.setTunning2', e);
+                WixCore.Debug.Server('vehicles.setTunning2', e);
             }
         }
     }, 10000);
@@ -1376,7 +1376,7 @@ vehicles.setHeading = (vid, rot = 0) => {
 
 let CountAllCars = 0;
 vehicles.spawnCar = (position, heading, nameOrModel, number = undefined, dim = 0) => {
-    methods.debug('vehicles.spawnCar ' + nameOrModel);
+    WixCore.Debug.Server('vehicles.spawnCar ' + nameOrModel);
     if (typeof nameOrModel == 'string')
         nameOrModel = mp.joaat(nameOrModel);
 
@@ -1395,7 +1395,7 @@ vehicles.spawnCar = (position, heading, nameOrModel, number = undefined, dim = 0
 
     vehicles.setNumberPlate(veh, number);
     //veh.engine = false;
-    methods.debug('spawnCar');
+    WixCore.Debug.Server('spawnCar');
     vSync.setEngineState(veh, false);
     veh.locked = false;
     veh.setColor(color1, color2);
@@ -1412,7 +1412,7 @@ vehicles.spawnCar = (position, heading, nameOrModel, number = undefined, dim = 0
 };
 
 vehicles.spawnCarCb = (cb, position, heading, nameOrModel, color1 = -1, color2 = -1, liv = -1, number = undefined) => {
-    methods.debug('vehicles.spawnCarCb ' + nameOrModel);
+    WixCore.Debug.Server('vehicles.spawnCarCb ' + nameOrModel);
     if (typeof nameOrModel == 'string')
         nameOrModel = mp.joaat(nameOrModel.toLowerCase());
 
@@ -1459,7 +1459,7 @@ vehicles.spawnCarCb = (cb, position, heading, nameOrModel, color1 = -1, color2 =
 };
 
 vehicles.spawnJobCar = (cb2, position, heading, nameOrModel, jobId = 0) => {
-    methods.debug('vehicles.spawnJobCar', nameOrModel, jobId);
+    WixCore.Debug.Server('vehicles.spawnJobCar', nameOrModel, jobId);
 
     if (typeof nameOrModel == "string")
         nameOrModel = nameOrModel.toLowerCase();
@@ -1549,7 +1549,7 @@ vehicles.spawnJobCar = (cb2, position, heading, nameOrModel, jobId = 0) => {
 };
 
 vehicles.lockStatus = (player, vehicle) => {
-    methods.debug('vehicles.lockStatus');
+    WixCore.Debug.Server('vehicles.lockStatus');
     if (!user.isLogin(player))
         return;
     if (!vehicles.exists(vehicle))
@@ -1584,7 +1584,7 @@ vehicles.lockStatus = (player, vehicle) => {
 };
 
 vehicles.engineStatus = (player, vehicle, status = null) => {
-    methods.debug('vehicles.engineStatus');
+    WixCore.Debug.Server('vehicles.engineStatus');
     if (!user.isLogin(player))
         return;
     if (!vehicles.exists(vehicle))
@@ -1633,7 +1633,7 @@ vehicles.engineStatus = (player, vehicle, status = null) => {
 };
 
 vehicles.neonStatus = (player, vehicle) => {
-    methods.debug('vehicles.neonStatus');
+    WixCore.Debug.Server('vehicles.neonStatus');
     if (!user.isLogin(player))
         return;
     if (!vehicles.exists(vehicle))
@@ -1651,6 +1651,6 @@ vehicles.neonStatus = (player, vehicle) => {
 };
 
 vehicles.exists = (vehicle) => {
-    //methods.debug('vehicles.exists');
+    //WixCore.Debug.Server('vehicles.exists');
     return vehicle && mp.vehicles.exists(vehicle) && vehicle.id;
 };

@@ -65,7 +65,7 @@ mp.events.add = (eventName, eventCallback) => {
             const callText = entityName !== null ? `${entityName} call event ${eventName}` : `Event ${eventName} called`;
 
             //if (eventName != 'server:clientDebug')
-            //    methods.debug(callText, argumentsList.slice(1));
+            //    WixCore.Debug.Server(callText, argumentsList.slice(1));
 
             target.apply(thisArg, argumentsList);
             return;
@@ -181,8 +181,8 @@ mp.events.addRemoteCounted('modules:server:data:Get', (player, promiseId, id, ke
         Container.Data.GetClient(player, promiseId, id, key);
     }
     catch (e) {
-        methods.debug('modules:server:data:Get');
-        methods.debug(e);
+        WixCore.Debug.Server('modules:server:data:Get');
+        WixCore.Debug.Server(e);
     }
 });
 
@@ -191,8 +191,8 @@ mp.events.addRemoteCounted('modules:server:data:GetAll', (player, promiseId, id)
         Container.Data.GetAllClient(player, promiseId, id);
     }
     catch (e) {
-        methods.debug('modules:server:data:GetAll');
-        methods.debug(e);
+        WixCore.Debug.Server('modules:server:data:GetAll');
+        WixCore.Debug.Server(e);
     }
 });
 
@@ -201,8 +201,8 @@ mp.events.addRemoteCounted('modules:server:data:Has', (player, promiseId, id, ke
         Container.Data.HasClient(player, promiseId, id, key);
     }
     catch (e) {
-        methods.debug('modules:server:data:Has');
-        methods.debug(e);
+        WixCore.Debug.Server('modules:server:data:Has');
+        WixCore.Debug.Server(e);
     }
 });
 
@@ -428,7 +428,7 @@ mp.events.addRemoteCounted('server:race:rating', (player) => {
                 user.showMenu(player, 'Рейтинг', '~g~MMR~s~ | ~q~Заезды~s~ | ~y~Победы', menuData);
             }
             catch (e) {
-                methods.debug(e);
+                WixCore.Debug.Server(e);
             }
         });
     } catch (e) {
@@ -458,7 +458,7 @@ mp.events.addRemoteCounted('server:duel:rating', (player) => {
                 user.showMenu(player, 'Рейтинг', '~g~MMR~s~ | ~q~Дуэлей~s~ | ~y~Победы', menuData);
             }
             catch (e) {
-                methods.debug(e);
+                WixCore.Debug.Server(e);
             }
         });
     } catch (e) {
@@ -567,7 +567,7 @@ mp.events.addRemoteCounted('server:user:arrest', (player) => {
 
 mp.events.addRemoteCounted('server:user:serVariable', (player, key, val) => {
     try {
-        //methods.debug('server:user:serVariable', key, val);
+        //WixCore.Debug.Server('server:user:serVariable', key, val);
         if (mp.players.exists(player))
             player.setVariable(key, val);
     } catch (e) {
@@ -577,7 +577,7 @@ mp.events.addRemoteCounted('server:user:serVariable', (player, key, val) => {
 
 mp.events.addRemoteCounted('server:vehicle:serVariable', (player, key, val) => {
     try {
-        //methods.debug('server:vehicle:serVariable', key, val);
+        //WixCore.Debug.Server('server:vehicle:serVariable', key, val);
         if (mp.players.exists(player) && mp.vehicles.exists(player.vehicle))
             player.vehicle.setVariable(key, val);
     } catch (e) {
@@ -587,7 +587,7 @@ mp.events.addRemoteCounted('server:vehicle:serVariable', (player, key, val) => {
 
 mp.events.addRemoteCounted('server:vehicle:attach', (player, key, isRemove) => {
     try {
-        //methods.debug('server:vehicle:serVariable', key, val);
+        //WixCore.Debug.Server('server:vehicle:serVariable', key, val);
         if (mp.players.exists(player) && mp.vehicles.exists(player.vehicle))
             player.vehicle.addAttachment(key, isRemove);
     } catch (e) {
@@ -601,7 +601,7 @@ mp.events.addRemoteCounted('server:user:generateCryptoCard', (player) => {
         user.save(player);
     }
     catch (e) {
-        methods.debug(e);
+        WixCore.Debug.Server(e);
     }
 });
 
@@ -763,7 +763,7 @@ mp.events.addRemoteCounted('server:enums:getCloth', (player, requestID) => {
     try {
         player.call('client:enums:updateCloth', [requestID, JSON.stringify(enums.hairOverlays), JSON.stringify(enums.clothM), JSON.stringify(enums.clothF), JSON.stringify(enums.propM), JSON.stringify(enums.propF)]);
     } catch (e) {
-        methods.debug(e);
+        WixCore.Debug.Server(e);
     }
 });
 
@@ -771,7 +771,7 @@ mp.events.addRemoteCounted('server:enums:getCloth1', (player, requestID) => {
     try {
         player.call('client:enums:updateCloth1', [requestID, JSON.stringify(enums.printList), JSON.stringify(enums.fractionListId)]);
     } catch (e) {
-        methods.debug(e);
+        WixCore.Debug.Server(e);
     }
 
     setTimeout(function () {
@@ -792,7 +792,7 @@ mp.events.addRemoteCounted('server:enums:getCloth1', (player, requestID) => {
                 player.call('client:enums:updateTattoo', [enums.tattooList.slice(i * 250, i * 250 + 250)]);
         }
         catch (e) {
-            methods.debug(e);
+            WixCore.Debug.Server(e);
         }
     }, 2000);
 });
@@ -829,7 +829,7 @@ mp.events.addRemoteCounted('server:stopAllAnimation', (player) => {
         user.stopAnimation(player);
     }
     catch (e) {
-        methods.debug(e);
+        WixCore.Debug.Server(e);
     }
 });
 
@@ -1062,7 +1062,7 @@ mp.events.addRemoteCounted('server:showMeriaTicketMenu', (player,) => {
             player.call('client:showMeriaTicketMenu', [JSON.stringify(list)]);
         }
         catch (e) {
-            methods.debug(e);
+            WixCore.Debug.Server(e);
         }
     });
 });
@@ -1104,7 +1104,7 @@ mp.events.addRemoteCounted('server:user:showPlayerHistory', (player,) => {
             player.call('client:showPlayerHistoryMenu', [JSON.stringify(list)]);
         }
         catch (e) {
-            methods.debug(e);
+            WixCore.Debug.Server(e);
         }
     });
 });
@@ -1481,7 +1481,7 @@ mp.events.addRemoteCounted("server:user:targetNotify", (player, nplayer, text) =
         nplayer.notify(text);
     }
     catch (e) {
-        methods.debug(e);
+        WixCore.Debug.Server(e);
     }
 });
 
@@ -1569,7 +1569,7 @@ mp.events.addRemoteCounted('server:user:cuffItemById', (player, targetId) => {
                         inventory.deleteItem(rows[0]['id']);
                     }
                     catch (e) {
-                        methods.debug(e);
+                        WixCore.Debug.Server(e);
                     }
                 }, 3800); //3760
             }, 200);
@@ -1670,7 +1670,7 @@ mp.events.addRemoteCounted('server:user:knockById', (player, targetId) => { //TO
                 user.reset(player, 'isKnockoutTimeout');
             }
             catch (e) {
-                methods.debug(e);
+                WixCore.Debug.Server(e);
             }
         }, 120000);
 
@@ -1687,7 +1687,7 @@ mp.events.addRemoteCounted('server:user:knockById', (player, targetId) => { //TO
                     user.stopAnimation(target)
                 }
                 catch (e) {
-                    methods.debug(e);
+                    WixCore.Debug.Server(e);
                 }
             }, 10000)
         }
@@ -1930,7 +1930,7 @@ mp.events.addRemoteCounted('server:user:inCarById', (player, targetId) => {
             player.notify('~r~Рядом с вами никого нет');
     }
     catch (e) {
-        methods.debug(e);
+        WixCore.Debug.Server(e);
     }
 });
 
@@ -1956,7 +1956,7 @@ mp.events.addRemoteCounted('server:user:removeCarById', (player, targetId) => {
             player.notify('~r~Рядом с вами никого нет');
     }
     catch (e) {
-        methods.debug(e);
+        WixCore.Debug.Server(e);
     }
 });
 
@@ -2267,7 +2267,7 @@ mp.events.addRemoteCounted('server:admin:spawnVeh', (player, vName) => {
         }
     }
     catch (e) {
-        methods.debug(e);
+        WixCore.Debug.Server(e);
     }
 });
 
@@ -2278,7 +2278,7 @@ mp.events.addRemoteCounted('server:admin:changeWeather', (player, w) => {
         }
     }
     catch (e) {
-        methods.debug(e);
+        WixCore.Debug.Server(e);
     }
 });
 
@@ -2307,7 +2307,7 @@ mp.events.addRemoteCounted('server:startSpecMission', (player) => {
         }
     }
     catch (e) {
-        methods.debug(e);
+        WixCore.Debug.Server(e);
     }
 });
 
@@ -2352,7 +2352,7 @@ mp.events.addRemoteCounted('server:startSpecMissionLspd', (player, vId) => {
         }
     }
     catch (e) {
-        methods.debug(e);
+        WixCore.Debug.Server(e);
     }
 });
 
@@ -2397,7 +2397,7 @@ mp.events.addRemoteCounted('server:startSpecMissionSmall', (player, vId) => {
         }
     }
     catch (e) {
-        methods.debug(e);
+        WixCore.Debug.Server(e);
     }
 });
 
@@ -2407,7 +2407,7 @@ mp.events.addRemoteCounted('server:stopSpecMission', (player) => {
             vehicles.respawn(player.vehicle);
     }
     catch (e) {
-        methods.debug(e);
+        WixCore.Debug.Server(e);
     }
 });
 
@@ -2430,7 +2430,7 @@ mp.events.addRemoteCounted('server:stopSpecMissionLspd', (player) => {
         }
     }
     catch (e) {
-        methods.debug(e);
+        WixCore.Debug.Server(e);
     }
 });
 
@@ -2446,7 +2446,7 @@ mp.events.addRemoteCounted('server:admin:gangZone:editPos', (player, id) => {
         player.notify('~b~Координаты были обновлены');
     }
     catch (e) {
-        methods.debug(e);
+        WixCore.Debug.Server(e);
     }
 });
 
@@ -2464,7 +2464,7 @@ mp.events.addRemoteCounted('server:admin:gangZone:edit', (player, id, key, val) 
         player.notify(`~b~Значение ${key} было обновлено на ${val}`);
     }
     catch (e) {
-        methods.debug(e);
+        WixCore.Debug.Server(e);
     }
 });
 
@@ -2480,7 +2480,7 @@ mp.events.addRemoteCounted('server:admin:canabisZone:editPos', (player, id) => {
         player.notify('~b~Координаты были обновлены');
     }
     catch (e) {
-        methods.debug(e);
+        WixCore.Debug.Server(e);
     }
 });
 
@@ -2498,7 +2498,7 @@ mp.events.addRemoteCounted('server:admin:canabisZone:edit', (player, id, key, va
         player.notify(`~b~Значение ${key} было обновлено на ${val}`);
     }
     catch (e) {
-        methods.debug(e);
+        WixCore.Debug.Server(e);
     }
 });
 
@@ -2510,7 +2510,7 @@ mp.events.addRemoteCounted('server:admin:vehicleSpeedBoost', (player, vName, num
         mysql.executeQuery(`UPDATE veh_info SET sb = '${num}' WHERE display_name = '${vName}'`);
     }
     catch (e) {
-        methods.debug(e);
+        WixCore.Debug.Server(e);
     }
 });
 
@@ -2522,7 +2522,7 @@ mp.events.addRemoteCounted('server:admin:vehicleSpeedMax', (player, vName, num) 
         mysql.executeQuery(`UPDATE veh_info SET sm = '${num}' WHERE display_name = '${vName}'`);
     }
     catch (e) {
-        methods.debug(e);
+        WixCore.Debug.Server(e);
     }
 });
 
@@ -2638,7 +2638,7 @@ mp.events.addRemoteCounted('server:ems:removeObject', (player, id) => {
         ems.removeObject(id);
     }
     catch (e) {
-        methods.debug(e);
+        WixCore.Debug.Server(e);
     }
 });
 
@@ -2647,7 +2647,7 @@ mp.events.addRemoteCounted('server:ems:attachObject', (player, id) => {
         ems.attachObject(player, id);
     }
     catch (e) {
-        methods.debug(e);
+        WixCore.Debug.Server(e);
     }
 });
 
@@ -2656,7 +2656,7 @@ mp.events.addRemoteCounted('server:ems:vehicleUnload', (player) => {
         ems.vehicleUnload(player);
     }
     catch (e) {
-        methods.debug(e);
+        WixCore.Debug.Server(e);
     }
 });
 
@@ -2692,7 +2692,7 @@ mp.events.addRemoteCounted('server:usmc:vehicleUnload', (player) => {
         }
     }
     catch (e) {
-        methods.debug(e);
+        WixCore.Debug.Server(e);
     }
 });
 
@@ -2727,7 +2727,7 @@ mp.events.addRemoteCounted('server:business:log', (player, id) => {
             player.call('client:showBusinessLogMenu', [JSON.stringify(list)]);
         }
         catch (e) {
-            methods.debug(e);
+            WixCore.Debug.Server(e);
         }
     });
 });
@@ -2810,7 +2810,7 @@ mp.events.addRemoteCounted('server:invader:getNewsList', (player) => {
             player.call('client:showInvaderNewsMenu', [JSON.stringify(list)]);
         }
         catch (e) {
-            methods.debug(e);
+            WixCore.Debug.Server(e);
         }
     });
 });
@@ -2878,7 +2878,7 @@ mp.events.addRemoteCounted('server:invader:getAdList', (player) => {
             player.call('client:showInvaderAdMenu', [JSON.stringify(list)]);
         }
         catch (e) {
-            methods.debug(e);
+            WixCore.Debug.Server(e);
         }
     });
 });
@@ -2928,7 +2928,7 @@ mp.events.addRemoteCounted('server:invader:getAdTempList', (player) => {
             player.call('client:showInvaderAdTempMenu', [JSON.stringify(list)]);
         }
         catch (e) {
-            methods.debug(e);
+            WixCore.Debug.Server(e);
         }
     });
 });
@@ -2958,7 +2958,7 @@ mp.events.addRemoteCounted('server:events:showTypeListMenu', (player, type) => {
             player.call('client:showBusinessTypeListMenu', [Array.from(resultData1), Array.from(resultData2), Array.from(resultData3)]);
         }
         catch (e) {
-            methods.debug(e);
+            WixCore.Debug.Server(e);
         }
     });
 });
@@ -3183,14 +3183,14 @@ mp.events.addRemoteCounted('server:gr6:findPickup', (player, x, y, z) => {
                         }
                     }
                     catch (e) {
-                        methods.debug(e);
+                        WixCore.Debug.Server(e);
                     }
                 })
             }
         }
     }
     catch (e) {
-        methods.debug(e);
+        WixCore.Debug.Server(e);
     }
 });
 
@@ -3210,14 +3210,14 @@ mp.events.addRemoteCounted('server:gr6:dropCar', (player, money, vId) => {
                             user.addWorkExp(p, 2);
                     }
                     catch (e) {
-                        methods.debug(e);
+                        WixCore.Debug.Server(e);
                     }
                 });
                 v.setVariable('gr6Money', methods.parseFloat(v.getVariable('gr6Money') + money));
             }
         }
         catch (e) {
-            methods.debug(e);
+            WixCore.Debug.Server(e);
         }
     });
 });
@@ -3286,14 +3286,14 @@ mp.events.addRemoteCounted('server:gr6:unload', (player) => {
                         }
                     }
                     catch (e) {
-                        methods.debug(e);
+                        WixCore.Debug.Server(e);
                     }
                 });
                 v.setVariable('gr6Money', 0);
             }
         }
         catch (e) {
-            methods.debug(e);
+            WixCore.Debug.Server(e);
         }
     }
 });
@@ -3317,7 +3317,7 @@ mp.events.addRemoteCounted('server:gr6:delete', (player) => {
                             }
                         }
                         catch (e) {
-                            methods.debug(e);
+                            WixCore.Debug.Server(e);
                         }
                     }, 500);
                 }, 700);
@@ -3328,7 +3328,7 @@ mp.events.addRemoteCounted('server:gr6:delete', (player) => {
         }
     }
     catch (e) {
-        methods.debug(e);
+        WixCore.Debug.Server(e);
     }
 });
 
@@ -3355,7 +3355,7 @@ mp.events.addRemoteCounted('server:gr6:grab', (player) => {
         }
     }
     catch (e) {
-        methods.debug(e);
+        WixCore.Debug.Server(e);
     }
 });
 
@@ -3395,7 +3395,7 @@ mp.events.addRemoteCounted('server:vehicles:spawnJobCar', (player, x, y, z, head
             }, new mp.Vector3(x, y, z), heading, name, job);
         }
         catch (e) {
-            methods.debug(e);
+            WixCore.Debug.Server(e);
         }
 
         setTimeout(function () {
@@ -3467,13 +3467,13 @@ mp.events.addRemoteCounted('server:vehicles:spawnLamarCar', (player, x, y, z, he
                         veh.setVariable('cargoId', 999);
                     }
                     catch (e) {
-                        methods.debug(e);
+                        WixCore.Debug.Server(e);
                     }
                 }
             }, new mp.Vector3(x, y, z), heading, name);
         }
         catch (e) {
-            methods.debug(e);
+            WixCore.Debug.Server(e);
         }
 
         setTimeout(function () {
@@ -3581,7 +3581,7 @@ mp.events.addRemoteCounted('server:phone:call', (player, phone) => {
         }
     }
     catch (e) {
-        methods.debug(e);
+        WixCore.Debug.Server(e);
     }
 });
 
@@ -3608,7 +3608,7 @@ mp.events.addRemoteCounted('server:phone:accept', (player) => {
         }
     }
     catch (e) {
-        methods.debug(e);
+        WixCore.Debug.Server(e);
     }
 });
 
@@ -3643,7 +3643,7 @@ mp.events.addRemoteCounted('server:phone:cancel', (player) => {
         }
     }
     catch (e) {
-        methods.debug(e);
+        WixCore.Debug.Server(e);
     }
 });
 
@@ -3653,12 +3653,12 @@ mp.events.addRemoteCounted('server:phone:editContact', (player, json) => {
 
     try {
         let contact = JSON.parse(json);
-        methods.debug(json);
+        WixCore.Debug.Server(json);
         mysql.executeQuery(`UPDATE phone_contact SET name = '${methods.removeQuotes(methods.removeQuotes2(contact.name))}', numbers = '${JSON.stringify(contact.numbers)}' WHERE id = '${contact.id}'`);
         player.notify('~y~Контакт отредактирован');
     }
     catch (e) {
-        methods.debug(e);
+        WixCore.Debug.Server(e);
     }
 });
 
@@ -3672,7 +3672,7 @@ mp.events.addRemoteCounted('server:phone:favoriteContact', (player, json) => {
         player.notify('~y~Контакт добавлен в избранное');
     }
     catch (e) {
-        methods.debug(e);
+        WixCore.Debug.Server(e);
     }
 });
 
@@ -3686,7 +3686,7 @@ mp.events.addRemoteCounted('server:phone:deleteContact', (player, json) => {
         player.notify('~y~Контакт удалён');
     }
     catch (e) {
-        methods.debug(e);
+        WixCore.Debug.Server(e);
     }
 });
 
@@ -3709,7 +3709,7 @@ mp.events.addRemoteCounted('server:phone:addContact', (player, json) => {
         }, 1000);
     }
     catch (e) {
-        methods.debug(e);
+        WixCore.Debug.Server(e);
     }
 });
 
@@ -3750,7 +3750,7 @@ mp.events.addRemoteCounted('server:phone:sendMessage', (player, phoneNumber, mes
 
     }
     catch (e) {
-        methods.debug(e);
+        WixCore.Debug.Server(e);
     }
 });
 
@@ -4582,7 +4582,7 @@ mp.events.addRemoteCounted('server:lspd:takeVehicle', (player, x, y, z, rot, vid
         }, 1000)
     }
     catch (e) {
-        methods.debug(e);
+        WixCore.Debug.Server(e);
     }
 });
 
@@ -4990,7 +4990,7 @@ mp.events.addRemoteCounted("server:vehicle:lockStatus", (player) => {
         }
     }
     catch (e) {
-        methods.debug(e);
+        WixCore.Debug.Server(e);
     }
 });
 
@@ -5201,7 +5201,7 @@ mp.events.addRemoteCounted('server:user:askAve', (player, id) => {
 
     }
     catch (e) {
-        methods.debug(e);
+        WixCore.Debug.Server(e);
     }
 });
 
@@ -5230,7 +5230,7 @@ mp.events.addRemoteCounted('server:user:askNoAve', (player, id) => {
 
     }
     catch (e) {
-        methods.debug(e);
+        WixCore.Debug.Server(e);
     }
 });
 
@@ -5283,7 +5283,7 @@ mp.events.addRemoteCounted('server:ave:accept', (player, id) => {
         });
     }
     catch (e) {
-        methods.debug(e);
+        WixCore.Debug.Server(e);
     }
 });
 
@@ -5312,7 +5312,7 @@ mp.events.addRemoteCounted('server:noave:accept', (player, id) => {
         user.save(target);
     }
     catch (e) {
-        methods.debug(e);
+        WixCore.Debug.Server(e);
     }
 });
 
@@ -6859,7 +6859,7 @@ mp.events.addRemoteCounted("playerEnterCheckpoint", (player, checkpoint) => {
 });
 
 mp.events.add("client:enterStaticCheckpoint", (player, checkpointId) => {
-    methods.debug('CP', checkpointId);
+    WixCore.Debug.Server('CP', checkpointId);
     if (!user.isLogin(player))
         return;
     if (Container.Data.Has(999999, 'checkpointStaticLabel' + checkpointId))
@@ -6888,7 +6888,7 @@ mp.events.add("server:pSync:fpUpdate", (player, camPitch, camHeading) => {
         mp.players.call(player.streamedPlayers, "client:pSync:fpUpdate", [player.id, camPitch, camHeading]);
     }
     catch (e) {
-        methods.debug(e);
+        WixCore.Debug.Server(e);
     }
 });
 
@@ -7495,7 +7495,7 @@ mp.events.addRemoteCounted('server:user:giveWanted', (player, id, level, reason)
             player.notify('~r~Игрок не найден');
     }
     catch (e) {
-        methods.debug(e);
+        WixCore.Debug.Server(e);
     }
 });
 
@@ -7536,7 +7536,7 @@ mp.events.addRemoteCounted('server:user:arrest', (player, id) => {
             player.notify('~r~Игрок не найден');
     }
     catch (e) {
-        methods.debug(e);
+        WixCore.Debug.Server(e);
     }
 });
 
@@ -7567,7 +7567,7 @@ mp.events.addRemoteCounted('server:med:free', (player, id) => {
             player.notify('~r~Игрок не найден');
     }
     catch (e) {
-        methods.debug(e);
+        WixCore.Debug.Server(e);
     }
 });
 
@@ -7590,7 +7590,7 @@ mp.events.addRemoteCounted('server:med:heal', (player, id) => {
             player.notify('~r~Игрок не найден');
     }
     catch (e) {
-        methods.debug(e);
+        WixCore.Debug.Server(e);
     }
 });
 
@@ -8104,7 +8104,7 @@ mp.events.addRemoteCounted('server:vehicle:engineStatus', (player, status) => {
         }
     }
     catch (e) {
-        methods.debug(e);
+        WixCore.Debug.Server(e);
     }
 });
 
@@ -8117,7 +8117,7 @@ mp.events.addRemoteCounted('server:vehicle:neonStatus', (player) => {
         }
     }
     catch (e) {
-        methods.debug(e);
+        WixCore.Debug.Server(e);
     }
 });
 
@@ -8130,7 +8130,7 @@ mp.events.addRemoteCounted('server:vehicle:setColor', (player, color1, color2) =
         }
     }
     catch (e) {
-        methods.debug(e);
+        WixCore.Debug.Server(e);
     }
 });
 
@@ -8143,7 +8143,7 @@ mp.events.addRemoteCounted('server:vehicle:setColorP', (player, color) => {
         }
     }
     catch (e) {
-        methods.debug(e);
+        WixCore.Debug.Server(e);
     }
 });
 
@@ -8156,7 +8156,7 @@ mp.events.addRemoteCounted('server:vehicle:setColorW', (player, color) => {
         }
     }
     catch (e) {
-        methods.debug(e);
+        WixCore.Debug.Server(e);
     }
 });
 
@@ -8169,7 +8169,7 @@ mp.events.addRemoteCounted('server:vehicle:setColorI', (player, color) => {
         }
     }
     catch (e) {
-        methods.debug(e);
+        WixCore.Debug.Server(e);
     }
 });
 
@@ -8182,7 +8182,7 @@ mp.events.addRemoteCounted('server:vehicle:setColorD', (player, color) => {
         }
     }
     catch (e) {
-        methods.debug(e);
+        WixCore.Debug.Server(e);
     }
 });
 
@@ -8195,7 +8195,7 @@ mp.events.addRemoteCounted('server:vehicle:setLivery', (player, liv) => {
         }
     }
     catch (e) {
-        methods.debug(e);
+        WixCore.Debug.Server(e);
     }
 });
 
@@ -8332,7 +8332,7 @@ mp.events.addRemoteCounted('server:sellUser', (player) => {
                 user.setById(user.getId(p), 'sellUser', true);
             }
             catch (e) {
-                methods.debug(e);
+                WixCore.Debug.Server(e);
             }
         }
     })
@@ -8617,7 +8617,7 @@ mp.events.addRemoteCounted('server:vehicle:park', (player) => {
         }
     }
     catch (e) {
-        methods.debug(e);
+        WixCore.Debug.Server(e);
     }
 });
 
@@ -8647,7 +8647,7 @@ mp.events.addRemoteCounted('server:vehicle:parkFraction', (player) => {
         }
     }
     catch (e) {
-        methods.debug(e);
+        WixCore.Debug.Server(e);
     }
 });
 
@@ -8663,7 +8663,7 @@ mp.events.addRemoteCounted('server:vehicle:park2', (player) => {
         }
     }
     catch (e) {
-        methods.debug(e);
+        WixCore.Debug.Server(e);
     }
 });
 
@@ -8718,7 +8718,7 @@ mp.events.addRemoteCounted('server:vehicle:ejectByIdOut', (player, vid, id) => {
                     }
                 }
                 catch (e) {
-                    methods.debug(e);
+                    WixCore.Debug.Server(e);
                 }
             })
         }
@@ -8793,7 +8793,7 @@ mp.events.addRemoteCounted('server:vehicle:setNeonColor', (player, r, g, b) => {
         }
     }
     catch (e) {
-        methods.debug(e);
+        WixCore.Debug.Server(e);
     }
 });
 
@@ -8807,7 +8807,7 @@ mp.events.addRemoteCounted('server:vehicle:setLight', (player, cl) => {
         }
     }
     catch (e) {
-        methods.debug(e);
+        WixCore.Debug.Server(e);
     }
 });
 
@@ -8964,7 +8964,7 @@ mp.events.add('server:playerWeaponShot', (player, targetId) => {
             target.call('playerMaybeTakeShot', [player.id]);
     }
     catch (e) {
-        methods.debug(e);
+        WixCore.Debug.Server(e);
     }
 });
 
@@ -8998,7 +8998,7 @@ mp.events.add('playerQuit', player => {
             }
         }
         catch (e) {
-            methods.debug(e);
+            WixCore.Debug.Server(e);
         }
         try {
             if (user.isTie(player)) {
@@ -9011,7 +9011,7 @@ mp.events.add('playerQuit', player => {
             }
         }
         catch (e) {
-            methods.debug(e);
+            WixCore.Debug.Server(e);
         }
 
         try {
@@ -9052,7 +9052,7 @@ mp.events.add("playerDeath", (player, reason, killer) => {
             );
         }
         catch (e) {
-            methods.debug(e);
+            WixCore.Debug.Server(e);
         }
     }
     else if (user.isLogin(player)) {
@@ -9069,7 +9069,7 @@ mp.events.add("playerDeath", (player, reason, killer) => {
             );
         }
         catch (e) {
-            methods.debug(e);
+            WixCore.Debug.Server(e);
         }
     }
 
@@ -9259,7 +9259,7 @@ mp.events.add('playerReady', player => {
             this.call("client:chat:sendMessage", [message]);
         }
         catch (e) {
-            methods.debug(e);
+            WixCore.Debug.Server(e);
         }
     };
 
@@ -9268,7 +9268,7 @@ mp.events.add('playerReady', player => {
             this.call("BN_Show", [message, flashing, textColor, bgColor, flashColor]);
         }
         catch (e) {
-            methods.debug(e);
+            WixCore.Debug.Server(e);
         }
     };
 
@@ -9277,13 +9277,13 @@ mp.events.add('playerReady', player => {
             this.call("BN_ShowWithPicture", [title, sender, message, notifPic, icon, flashing, textColor, bgColor, flashColor]);
         }
         catch (e) {
-            methods.debug(e);
+            WixCore.Debug.Server(e);
         }
     };
 });
 
 /*process.on('exit', (code) => {
-    methods.debug(code);
+    WixCore.Debug.Server(code);
 });*/
 
 /*process.on('SIGINT', shutdownProcess);  // Runs when you Ctrl + C in console

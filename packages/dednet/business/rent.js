@@ -48,7 +48,7 @@ rent.listBike = [
 ];
 
 rent.loadAll = function() {
-    methods.debug('rent.loadAll');
+    WixCore.Debug.Server('rent.loadAll');
     rent.listBike.forEach(function (item) {
         let shopPos = new mp.Vector3(item[0], item[1], item[2]);
         methods.createBlip(shopPos, 226, 0, 0.6, 'Rent');
@@ -57,7 +57,7 @@ rent.loadAll = function() {
 };
 
 rent.getBikeInRadius = function(pos, radius = 2) {
-    methods.debug('rent.getBikeInRadius');
+    WixCore.Debug.Server('rent.getBikeInRadius');
     let shopId = -1;
     rent.listBike.forEach(function (item, idx) {
         let shopPos = new mp.Vector3(item[0], item[1], item[2]);
@@ -68,7 +68,7 @@ rent.getBikeInRadius = function(pos, radius = 2) {
 };
 
 rent.checkPosForOpenMenu = function(player) {
-    methods.debug('rent.checkPosForOpenMenu');
+    WixCore.Debug.Server('rent.checkPosForOpenMenu');
     try {
         let playerPos = player.position;
         let shopId = rent.getBikeInRadius(playerPos, 2);
@@ -81,12 +81,12 @@ rent.checkPosForOpenMenu = function(player) {
         player.call('client:menuList:showRentBikeMenu', [shopId, business.getPrice(shopId)]);
     }
     catch (e) {
-        methods.debug(e);
+        WixCore.Debug.Server(e);
     }
 };
 
 rent.findNearest = function(pos) {
-    methods.debug('rent.findNearest');
+    WixCore.Debug.Server('rent.findNearest');
     let prevPos = new mp.Vector3(9999, 9999, 9999);
     enums.carShopList.forEach(function (item,) {
         let shopPos = new mp.Vector3(item.buyPos[0], item.buyPos[1], item.buyPos[2]);
@@ -102,7 +102,7 @@ rent.findNearest = function(pos) {
 };
 
 rent.buy = function(player, hash, price, shopId, payType) {
-    methods.debug('rent.buy');
+    WixCore.Debug.Server('rent.buy');
     if (!user.isLogin(player))
         return;
 

@@ -98,7 +98,7 @@ houses.garageIntList = [
 ];
 
 houses.loadAll = function() {
-    methods.debug('houses.loadAll');
+    WixCore.Debug.Server('houses.loadAll');
 
     mysql.executeQuery(`SELECT * FROM houses`, function (err, rows, fields) {
         rows.forEach(function(item) {
@@ -181,7 +181,7 @@ houses.loadAll = function() {
 
         });
         count = rows.length;
-        methods.debug('All Houses Loaded: ' + count);
+        WixCore.Debug.Server('All Houses Loaded: ' + count);
     });
 
     houses.interiorList.forEach(function(item) {
@@ -213,7 +213,7 @@ houses.loadAll = function() {
 
 
 houses.loadLast = function() {
-    methods.debug('houses.loadLast');
+    WixCore.Debug.Server('houses.loadLast');
 
     mysql.executeQuery(`SELECT * FROM houses ORDER BY id DESC LIMIT 1`, function (err, rows, fields) {
 
@@ -290,19 +290,19 @@ houses.loadLast = function() {
             });
         });
         count = rows.length;
-        methods.debug(`Last House Loaded`);
+        WixCore.Debug.Server(`Last House Loaded`);
     });
 };
 
 houses.insert = function(player, number, street, zone, x, y, z, rot, interior, price) {
-    methods.debug('houses.insert');
+    WixCore.Debug.Server('houses.insert');
 
     mysql.executeQuery(`INSERT INTO houses (number, street, address, rot, x, y, z, interior, price) VALUES ('${number}', '${street}', '${zone}', '${rot}', '${x}', '${y}', '${z - 1}', '${interior}', '${price}')`);
     setTimeout(houses.loadLast, 1000);
 };
 
 houses.insert1 = function(player, id, int, gx, gy, gz, grot) {
-    methods.debug('houses.insert1');
+    WixCore.Debug.Server('houses.insert1');
 
     houses.set(id, 'gx1', gx);
     houses.set(id, 'gy1', gy);
@@ -315,7 +315,7 @@ houses.insert1 = function(player, id, int, gx, gy, gz, grot) {
 };
 
 houses.insert2 = function(player, id, int, gx, gy, gz, grot) {
-    methods.debug('houses.insert2');
+    WixCore.Debug.Server('houses.insert2');
 
     houses.set(id, 'gx2', gx);
     houses.set(id, 'gy2', gy);
@@ -328,7 +328,7 @@ houses.insert2 = function(player, id, int, gx, gy, gz, grot) {
 };
 
 houses.insert3 = function(player, id, int, gx, gy, gz, grot) {
-    methods.debug('houses.insert3');
+    WixCore.Debug.Server('houses.insert3');
 
     houses.set(id, 'gx3', gx);
     houses.set(id, 'gy3', gy);
@@ -360,12 +360,12 @@ houses.getCountLiveUser = function(id, cb) {
 };
 
 houses.getAllHouses = function() {
-    methods.debug('houses.getAllHouses');
+    WixCore.Debug.Server('houses.getAllHouses');
     return hBlips;
 };
 
 houses.updateOwnerInfo = function (id, userId, userName) {
-    methods.debug('houses.updateOwnerInfo');
+    WixCore.Debug.Server('houses.updateOwnerInfo');
     id = methods.parseInt(id);
     userId = methods.parseInt(userId);
 
@@ -387,7 +387,7 @@ houses.updateOwnerInfo = function (id, userId, userName) {
 
 houses.updateSafe = function (id, pin, isLoad = false) {
     try {
-        methods.debug('houses.updateSafe');
+        WixCore.Debug.Server('houses.updateSafe');
 
         pin = methods.parseInt(pin);
 
@@ -434,14 +434,14 @@ houses.updateSafe = function (id, pin, isLoad = false) {
         }
     }
     catch (e) {
-        methods.debug(e);
-        methods.debug(e);
-        methods.debug(e);
+        WixCore.Debug.Server(e);
+        WixCore.Debug.Server(e);
+        WixCore.Debug.Server(e);
     }
 };
 
 houses.updatePin = function (id, pin) {
-    methods.debug('houses.updatePin');
+    WixCore.Debug.Server('houses.updatePin');
     id = methods.parseInt(id);
     pin = methods.parseInt(pin);
     houses.set(id, 'pin', pin);
@@ -449,14 +449,14 @@ houses.updatePin = function (id, pin) {
 };
 
 houses.lockStatus = function (id, lockStatus) {
-    methods.debug('houses.lockStatus');
+    WixCore.Debug.Server('houses.lockStatus');
     id = methods.parseInt(id);
     houses.set(id, 'is_lock', lockStatus);
     mysql.executeQuery("UPDATE houses SET is_lock = '" + methods.boolToInt(lockStatus) + "' where id = '" + id + "'");
 };
 
 houses.sell = function (player) {
-    methods.debug('houses.sell');
+    WixCore.Debug.Server('houses.sell');
     if (!user.isLogin(player))
         return;
 
@@ -491,7 +491,7 @@ houses.sell = function (player) {
 };
 
 houses.buy = function (player, id) {
-    methods.debug('houses.buy');
+    WixCore.Debug.Server('houses.buy');
 
     if (!user.isLogin(player))
         return;
@@ -530,7 +530,7 @@ houses.buy = function (player, id) {
 };
 
 houses.enter = function (player, id) {
-    methods.debug('houses.enter', id);
+    WixCore.Debug.Server('houses.enter', id);
 
     if (!user.isLogin(player))
         return;
@@ -549,7 +549,7 @@ houses.enterGarage = function (player, id) {
 };
 
 houses.enterv = function (player, id) {
-    methods.debug('houses.enter', id);
+    WixCore.Debug.Server('houses.enter', id);
 
     if (!user.isLogin(player))
         return;
@@ -625,7 +625,7 @@ houses.enterv = function (player, id) {
 };
 
 houses.exitv = function (player, id) {
-    methods.debug('houses.enter', id);
+    WixCore.Debug.Server('houses.enter', id);
 
     if (!user.isLogin(player))
         return;

@@ -126,7 +126,7 @@ graffiti.loadAll = function () {
             });
         }
         catch (e) {
-            methods.debug(e);
+            WixCore.Debug.Server(e);
         }
     });
 };
@@ -211,7 +211,7 @@ graffiti.timerWar = function() {
 graffiti.save = function(id) {
 
     return new Promise((resolve) => {
-        methods.debug('graffiti.save');
+        WixCore.Debug.Server('graffiti.save');
 
         if (!graffiti.has(id, "id")) {
             resolve();
@@ -228,7 +228,7 @@ graffiti.save = function(id) {
 };
 
 graffiti.saveAll = function() {
-    methods.debug('graffiti.saveAll');
+    WixCore.Debug.Server('graffiti.saveAll');
     mysql.executeQuery(`SELECT * FROM graffiti_war`, function (err, rows, fields) {
         rows.forEach(function(item) {
             graffiti.save(item['id']);

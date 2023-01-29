@@ -8,7 +8,7 @@ function init() {
     try {
         blips.init();
     } catch (err) {
-        methods.debug('ERROR WORLDS INIT', err);
+        WixCore.Debug.Server('ERROR WORLDS INIT', err);
     }
 }
 

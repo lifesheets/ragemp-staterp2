@@ -18,7 +18,7 @@ business.BusinessRoofPos = new mp.Vector3(-136.6686, -596.3055, 205.9157);
 business.BusinessBotPos = new mp.Vector3(-139.2922, -631.5964, 167.8204);
 
 business.loadAll = function() {
-    methods.debug('business.loadAll');
+    WixCore.Debug.Server('business.loadAll');
     mysql.executeQuery(`SELECT * FROM business`, function (err, rows, fields) {
         rows.forEach(function(item) {
             business.set(item['id'], 'id', item['id']);
@@ -40,12 +40,12 @@ business.loadAll = function() {
             business.set(item['id'], 'tax_score', item['tax_score']);
             business.set(item['id'], 'tax_money', item['tax_money']);
         });
-        methods.debug('All Business Loaded: ' + rows.length);
+        WixCore.Debug.Server('All Business Loaded: ' + rows.length);
     });
 };
 
 business.save = function(id) {
-    methods.debug('business.save');
+    WixCore.Debug.Server('business.save');
 
     if (!business.has(id, "id")) return;
 
@@ -189,7 +189,7 @@ business.addHistoryTax = function(id, price) {
 };
 
 business.updateOwnerInfo = function (bId, userId, userName) {
-    methods.debug('business.updateOwnerInfo');
+    WixCore.Debug.Server('business.updateOwnerInfo');
     business.set(bId, 'user_id', userId);
     business.set(bId, 'user_name', userName);
     business.save(bId);
@@ -200,7 +200,7 @@ business.updateOwnerInfo = function (bId, userId, userName) {
 };
 
 business.sell = function (player) {
-    methods.debug('business.sell');
+    WixCore.Debug.Server('business.sell');
     if (!user.isLogin(player))
         return;
 
@@ -237,7 +237,7 @@ business.sell = function (player) {
 };
 
 business.buy = function (player, id) {
-    methods.debug('business.buy');
+    WixCore.Debug.Server('business.buy');
 
     if (!user.isLogin(player))
         return;

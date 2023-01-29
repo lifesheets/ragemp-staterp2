@@ -409,7 +409,7 @@ stocks.types = [
 ];
 
 stocks.loadAll = function() {
-    methods.debug('stocks.loadAll');
+    WixCore.Debug.Server('stocks.loadAll');
 
     mysql.executeQuery(`SELECT * FROM stocks`, function (err, rows, fields) {
         rows.forEach(function(item) {
@@ -480,7 +480,7 @@ stocks.loadAll = function() {
             }
         });
         count = rows.length;
-        methods.debug('All stocks Loaded: ' + count);
+        WixCore.Debug.Server('All stocks Loaded: ' + count);
     });
 
     stocks.interiorList.forEach(function(item) {
@@ -499,7 +499,7 @@ stocks.loadAll = function() {
 };
 
 stocks.loadLast = function() {
-    methods.debug('stocks.loadLast');
+    WixCore.Debug.Server('stocks.loadLast');
 
     mysql.executeQuery(`SELECT * FROM stocks ORDER BY id DESC LIMIT 1`, function (err, rows, fields) {
 
@@ -566,12 +566,12 @@ stocks.loadLast = function() {
             stockList.set(item['id'], hBlip);
         });
         count = rows.length;
-        methods.debug(`Last House Loaded`);
+        WixCore.Debug.Server(`Last House Loaded`);
     });
 };
 
 stocks.insert = function(player, number, street, zone, x, y, z, rot, interior, price) {
-    methods.debug('stocks.insert');
+    WixCore.Debug.Server('stocks.insert');
 
     mysql.executeQuery(`INSERT INTO stocks (number, street, address, rot, x, y, z, interior, price) VALUES ('${number}', '${street}', '${zone}', '${rot}', '${x}', '${y}', '${z - 1}', '${interior}', '${price}')`);
 
@@ -579,7 +579,7 @@ stocks.insert = function(player, number, street, zone, x, y, z, rot, interior, p
 };
 
 stocks.insert2 = function(player, id, vx, vy, vz, vrot) {
-    methods.debug('stocks.insert2');
+    WixCore.Debug.Server('stocks.insert2');
 
     stocks.set(id, 'vx', vx);
     stocks.set(id, 'vy', vy);
@@ -592,7 +592,7 @@ stocks.insert2 = function(player, id, vx, vy, vz, vrot) {
 };
 
 stocks.removeState = function() {
-    methods.debug('stocks.removeState');
+    WixCore.Debug.Server('stocks.removeState');
     mysql.executeQuery(`SELECT * FROM stocks`, function (err, rows, fields) {
         rows.forEach(function(item) {
             try {
@@ -638,7 +638,7 @@ stocks.removeState = function() {
 };
 
 stocks.saveAll = function() {
-    methods.debug('stocks.saveAll');
+    WixCore.Debug.Server('stocks.saveAll');
     mysql.executeQuery(`SELECT * FROM stocks`, function (err, rows, fields) {
         rows.forEach(function(item) {
             stocks.save(item['id']);
@@ -649,7 +649,7 @@ stocks.saveAll = function() {
 stocks.save = function(id) {
 
     return new Promise((resolve) => {
-        methods.debug('stocks.save');
+        WixCore.Debug.Server('stocks.save');
 
         if (!stocks.has(id, "id")) {
             resolve();
@@ -873,13 +873,13 @@ stocks.addCargo = function(stockKey, bid = 1) {
         }
     }
     catch (e) {
-        methods.debug(e);
+        WixCore.Debug.Server(e);
     }
     return false;
 };
 
 stocks.sellBySlot = function (player, slot) {
-    methods.debug('stocks.sell');
+    WixCore.Debug.Server('stocks.sell');
     if (!user.isLogin(player))
         return;
 
@@ -934,7 +934,7 @@ stocks.sellBySlot = function (player, slot) {
 };
 
 stocks.openBySlot = function (player, slot, boxId) {
-    methods.debug('stocks.sell');
+    WixCore.Debug.Server('stocks.sell');
     if (!user.isLogin(player))
         return;
 
@@ -989,7 +989,7 @@ stocks.openBySlot = function (player, slot, boxId) {
 };
 
 stocks.sellAllByClass = function (player, className, price) {
-    methods.debug('stocks.sell');
+    WixCore.Debug.Server('stocks.sell');
     if (!user.isLogin(player))
         return;
 
@@ -1088,7 +1088,7 @@ stocks.loadUpgrades = function(upgradeString, id, interior) {
             o.destroy();
         }
         catch (e) {
-            methods.debug(e);
+            WixCore.Debug.Server(e);
         }
     });
 
@@ -1126,7 +1126,7 @@ stocks.addObject = function(boxId, slot, id, interior) {
 };
 
 stocks.getAll = function() {
-    methods.debug('stocks.getAll');
+    WixCore.Debug.Server('stocks.getAll');
     return stockList;
 };
 
@@ -1144,7 +1144,7 @@ stocks.getNearestVehWithCoords = function(pos, r) {
 };
 
 stocks.updateOwnerInfo = function (id, userId, userName) {
-    methods.debug('stocks.updateOwnerInfo');
+    WixCore.Debug.Server('stocks.updateOwnerInfo');
     id = methods.parseInt(id);
     userId = methods.parseInt(userId);
 
@@ -1186,7 +1186,7 @@ stocks.updateOwnerInfo = function (id, userId, userName) {
 };
 
 stocks.updateUpgradeG = function (id, status) {
-    methods.debug('stocks.updateUpgradeG');
+    WixCore.Debug.Server('stocks.updateUpgradeG');
     if (typeof status === "boolean") {
         if (status)
             status = 1;
@@ -1200,7 +1200,7 @@ stocks.updateUpgradeG = function (id, status) {
 };
 
 stocks.updateUpgradeB = function (id, status) {
-    methods.debug('stocks.updateUpgradeB');
+    WixCore.Debug.Server('stocks.updateUpgradeB');
     if (typeof status === "boolean") {
         if (status)
             status = 1;
@@ -1214,7 +1214,7 @@ stocks.updateUpgradeB = function (id, status) {
 };
 
 stocks.updateUpgradeL = function (id, status) {
-    methods.debug('stocks.updateUpgradeL');
+    WixCore.Debug.Server('stocks.updateUpgradeL');
     if (typeof status === "boolean") {
         if (status)
             status = 1;
@@ -1228,7 +1228,7 @@ stocks.updateUpgradeL = function (id, status) {
 };
 
 stocks.updateUpgradeN = function (id, status) {
-    methods.debug('stocks.updateUpgradeN');
+    WixCore.Debug.Server('stocks.updateUpgradeN');
     if (typeof status === "boolean") {
         if (status)
             status = 1;
@@ -1242,7 +1242,7 @@ stocks.updateUpgradeN = function (id, status) {
 };
 
 stocks.updatePin = function (id, pin) {
-    methods.debug('stocks.updatePin');
+    WixCore.Debug.Server('stocks.updatePin');
     id = methods.parseInt(id);
     pin = methods.parseInt(pin);
     stocks.set(id, 'pin', pin);
@@ -1250,7 +1250,7 @@ stocks.updatePin = function (id, pin) {
 };
 
 stocks.updatePin1 = function (id, pin) {
-    methods.debug('stocks.updatePin');
+    WixCore.Debug.Server('stocks.updatePin');
     id = methods.parseInt(id);
     pin = methods.parseInt(pin);
     stocks.set(id, 'pin1', pin);
@@ -1258,7 +1258,7 @@ stocks.updatePin1 = function (id, pin) {
 };
 
 stocks.updatePin2 = function (id, pin) {
-    methods.debug('stocks.updatePin');
+    WixCore.Debug.Server('stocks.updatePin');
     id = methods.parseInt(id);
     pin = methods.parseInt(pin);
     stocks.set(id, 'pin2', pin);
@@ -1266,7 +1266,7 @@ stocks.updatePin2 = function (id, pin) {
 };
 
 stocks.updatePin3 = function (id, pin) {
-    methods.debug('stocks.updatePin');
+    WixCore.Debug.Server('stocks.updatePin');
     id = methods.parseInt(id);
     pin = methods.parseInt(pin);
     stocks.set(id, 'pin3', pin);
@@ -1274,7 +1274,7 @@ stocks.updatePin3 = function (id, pin) {
 };
 
 stocks.updatePinO = function (id, pin) {
-    methods.debug('stocks.updatePin');
+    WixCore.Debug.Server('stocks.updatePin');
     id = methods.parseInt(id);
     pin = methods.parseInt(pin);
     stocks.set(id, 'pin_o', pin);
@@ -1282,7 +1282,7 @@ stocks.updatePinO = function (id, pin) {
 };
 
 stocks.updatePinL = function (id, pin) {
-    methods.debug('stocks.updatePinL');
+    WixCore.Debug.Server('stocks.updatePinL');
     id = methods.parseInt(id);
     pin = methods.parseInt(pin);
     stocks.set(id, 'pin_l', pin);
@@ -1290,7 +1290,7 @@ stocks.updatePinL = function (id, pin) {
 };
 
 stocks.updatePinB = function (id, pin) {
-    methods.debug('stocks.updatePinB');
+    WixCore.Debug.Server('stocks.updatePinB');
     id = methods.parseInt(id);
     pin = methods.parseInt(pin);
     stocks.set(id, 'pin_b', pin);
@@ -1298,7 +1298,7 @@ stocks.updatePinB = function (id, pin) {
 };
 
 stocks.labStart = function (id, type, count) {
-    methods.debug('stocks.labStart');
+    WixCore.Debug.Server('stocks.labStart');
     stocks.set(id, 'lab_state', type * 6);
     stocks.set(id, 'lab_type', type);
     stocks.set(id, 'lab_1_count', stocks.get(id, 'lab_1_count') - count);
@@ -1309,7 +1309,7 @@ stocks.labStart = function (id, type, count) {
 };
 
 stocks.bunkStart = function (id, type, count) {
-    methods.debug('stocks.labStart');
+    WixCore.Debug.Server('stocks.labStart');
     stocks.set(id, 'bunk_state', type * 6);
     stocks.set(id, 'bunk_type', type);
     stocks.set(id, 'bunk_1_count', stocks.get(id, 'bunk_1_count') - count);
@@ -1320,7 +1320,7 @@ stocks.bunkStart = function (id, type, count) {
 };
 
 stocks.sell = function (player) {
-    methods.debug('stocks.sell');
+    WixCore.Debug.Server('stocks.sell');
     if (!user.isLogin(player))
         return;
 
@@ -1353,7 +1353,7 @@ stocks.sell = function (player) {
 };
 
 stocks.buy = function (player, id) {
-    methods.debug('stocks.buy');
+    WixCore.Debug.Server('stocks.buy');
 
     if (!user.isLogin(player))
         return;
@@ -1389,7 +1389,7 @@ stocks.buy = function (player, id) {
 };
 
 stocks.enter = function (player, id) {
-    methods.debug('stocks.enter', id);
+    WixCore.Debug.Server('stocks.enter', id);
 
     if (!user.isLogin(player))
         return;
@@ -1402,7 +1402,7 @@ stocks.enter = function (player, id) {
 };
 
 stocks.enter1 = function (player, id) {
-    methods.debug('stocks.enter', id);
+    WixCore.Debug.Server('stocks.enter', id);
 
     if (!user.isLogin(player))
         return;
@@ -1414,7 +1414,7 @@ stocks.enter1 = function (player, id) {
 };
 
 stocks.enterl = function (player, id) {
-    methods.debug('stocks.enter', id);
+    WixCore.Debug.Server('stocks.enter', id);
 
     if (!user.isLogin(player))
         return;
@@ -1426,7 +1426,7 @@ stocks.enterl = function (player, id) {
 };
 
 stocks.enterb = function (player, id) {
-    methods.debug('stocks.enter', id);
+    WixCore.Debug.Server('stocks.enter', id);
 
     if (!user.isLogin(player))
         return;
@@ -1438,7 +1438,7 @@ stocks.enterb = function (player, id) {
 };
 
 stocks.enterv = function (player, id) {
-    methods.debug('stocks.enter', id);
+    WixCore.Debug.Server('stocks.enter', id);
 
     if (!user.isLogin(player))
         return;
@@ -1501,7 +1501,7 @@ stocks.enterv = function (player, id) {
 };
 
 stocks.enterv1 = function (player, id) {
-    methods.debug('stocks.enter', id);
+    WixCore.Debug.Server('stocks.enter', id);
 
     if (!user.isLogin(player))
         return;
@@ -1569,7 +1569,7 @@ stocks.enterv1 = function (player, id) {
 };
 
 stocks.entervb = function (player, id) {
-    methods.debug('stocks.enter', id);
+    WixCore.Debug.Server('stocks.enter', id);
 
     if (!user.isLogin(player))
         return;

@@ -15,7 +15,7 @@ barberShop.list = [
 ];
 
 barberShop.loadAll = function() {
-    methods.debug('barberShop.loadAll');
+    WixCore.Debug.Server('barberShop.loadAll');
     barberShop.list.forEach(function (item) {
         let shopPos = new mp.Vector3(item[0], item[1], item[2]);
         methods.createBlip(shopPos, 71, 0, 0.8, 'BarberShop');
@@ -24,7 +24,7 @@ barberShop.loadAll = function() {
 };
 
 barberShop.getInRadius = function(pos, radius = 2) {
-    methods.debug('barberShop.getInRadius');
+    WixCore.Debug.Server('barberShop.getInRadius');
     let shopId = -1;
     barberShop.list.forEach(function (item, idx) {
         let shopPos = new mp.Vector3(item[0], item[1], item[2]);
@@ -35,7 +35,7 @@ barberShop.getInRadius = function(pos, radius = 2) {
 };
 
 barberShop.checkPosForOpenMenu = function(player) {
-    methods.debug('barberShop.checkPosForOpenMenu');
+    WixCore.Debug.Server('barberShop.checkPosForOpenMenu');
     try {
         let playerPos = player.position;
         let shopId = barberShop.getInRadius(playerPos, 2);
@@ -48,12 +48,12 @@ barberShop.checkPosForOpenMenu = function(player) {
         player.call('client:menuList:showBarberShopMenu', [shopId, business.getPrice(shopId)]);
     }
     catch (e) {
-        methods.debug(e);
+        WixCore.Debug.Server(e);
     }
 };
 
 barberShop.findNearest = function(pos) {
-    methods.debug('barberShop.findNearest');
+    WixCore.Debug.Server('barberShop.findNearest');
     let prevPos = new mp.Vector3(9999, 9999, 9999);
     barberShop.list.forEach(function (item) {
         let shopPos = new mp.Vector3(item[0], item[1], item[2]);

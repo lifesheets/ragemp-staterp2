@@ -130,7 +130,7 @@ bank.doorPosLockPick = [
 ];
 
 bank.loadAll = function() {
-    methods.debug('bank.loadAll');
+    WixCore.Debug.Server('bank.loadAll');
 
     methods.createBlip(bank.pacificPos, 500, 65, 0.9, 'Bank Pacific');
     methods.createBlip(bank.blainePos, 500, 67, 0.9, 'Bank Blaine');
@@ -170,11 +170,11 @@ bank.loadAll = function() {
             idx++;
         }
         catch (e) {
-            methods.debug(e);
+            WixCore.Debug.Server(e);
         }
     });
 
-    methods.debug('LOAD ALL BANKS');
+    WixCore.Debug.Server('LOAD ALL BANKS');
 };
 
 bank.addBankHistory = function(userId, card, text, price) {
@@ -191,7 +191,7 @@ bank.addBankHistory = function(userId, card, text, price) {
 };
 
 bank.transferMoney = function(player, bankNumber, money) {
-    methods.debug('bank.transferMoney');
+    WixCore.Debug.Server('bank.transferMoney');
     if (!user.isLogin(player))
         return;
 
@@ -288,7 +288,7 @@ bank.transferMoney = function(player, bankNumber, money) {
 };
 
 bank.transferCryptoMoney = function(player, bankNumber, money) {
-    methods.debug('bank.transferMoney');
+    WixCore.Debug.Server('bank.transferMoney');
     if (!user.isLogin(player))
         return;
 
@@ -353,7 +353,7 @@ bank.transferCryptoMoney = function(player, bankNumber, money) {
 };
 
 bank.changePin = function(player, pin) {
-    methods.debug('bank.changePin');
+    WixCore.Debug.Server('bank.changePin');
     if (!user.isLogin(player))
         return;
 
@@ -376,7 +376,7 @@ bank.changePin = function(player, pin) {
 };
 
 /*bank.changeCardNumber = function(player, bankNumber) {
-    methods.debug('bank.changeCardNumber');
+    WixCore.Debug.Server('bank.changeCardNumber');
     if (!user.isLogin(player))
         return;
 
@@ -414,7 +414,7 @@ bank.changePin = function(player, pin) {
 };*/
 
 bank.withdraw = function(player, money, procent = 0) {
-    methods.debug('bank.withdraw');
+    WixCore.Debug.Server('bank.withdraw');
 
     //setTimeout(function () {
 
@@ -467,7 +467,7 @@ bank.withdraw = function(player, money, procent = 0) {
 };
 
 bank.deposit = function(player, money, procent = 0) {
-    methods.debug('bank.deposit');
+    WixCore.Debug.Server('bank.deposit');
     procent = methods.parseInt(procent);
     if (!user.isLogin(player))
         return;
@@ -516,7 +516,7 @@ bank.deposit = function(player, money, procent = 0) {
 };
 
 bank.addBusinessBankMoneyByCard = function(prefix, money) {
-    methods.debug('bank.addBusinessBankMoneyByCard');
+    WixCore.Debug.Server('bank.addBusinessBankMoneyByCard');
     switch (prefix)
     {
         case 6000:
@@ -538,7 +538,7 @@ bank.addBusinessBankMoneyByCard = function(prefix, money) {
 };
 
 bank.openCard = function(player, bankId, price) {
-    methods.debug('bank.openCard');
+    WixCore.Debug.Server('bank.openCard');
     if (!user.isLogin(player))
         return;
 
@@ -593,7 +593,7 @@ bank.openCard = function(player, bankId, price) {
 };
 
 bank.closeCard = function(player) {
-    methods.debug('bank.closeCard');
+    WixCore.Debug.Server('bank.closeCard');
     if (!user.isLogin(player))
         return;
     bank.sendSmsBankCloseOperation(player);
@@ -750,7 +750,7 @@ bank.lockPickDoor = function(player, radius = 3) {
 };
 
 bank.checkPosForOpenMenu = function(player) {
-    methods.debug('bank.checkPosForOpenMenu');
+    WixCore.Debug.Server('bank.checkPosForOpenMenu');
     try {
         let playerPos = player.position;
         let shopId = bank.getInRadius(playerPos, 2);
@@ -760,12 +760,12 @@ bank.checkPosForOpenMenu = function(player) {
         player.call('client:menuList:showBankMenu', [shopId, business.getPrice(shopId)]);
     }
     catch (e) {
-        methods.debug(e);
+        WixCore.Debug.Server(e);
     }
 };
 
 bank.findNearest = function(pos) {
-    methods.debug('bank.findNearest');
+    WixCore.Debug.Server('bank.findNearest');
     let prevPos = new mp.Vector3(9999, 9999, 9999);
     bank.markers.forEach(function (item,) {
         let fuelPos = new mp.Vector3(item[0], item[1], item[2]);
@@ -776,7 +776,7 @@ bank.findNearest = function(pos) {
 };
 
 bank.findNearestFleeca = function(pos) {
-    methods.debug('bank.findNearestFleeca');
+    WixCore.Debug.Server('bank.findNearestFleeca');
     let prevPos = new mp.Vector3(9999, 9999, 9999);
     bank.fleecaMarkers.forEach(function (item,) {
         let fuelPos = new mp.Vector3(item[0], item[1], item[2]);

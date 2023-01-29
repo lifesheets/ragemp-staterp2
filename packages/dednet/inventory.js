@@ -117,7 +117,7 @@ inventory.getItemList = function(player, ownerType, ownerId, isFrisk = false, ju
             }
         });
     } catch(e) {
-        methods.debug(e);
+        WixCore.Debug.Server(e);
     }
 };
 
@@ -166,7 +166,7 @@ inventory.getItemListSell = function(player) {
                 player.call('client:showSellItemsMenu', [data]);
             });
         } catch(e) {
-            methods.debug(e);
+            WixCore.Debug.Server(e);
         }
     }, 1000);
 };
@@ -219,7 +219,7 @@ inventory.getItemListTrade = function(player, ownerId, ownerType) {
                     player.notify('~r~В данный момент нет товаров')
             });
         } catch(e) {
-            methods.debug(e);
+            WixCore.Debug.Server(e);
         }
     }, 10);
 };
@@ -268,7 +268,7 @@ inventory.getItemListGunTranferSell = function(player) {
                 player.call('client:showSellGunMenu', [data]);
             });
         } catch(e) {
-            methods.debug(e);
+            WixCore.Debug.Server(e);
         }
     }, 1000);
 };
@@ -317,7 +317,7 @@ inventory.getItemListGunFix = function(player) {
                 player.call('client:showFixGunMenu', [data]);
             });
         } catch(e) {
-            methods.debug(e);
+            WixCore.Debug.Server(e);
         }
     }, 1000);
 };
@@ -366,7 +366,7 @@ inventory.getItemListGunColor = function(player) {
                 player.call('client:showColorGunMenu', [data]);
             });
         } catch(e) {
-            methods.debug(e);
+            WixCore.Debug.Server(e);
         }
     }, 1000);
 };
@@ -415,7 +415,7 @@ inventory.getItemListGunFixFree = function(player) {
                 player.call('client:showFixGunFreeMenu', [data]);
             });
         } catch(e) {
-            methods.debug(e);
+            WixCore.Debug.Server(e);
         }
     }, 1000);
 };
@@ -463,7 +463,7 @@ inventory.getItemListClothTranferSell = function(player) {
             player.call('client:showSellClothMenu', [data]);
         });
     } catch(e) {
-        methods.debug(e);
+        WixCore.Debug.Server(e);
     }
 };
 
@@ -510,7 +510,7 @@ inventory.getItemListSellFish = function(player, shopId) {
             player.call('client:showSellFishMenu', [data, shopId]);
         });
     } catch(e) {
-        methods.debug(e);
+        WixCore.Debug.Server(e);
     }
 };
 
@@ -753,7 +753,7 @@ inventory.equip = function(player, id, itemId, count, aparams) {
                 params = JSON.parse(aparams);
             }
             catch (e) {
-                methods.debug(e);
+                WixCore.Debug.Server(e);
             }
 
             if (itemId == 50) {
@@ -821,7 +821,7 @@ inventory.equip = function(player, id, itemId, count, aparams) {
                     }
                 }
                 catch (e) {
-                    methods.debug(e);
+                    WixCore.Debug.Server(e);
                 }
             }
             else if (itemId == 264 || itemId == 263) {
@@ -993,7 +993,7 @@ inventory.equip = function(player, id, itemId, count, aparams) {
             }, 1000)
         });
     } catch(e) {
-        methods.debug(e);
+        WixCore.Debug.Server(e);
     }
 };
 
@@ -1005,7 +1005,7 @@ inventory.updateEquipStatus = function(id, status) {
         mysql.executeQuery(`UPDATE items SET is_equip = '${newStatus}' WHERE id = '${methods.parseInt(id)}'`);
     }
     catch (e) {
-        methods.debug('inventory.updateEquipStatus', e);
+        WixCore.Debug.Server('inventory.updateEquipStatus', e);
     }
 };
 
@@ -1016,7 +1016,7 @@ inventory.updateItemsEquipByItemId = function(itemId, ownerId, ownerType, equip,
         else
             mysql.executeQuery(`UPDATE items SET is_equip = '${equip}' where item_id = '${itemId}' AND owner_type = '${ownerType}' AND owner_id = '${ownerId}'`);
     } catch(e) {
-        methods.debug(e);
+        WixCore.Debug.Server(e);
     }
 };
 
@@ -1029,7 +1029,7 @@ inventory.updateOwnerId = function(id, ownerId, ownerType) {
             ['UPDATE_OWNER', `id:${id}, ownerId:${ownerId}, ownerType:${ownerType}`],
         );
     } catch(e) {
-        methods.debug(e);
+        WixCore.Debug.Server(e);
     }
 };
 
@@ -1042,7 +1042,7 @@ inventory.updateOwnerIdWithPrice = function(id, ownerId, ownerType, price) {
             ['UPDATE_OWNER', `id:${id}, ownerId:${ownerId}, ownerType:${ownerType}, price:${price}`],
         );
     } catch(e) {
-        methods.debug(e);
+        WixCore.Debug.Server(e);
     }
 };
 
@@ -1050,7 +1050,7 @@ inventory.updateOwnerAll = function(oldOwnerId, oldOwnerType, ownerId, ownerType
     try {
         mysql.executeQuery(`UPDATE items SET owner_type = '${ownerType}', owner_id = '${methods.parseInt(ownerId)}' where owner_type = '${oldOwnerType}' AND owner_id = '${methods.parseInt(oldOwnerId)}' AND is_equip = '0'`);
     } catch(e) {
-        methods.debug(e);
+        WixCore.Debug.Server(e);
     }
 };
 
@@ -1063,7 +1063,7 @@ inventory.updateItemParams = function(id, params) {
             ['UPDATE_PARAMS', `id:${id}, params:${params}`],
         );
     } catch(e) {
-        methods.debug(e);
+        WixCore.Debug.Server(e);
     }
 };
 
@@ -1076,7 +1076,7 @@ inventory.updateItemCount = function(id, count) {
             ['UPDATE_COUNT', `id:${id}, count:${count}`],
         );
     } catch(e) {
-        methods.debug(e);
+        WixCore.Debug.Server(e);
     }
 };
 
@@ -1089,7 +1089,7 @@ inventory.updateItemCountByItemId = function(itemId, count, ownerId, ownerType =
             ['UPDATE_COUNT', `itemId:${itemId}, ownerType:${ownerType}, ownerId:${ownerId}, count:${count}`],
         );
     } catch(e) {
-        methods.debug(e);
+        WixCore.Debug.Server(e);
     }
 };
 
@@ -1114,7 +1114,7 @@ inventory.updateAmount = function(player, ownerId, ownerType) { // Фикс ху
             player.call('client:inventory:sendToPlayerItemListUpdateAmountMenu', [Array.from(data), ownerType, ownerId]);
         }
         catch (e) {
-            methods.debug(e);
+            WixCore.Debug.Server(e);
         }
     });
 };
@@ -1137,7 +1137,7 @@ inventory.dropItem = function(player, id, itemId, posX, posY, posZ, rotX, rotY, 
         inventory.dropItemJust(id, itemId, posX, posY, posZ, rotX, rotY, player.heading);
 
     } catch(e) {
-        methods.debug(e);
+        WixCore.Debug.Server(e);
     }
 };
 
@@ -1206,7 +1206,7 @@ inventory.dropItemJust = function(id, itemId, posX, posY, posZ, rotX, rotY, rotZ
         mysql.executeQuery(`UPDATE items SET owner_type = 0, owner_id = 0, is_equip = 0, pos_x = ${posX}, pos_y = ${posY}, pos_z = ${posZ}, rot_x = ${rotX}, rot_y = ${rotY}, rot_z = ${rotZ}, timestamp_update = ${methods.getTimeStamp()} where id = ${id}`);
 
     } catch(e) {
-        methods.debug(e);
+        WixCore.Debug.Server(e);
     }
 };
 
@@ -1216,14 +1216,14 @@ inventory.deleteDropItem = function(id) {
         if (mp.objects.exists(entity))
             entity.destroy();
     } catch(e) {
-        methods.debug(e);
+        WixCore.Debug.Server(e);
     }
     
     try {
         props.delete(id.toString());
     }
     catch (e) {
-        methods.debug(e);
+        WixCore.Debug.Server(e);
     }
 };
 
@@ -1233,7 +1233,7 @@ inventory.deleteItem = function(id) {
         inventory.deleteDropItem(id);
         inventory.deleteItemByUsers(id);
     } catch(e) {
-        methods.debug(e);
+        WixCore.Debug.Server(e);
     }
 };
 
@@ -1249,7 +1249,7 @@ inventory.deleteItemByItemId = function(id, isEquip = 0, limit = -1) {
         else
             mysql.executeQuery(`DELETE FROM items WHERE item_id = ${id} AND is_equip = ${isEquip}`);
     } catch(e) {
-        methods.debug(e);
+        WixCore.Debug.Server(e);
     }
 };
 
@@ -1265,7 +1265,7 @@ inventory.deleteUserItemByItemId = function(ownerType, ownerId, id, isEquip = 0,
         else
             mysql.executeQuery(`DELETE FROM items WHERE owner_id = ${ownerId} AND owner_type = ${ownerType} AND item_id = ${id} AND is_equip = ${isEquip}`);
     } catch(e) {
-        methods.debug(e);
+        WixCore.Debug.Server(e);
     }
 };
 
@@ -1277,7 +1277,7 @@ inventory.deleteItemByUsers = function(id) {
                 user.callCef(p, 'inventory', data);
         });
     } catch(e) {
-        methods.debug(e);
+        WixCore.Debug.Server(e);
     }
 };
 
@@ -1287,7 +1287,7 @@ inventory.deleteItemsRange = function(player, itemIdFrom, itemIdTo) {
             return;
         mysql.executeQuery(`DELETE FROM items WHERE item_id >= ${itemIdFrom} AND item_id <= ${itemIdTo} AND owner_id = ${user.getId(player)} AND owner_type = 1`);
     } catch(e) {
-        methods.debug(e);
+        WixCore.Debug.Server(e);
     }
 };
 
@@ -1295,7 +1295,7 @@ inventory.deleteItemsByItemId = function(itemId) {
     try {
         mysql.executeQuery(`DELETE FROM items WHERE item_id = ${itemId}`);
     } catch(e) {
-        methods.debug(e);
+        WixCore.Debug.Server(e);
     }
 };
 
@@ -1370,7 +1370,7 @@ inventory.addItemSql = function(itemId, count, ownerType, ownerId, countItems, i
                 ['ADD_NEW', `itemId:${itemId}, count:${count}, ownerType:${ownerType}, ownerId:${ownerId}, countItems:${countItems}, params:${params}`],
             );
         } catch(e) {
-            methods.debug(e);
+            WixCore.Debug.Server(e);
         }
     }, timeout);
 };
@@ -1397,7 +1397,7 @@ inventory.addWorldItem = function(itemId, count, countItems, posx, posy, posz, r
                 ['ADD_NEW', `itemId:${itemId}, count:${count}, ownerType:${0}, ownerId:${0}, countItems:${countItems}, params:${params}`],
             );
         } catch(e) {
-            methods.debug(e);
+            WixCore.Debug.Server(e);
         }
     }, timeout);
 };
@@ -1426,7 +1426,7 @@ inventory.getInvAmount = function(player, id, type) {
         inventory.updateAmount(player, id, type);
         return Container.Data.Get(id, "invAmount:" + type);
     } catch(e) {
-        methods.debug(e);
+        WixCore.Debug.Server(e);
     }
 };
 
@@ -1590,7 +1590,7 @@ inventory.useItem = function(player, id, itemId, isTargetable = false) {
                         user.updateClientCache(player);
                     }
                     catch (e) {
-                        methods.debug(e);
+                        WixCore.Debug.Server(e);
                     }
                     break;
                 }
@@ -1869,7 +1869,7 @@ inventory.useItem = function(player, id, itemId, isTargetable = false) {
                             user.reset(player, 'usingLockpick');
                         }
                         catch (e) {
-                            methods.debug(e);
+                            WixCore.Debug.Server(e);
                         }
                     }, 5000);
                     break;
@@ -2041,7 +2041,7 @@ inventory.useItem = function(player, id, itemId, isTargetable = false) {
                                 methods.deleteObject(bank.doorPos[grabId.idx][1], bank.doorPos[grabId.idx][2], bank.doorPos[grabId.idx][3], bank.doorPos[grabId.idx][0]);
                             }
                             catch (e) {
-                                methods.debug(e);
+                                WixCore.Debug.Server(e);
                             }
                         }, 10000);
                     }, 5000);
@@ -2432,7 +2432,7 @@ inventory.useItem = function(player, id, itemId, isTargetable = false) {
                                 inventory.deleteItem(id);
                             }
                             catch (e) {
-                                methods.debug(e);
+                                WixCore.Debug.Server(e);
                             }
                         }, 3800); //3760
                     }, 200);
@@ -2556,7 +2556,7 @@ inventory.useItem = function(player, id, itemId, isTargetable = false) {
             }
         });
     } catch(e) {
-        methods.debug(e);
+        WixCore.Debug.Server(e);
     }
 };
 
