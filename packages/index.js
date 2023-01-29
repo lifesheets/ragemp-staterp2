@@ -2,6 +2,7 @@
 
 (async () => {
     await require('./wixcore')();
+    await require('./wixcore/events');
 })();
 
 require('./dednet/modules/cli');

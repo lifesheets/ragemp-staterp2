@@ -2,10 +2,10 @@
 
 module.exports = {
     date: new Date(),
-    GetTime: function() {
+    GetTime: function () {
         return `${this.DigitFormat(this.date.getHours())}:${this.DigitFormat(this.date.getMinutes())}:${this.DigitFormat(this.date.getSeconds())}`;
     },
-    DigitFormat : function(number) {
+    DigitFormat: function (number) {
         return ("0" + number).slice(-2);
     },
     CreateFileTmp: function (file) {

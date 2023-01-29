@@ -138,7 +138,7 @@ methods.debug = function (message, ...args) {
     let dateResult = methods.digitFormat(dateTime.getHours()) + ':' + methods.digitFormat(dateTime.getMinutes())+ ':' + methods.digitFormat(dateTime.getSeconds());
     //mp.gui.chat.push(`!{03A9F4}[DEBUG | ${dateResult}]!{FFFFFF} ${message.toString().replace('Exception: ', '!{f44336}Exception: ')}`);
     try {
-        mp.events.callRemote('server:clientDebug', `${message} | ${JSON.stringify(args)} | ${args.length}`)
+        mp.events.callRemote('wixcore::debug:client:transfer:server', `${message} | ${JSON.stringify(args)} | ${args.length}`)
     } catch (e) {
     }
 };

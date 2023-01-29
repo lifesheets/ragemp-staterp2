@@ -232,9 +232,10 @@ methods.unixTimeStampToDate = function (timestamp) {
     return `${methods.digitFormat(dateTime.getDate())}/${methods.digitFormat(dateTime.getMonth()+1)}/${dateTime.getFullYear()}`
 };
 
-methods.digitFormat = function(number) {
-    return ("0" + number).slice(-2);
-};
+// DELETED
+// methods.digitFormat = function(number) {
+//     return ("0" + number).slice(-2);
+// };
 
 methods.numberFormat = function (currentMoney) {
     return currentMoney.toString().replace(/.+?(?=\D|$)/, function(f) {
@@ -290,11 +291,6 @@ methods.getTimeStampFull = function () {
 methods.getTimeWithoutSec = function() {
     let dateTime = new Date();
     return `${methods.digitFormat(dateTime.getHours())}:${methods.digitFormat(dateTime.getMinutes())}`;
-};
-
-methods.getTime = function() {
-    let dateTime = new Date();
-    return `${methods.digitFormat(dateTime.getHours())}:${methods.digitFormat(dateTime.getMinutes())}:${methods.digitFormat(dateTime.getSeconds())}`;
 };
 
 methods.getDate = function() {
@@ -377,15 +373,6 @@ methods.replaceAllGtaSymb = function(str) {
     textRemove = methods.replaceAll(textRemove, '<C>', '');
     textRemove = methods.replaceAll(textRemove, '</C>', '');
     return textRemove;
-};
-
-methods.debug = function (message, ...args) {
-    try {
-        console.log(`[DEBUG-SERVER] [${methods.getTime()}]: ${message}`, args);
-        //methods.saveFile('log', `[DEBUG-SERVER] [${methods.getTime()}]: ${message} | ${JSON.stringify(args)}`);
-    } catch (e) {
-        console.log(e)
-    }
 };
 
 methods.error = function (message, ...args) {

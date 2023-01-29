@@ -206,16 +206,6 @@ mp.events.addRemoteCounted('modules:server:data:Has', (player, promiseId, id, ke
     }
 });
 
-
-mp.events.add('server:clientDebug', (player, message) => {
-    try {
-        console.log(`[DEBUG-CLIENT][${player.socialClub}]: ${message}`);
-        //methods.saveFile('log', `[DEBUG-CLIENT][${player.socialClub}]: ${message}`);
-    } catch (e) {
-        console.log(e);
-    }
-});
-
 mp.events.addRemoteCounted('server:user:respawn', (player, x, y, z) => {
     if (!user.isLogin(player))
         return;
