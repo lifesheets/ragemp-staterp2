@@ -6,23 +6,6 @@ let user = require('../user');
 
 let discord = exports;
 
-discord.report = "https://discordapp.com/api/webhooks/682573681415028740/l0tkdhaVqlCLa_JZQ6xnAE1lE2aZejqq8Zj_x8QvUlAH8hoIB6frc6uZpUPfx3C7K8Ah";
-discord.deadlist = "https://discord.com/api/webhooks/800625907323633676/6i7L7D9R0_WnwyNZdzZJHrkT3ZqUltCrOdu-UFzZzxg7N4jbJ-iP40UGBAUeYTSniKYB";
-discord.invaderAd = "https://discord.com/api/webhooks/800626231351312425/No7GOZ8TxubI-CbIX9ylGQmRoNv3sxG2ONJSSY2bwIrGdjwdILeulTYqgnedvl36-GPc";
-discord.invaderNews = "https://discordapp.com/api/webhooks/749837863985610853/8TJa5mtY2hdq1_2NWXoJEiiXT9o4BsDaUgrTungw5xJ5l3BNBVclgXMIiQo8Pf1L1Dkj";
-discord.fractionNews = "https://discordapp.com/api/webhooks/682956739792076838/xnKY61UPcvyakdcRkMIFEsaFCMGKuK9u4wT7KK4lN_Spo1EdA_ySlzMOSLtfyW44QWMb";
-
-discord.workBcsd = "https://discord.com/api/webhooks/793982959157248030/RPNJVWyyqk8LrqVkzmEo-7wrke_OPKiouBa0FepwEMj3tdOFIPUYdydirNRzcfv-2xy3";
-discord.workLspd = "https://discord.com/api/webhooks/793982785542946846/6YZb1qRNvw03bV8rQkr-uhDeEbasw9LeUiFLLENNJE4s6-2rTUeWKOrR7_fNcqLGAfrG";
-discord.workUsmc = "https://discord.com/api/webhooks/793982506390913065/7irBRWrmVfiXlJg3_RVKv3W_4YInkEzYEON55Ucn5sHSBtXHczT9t7FxhRPSCQXSpzNO";
-discord.workNews = "https://discord.com/api/webhooks/793982310009012244/AC6aL2bazUf0G2t1g28rYWLx0b8M6z5R38Jp59KK20rb47yEQVo5kLI3y5XvOuJC6lm5";
-discord.workEms = "https://discord.com/api/webhooks/793982662549307403/u3zvwVQfmOJ6qOyiK4bnSGZcel9wKSVFR8JMT3-vRPWIYH95RgePHDKYjATEwGzVvb4M";
-discord.workGov = "https://discordapp.com/api/webhooks/756864667233812531/KgEtvxABddRxRW7ppLql2kTy4ZPFhFx5cCpvsSVlfdtKmj6i-1A5cJ4LFya9g-xVwbUw";
-
-discord.marketProperty = "https://discord.com/api/webhooks/793983974397181962/x5MReHfl4s02-C2HI5Q6xOBjWdIAY9-gkeW-_aMqrXugJ_yXC9u1EFDCQL6gXl7MSDvg";
-discord.marketBusiness = "https://discord.com/api/webhooks/793983974397181962/x5MReHfl4s02-C2HI5Q6xOBjWdIAY9-gkeW-_aMqrXugJ_yXC9u1EFDCQL6gXl7MSDvg";
-discord.marketVehicles = "https://discord.com/api/webhooks/793983974397181962/x5MReHfl4s02-C2HI5Q6xOBjWdIAY9-gkeW-_aMqrXugJ_yXC9u1EFDCQL6gXl7MSDvg";
-
 discord.dednetImg = "https://i.imgur.com/WhubVMp.png";
 discord.socialClub = "https://a.rsg.sc/n/";
 
@@ -43,7 +26,7 @@ discord.colorEms = "#f44336";
 discord.colorInvader = "#FFEB3B";
 
 discord.sendFractionList = function (title, sender, message, senderImg = discord.dednetImg, avatar = discord.imgGov, color = "#f44336") {
-    const Hook = new webhook.Webhook(discord.fractionNews);
+    const Hook = new webhook.Webhook(process.env.discord_webhooks_fractionNews);
 
     const msg = new webhook.MessageBuilder()
         .setName('Новости Штата')
@@ -58,7 +41,7 @@ discord.sendFractionList = function (title, sender, message, senderImg = discord
 };
 
 discord.sendDeadList = function (target, desc, reason, sender = 'Server', senderImg = discord.dednetImg, color = "#f44336") {
-    const Hook = new webhook.Webhook(discord.deadlist);
+    const Hook = new webhook.Webhook(process.env.discord_webhooks_deadlist );
 
     const msg = new webhook.MessageBuilder()
         .setName("DEAD LIST")
@@ -73,7 +56,7 @@ discord.sendDeadList = function (target, desc, reason, sender = 'Server', sender
 };
 
 discord.sendAd = function (title, name, text, phone, editor, editorImg) {
-    const Hook = new webhook.Webhook(discord.invaderAd);
+    const Hook = new webhook.Webhook(process.env.discord_webhooks_invaderAd);
 
     let color = "#607D8B";
     if (title === 'Покупка')
@@ -98,7 +81,7 @@ discord.sendAd = function (title, name, text, phone, editor, editorImg) {
 };
 
 discord.sendNews = function (title, text, editor, editorImg) {
-    const Hook = new webhook.Webhook(discord.invaderNews);
+    const Hook = new webhook.Webhook(process.env.discord_webhooks_invaderNews);
     const msg = new webhook.MessageBuilder()
         .setName('Новости')
         .setTitle(title)
@@ -153,7 +136,7 @@ discord.sendWork = function (url, player, dscrd, text) {
 };
 
 discord.sendMarketProperty = function (title, text) {
-    const Hook = new webhook.Webhook(discord.marketProperty);
+    const Hook = new webhook.Webhook(process.env.discord_webhooks_marketProperty);
     const msg = new webhook.MessageBuilder()
         .setName('Новости имущества')
         .setTitle(title)
@@ -165,7 +148,7 @@ discord.sendMarketProperty = function (title, text) {
 };
 
 discord.sendMarketBusiness = function (title, text) {
-    const Hook = new webhook.Webhook(discord.marketBusiness);
+    const Hook = new webhook.Webhook(process.env.discord_webhooks_marketBusiness);
     const msg = new webhook.MessageBuilder()
         .setName('Новости бизнеса')
         .setTitle(title)
@@ -177,7 +160,7 @@ discord.sendMarketBusiness = function (title, text) {
 };
 
 discord.sendMarketVehicles = function (title, text, imgUrl) {
-    const Hook = new webhook.Webhook(discord.marketVehicles);
+    const Hook = new webhook.Webhook(process.env.discord_webhooks_marketVehicles);
     const msg = new webhook.MessageBuilder()
         .setName('Новости транспорта')
         .setTitle(title)
