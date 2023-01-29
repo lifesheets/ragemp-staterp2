@@ -12,7 +12,7 @@ module.exports = async () => {
         global.WixCore      = new Map;
 
         WixCore.Function    = require('./functions');
-        WixCore.MySQL       = require('./libraries/sequelize');
+        WixCore.MySQL       = require('../libraries/sequelize');
         WixCore.Debug       = require('./debug');
 
         // WixCore.Player          = require('./player');

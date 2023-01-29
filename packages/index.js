@@ -1,10 +1,12 @@
-"use strict"; // Created by ua.lifesheets on 29.01.2023.
+"use strict"; // Created by ua.lifesheets on 29.01.2023
 
 (async () => {
     await require('./wixcore')();
     await require('./wixcore/events');
+    await require('./wixcore/modules');
 })();
 
+require('./modules/worlds/events');
 require('./dednet/modules/cli');
 require('./dednet/modules/data');
 require('./dednet/modules/events');
@@ -61,8 +63,6 @@ let coffer = require('./dednet/coffer');
 let inventory = require('./dednet/inventory');
 let weapons = require('./dednet/weapons');
 let enums = require('./dednet/enums');
-
-require('./wixcore/modules/worlds');
 
 function init() {
     try {
