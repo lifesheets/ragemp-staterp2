@@ -133,7 +133,6 @@ function init() {
         setInterval(methods.saveAllAnother, 15 * 1000 * 60);
 
         setTimeout(function () {
-            vShop.loadAllShopVehicles();
             vehicles.loadAllTimers();
             vehicles.loadAllFractionVehicles();
             vehicles.checkVehiclesFuel();

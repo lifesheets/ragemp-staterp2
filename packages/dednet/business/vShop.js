@@ -22,47 +22,6 @@ vShop.loadAllShop = () => {
     });
 };
 
-vShop.loadAllShopVehicles = () => {
-    enums.carShopVehicleList.forEach(item => {
-        vehicles.spawnCarCb(veh => {
-            if (!vehicles.exists(veh))
-                return;
-            let vInfo = methods.getVehicleInfo(item[0]);
-
-            let fuelSpeed = 20;
-            let fuel = vInfo.fuel_min / fuelSpeed * 100;
-            if (fuel > 100)
-                fuel = 100;
-
-            let st = vInfo.stock / 7000000 * 100;
-            if (st > 100)
-                st = 100;
-
-            veh.locked = true;
-            veh.engine = false;
-            veh.setVariable('useless', true);
-            veh.setVariable('s_name', item[0]);
-            veh.setVariable('s_price', vInfo.price);
-            veh.setVariable('s_fuel', fuel);
-            veh.setVariable('s_stock', st);
-        }, new mp.Vector3(item[1], item[2], item[3]), item[4], item[0]);
-
-        /*if (item[0] !== ' ')
-            methods.createCp(item[1], item[2], item[3], `~b~Название:~s~ ${item[0]}\n~b~Цена: ~g~${methods.moneyFormat(methods.getVehicleInfo(item[0]).price)}`, 5, -1, [0, 0, 0, 0]);*/
-    });
-
-    enums.carTacoVehicleList.forEach(item => {
-        vehicles.spawnCarCb(veh => {
-            if (!vehicles.exists(veh))
-                return;
-            veh.locked = true;
-            veh.engine = false;
-            veh.setVariable('useless', true);
-            vSync.setTrunkState(veh, true);
-        }, new mp.Vector3(item[1], item[2], item[3]), item[4], item[0]);
-    });
-};
-
 vShop.getInRadius = function(pos, radius = 2) {
     WixCore.Debug.Server('gun.getInRadius');
     let shopId = -1;
