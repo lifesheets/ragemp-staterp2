@@ -21,7 +21,6 @@ require('./dednet/casino/wheel');
 
 let mysql = require('./dednet/modules/mysql');
 let methods = require('./dednet/modules/methods');
-let vehicleInfo = require('./dednet/modules/vehicleInfo');
 let ctos = require('./dednet/modules/ctos');
 let cloth = require('./dednet/business/cloth');
 let tattoo = require('./dednet/business/tattoo');
@@ -73,7 +72,6 @@ function init() {
         for (let i = 0; i < weapons.hashesMap.length; i++)
             weapons.hashesMap[i][1] *= 2;
 
-        vehicleInfo.loadAll();
         ctos.loadAll();
         graffiti.loadAll();
         fishing.loadAll();

@@ -11,6 +11,7 @@ module.exports = async () => {
 
         global.WixCore      = new Map;
 
+        WixCore.Array       = require('./array');
         WixCore.Function    = require('./functions');
         WixCore.MySQL       = require('../libraries/sequelize');
         WixCore.Debug       = require('./debug');

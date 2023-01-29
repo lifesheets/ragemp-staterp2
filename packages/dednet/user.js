@@ -1851,38 +1851,15 @@ user.updateVehicleInfo = function(player) {
         return false;
 
     try {
-        for (let i = 0; i < parseInt(enums.vehicleInfo.length / 250) + 1; i++) {
+        for (let i = 0; i < parseInt(WixCore.Array.Vehicles.Features.length / 250) + 1; i++) {
             let from = i * 250 - 1;
             let to = i * 250 + 249;
-            player.call('client:updateVehicleInfo', [i, enums.vehicleInfo.slice(from < 0 ? 0 : from, to)]);
+            player.call('client:updateVehicleInfo', [i, WixCore.Array.Vehicles.Features.slice(from < 0 ? 0 : from, to)]);
         }
     } catch (e) {
         WixCore.Debug.Server(e);
     }
-
-    /*try {
-        for (let i = 0; i < methods.parseInt(enums.vehicleInfo.length / 250) + 1; i++)
-            player.call('client:updateVehicleInfo', [i, enums.vehicleInfo.slice(i * 250, i * 250 + 249)]);
-    }
-    catch (e) {
-        WixCore.Debug.Server(e);
-    }*/
 };
-
-/*user.updateVehicleInfo = function(player) {
-    if (!mp.players.exists(player))
-        return false;
-
-    try {
-        for (let i = 0; i < parseInt(enums.vehicleInfo.length / 250); i++) {
-            let from = i * 250 - 1;
-            let to = i * 250 + 249;
-            player.call('client:updateVehicleInfo', [i, enums.vehicleInfo.slice(from < 0 ? 0 : from, to)]);
-        }
-    } catch (e) {
-        WixCore.Debug.Server(e);
-    }
-};*/
 
 /*
 * StyleType

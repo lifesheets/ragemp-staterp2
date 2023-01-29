@@ -5175,60 +5175,44 @@ CREATE TABLE IF NOT EXISTS `user_dating` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_general_ci;
 
--- Dumping data for table database.user_dating: ~0 rows (приблизно)
-/*!40000 ALTER TABLE `user_dating` DISABLE KEYS */;
-/*!40000 ALTER TABLE `user_dating` ENABLE KEYS */;
-
--- Dumping structure for таблиця database.veh_info
-CREATE TABLE IF NOT EXISTS `veh_info` (
+CREATE TABLE IF NOT EXISTS `yachts` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `display_name` varchar(64) NOT NULL DEFAULT '',
-  `m_name` varchar(64) NOT NULL DEFAULT '',
-  `n_name` varchar(64) NOT NULL DEFAULT '',
-  `class_name` varchar(64) NOT NULL DEFAULT '',
-  `class_name_ru` varchar(64) NOT NULL DEFAULT '',
-  `hash` int(11) NOT NULL DEFAULT 0,
-  `stock` int(11) NOT NULL DEFAULT 0,
-  `stock_full` int(11) NOT NULL DEFAULT 0,
-  `fuel_full` int(11) NOT NULL DEFAULT 0,
-  `fuel_min` int(11) NOT NULL DEFAULT 0,
-  `fuel_type` int(11) NOT NULL DEFAULT 0,
-  `type` int(11) NOT NULL DEFAULT 0,
-  `price` double NOT NULL DEFAULT 0,
-  `price_dc` int(11) NOT NULL DEFAULT 0,
-  `sb` int(11) NOT NULL DEFAULT 0,
-  `sm` int(11) NOT NULL DEFAULT 1,
-  `tm` tinyint(1) NOT NULL DEFAULT 0,
-  `temp` tinyint(1) NOT NULL DEFAULT 1,
-  `anchor` tinyint(1) NOT NULL DEFAULT 0,
-  `lck` tinyint(1) NOT NULL DEFAULT 0,
-  `sbag` int(11) NOT NULL DEFAULT 5000,
-  `trucker` int(11) NOT NULL DEFAULT 0,
-  `t_main` int(11) NOT NULL DEFAULT 0,
-  `t_color` tinyint(1) NOT NULL DEFAULT 1,
-  `t_inside` int(11) NOT NULL DEFAULT 1,
-  `t_chip` int(11) NOT NULL DEFAULT 1,
-  `t_vis` int(11) NOT NULL DEFAULT 1,
-  `t_module` int(11) NOT NULL DEFAULT 1,
-  `t_extra` int(11) NOT NULL DEFAULT 1,
-  `t_wheels` tinyint(1) NOT NULL DEFAULT 1,
-  `t_block` varchar(1024) NOT NULL DEFAULT '{}',
-  `t_neon` tinyint(1) NOT NULL DEFAULT 1,
-  `t_light` tinyint(1) NOT NULL DEFAULT 1,
-  `r_speed` int(11) NOT NULL DEFAULT 0,
-  `a_spawn` int(11) NOT NULL DEFAULT 1,
-  `s_park` tinyint(1) NOT NULL DEFAULT 0,
-  `ticket_z` int(11) NOT NULL DEFAULT 0,
-  `lc` tinyint(1) NOT NULL DEFAULT 1,
-  `blt` tinyint(1) NOT NULL DEFAULT 1,
-  `siren` int(11) NOT NULL DEFAULT 0,
-  `k_block` varchar(64) NOT NULL DEFAULT '[]',
+  `name` varchar(64) NOT NULL DEFAULT '',
+  `price` int(11) NOT NULL DEFAULT 0,
+  `user_id` int(11) NOT NULL DEFAULT 0,
+  `user_name` varchar(256) NOT NULL DEFAULT '',
+  `x` float NOT NULL DEFAULT 0,
+  `y` float NOT NULL DEFAULT 0,
+  `z` float NOT NULL DEFAULT 0,
+  `rot` float NOT NULL DEFAULT 0,
+  `tax_score` int(11) NOT NULL DEFAULT 0,
+  `tax_money` float NOT NULL DEFAULT 0,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=870 DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_general_ci;
 
--- Dumping data for table database.veh_info: ~863 rows (приблизно)
-/*!40000 ALTER TABLE `veh_info` DISABLE KEYS */;
-INSERT INTO `veh_info` (`id`, `display_name`, `m_name`, `n_name`, `class_name`, `class_name_ru`, `hash`, `stock`, `stock_full`, `fuel_full`, `fuel_min`, `fuel_type`, `type`, `price`, `price_dc`, `sb`, `sm`, `tm`, `temp`, `anchor`, `lck`, `sbag`, `trucker`, `t_main`, `t_color`, `t_inside`, `t_chip`, `t_vis`, `t_module`, `t_extra`, `t_wheels`, `t_block`, `t_neon`, `t_light`, `r_speed`, `a_spawn`, `s_park`, `ticket_z`, `lc`, `blt`, `siren`, `k_block`) VALUES
+-- Dumping data for table database.yachts: ~2 rows (приблизно)
+/*!40000 ALTER TABLE `yachts` DISABLE KEYS */;
+INSERT INTO `yachts` (`id`, `name`, `price`, `user_id`, `user_name`, `x`, `y`, `z`, `rot`, `tax_score`, `tax_money`) VALUES
+	(1, 'M83', 19000000, 0, '', -2084.49, -1017.75, 11.781, 0, 89826841, 0),
+	(2, 'Alamo', 19000000, 1, 'Looney Moretti', -1429.57, 6755.92, 11.781, 0, 80145553, -24713);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+INSERT INTO `VehicleFeatures` (`id`, `display_name`, `m_name`, `n_name`, `class_name`, `class_name_ru`, `hash`, `stock`, `stock_full`, `fuel_full`, `fuel_min`, `fuel_type`, `type`, `price`, `price_dc`, `sb`, `sm`, `tm`, `temp`, `anchor`, `lck`, `sbag`, `trucker`, `t_main`, `t_color`, `t_inside`, `t_chip`, `t_vis`, `t_module`, `t_extra`, `t_wheels`, `t_block`, `t_neon`, `t_light`, `r_speed`, `a_spawn`, `s_park`, `ticket_z`, `lc`, `blt`, `siren`, `k_block`) VALUES
 	(1, 'Bagger', 'Western Motorcycle Company', 'Bagger', 'Motorcycles', 'Мотоцикл', -2140431165, 80000, 45000, 55, 5, 1, 5, 47000, 0, 32, 144, 0, 0, 0, 0, 0, 0, 0, 1, 1, 0, 1, 0, 1, 1, '{}', 0, 1, 5, 1, 0, 0, 0, 0, 0, '[]'),
 	(2, 'Phantom', 'Jobuilt', 'Phantom', 'Commercials', 'Коммерческий', -2137348917, 0, 0, 310, 22, 2, 4, 399999, 0, 1, 139, 0, 1, 0, 0, 5000, 4, 1, 1, 0, 0, 1, 1, 1, 1, '{}', 0, 1, 4, 1, 0, 1, 1, 1, 0, '[]'),
 	(3, 'Blazer', 'Nagasaki', 'Blazer', 'Off-Road', 'Внедорожник', -2128233223, 10000, 50000, 14, 1, 1, 5, 21000, 0, 0, 124, 0, 0, 0, 0, 0, 0, 0, 1, 1, 0, 1, 0, 1, 1, '{}', 0, 1, 2, 1, 0, 0, 0, 0, 0, '[]'),
@@ -6092,32 +6076,48 @@ INSERT INTO `veh_info` (`id`, `display_name`, `m_name`, `n_name`, `class_name`, 
 	(867, 'Rmodspeed', 'McLaren', 'Speedtail', 'Super', 'Суперкар', 1663218586, 0, 0, 98, 12, 1, 1, 11300000, 0, 55, 286, 0, 1, 0, 0, 5000, 0, 0, 1, 1, 1, 1, 1, 1, 1, '{}', 1, 1, 6, 1, 0, 0, 1, 1, 0, '[]'),
 	(868, 'C63coupe', 'Mercedes', 'C63 Coupe', 'Sports', 'Спорткар', 0, 390000, 210000, 84, 9, 1, 99, 320000, 2999, 20, 240, 0, 1, 0, 0, 5000, 0, 0, 1, 1, 1, 1, 1, 1, 1, '{}', 1, 1, 5, 1, 0, 0, 1, 1, 0, '[]'),
 	(869, 'Cam08', 'Toyota', 'Camry 3.5', 'Sedans', 'Седан', 0, 285000, 125000, 63, 8, 1, 10, 205000, 0, 35, 195, 0, 1, 0, 0, 5000, 0, 0, 1, 1, 1, 1, 1, 1, 1, '{}', 1, 1, 6, 1, 0, 0, 1, 1, 0, '[]');
-/*!40000 ALTER TABLE `veh_info` ENABLE KEYS */;
 
--- Dumping structure for таблиця database.yachts
-CREATE TABLE IF NOT EXISTS `yachts` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `name` varchar(64) NOT NULL DEFAULT '',
-  `price` int(11) NOT NULL DEFAULT 0,
-  `user_id` int(11) NOT NULL DEFAULT 0,
-  `user_name` varchar(256) NOT NULL DEFAULT '',
-  `x` float NOT NULL DEFAULT 0,
-  `y` float NOT NULL DEFAULT 0,
-  `z` float NOT NULL DEFAULT 0,
-  `rot` float NOT NULL DEFAULT 0,
-  `tax_score` int(11) NOT NULL DEFAULT 0,
-  `tax_money` float NOT NULL DEFAULT 0,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_general_ci;
-
--- Dumping data for table database.yachts: ~2 rows (приблизно)
-/*!40000 ALTER TABLE `yachts` DISABLE KEYS */;
-INSERT INTO `yachts` (`id`, `name`, `price`, `user_id`, `user_name`, `x`, `y`, `z`, `rot`, `tax_score`, `tax_money`) VALUES
-	(1, 'M83', 19000000, 0, '', -2084.49, -1017.75, 11.781, 0, 89826841, 0),
-	(2, 'Alamo', 19000000, 1, 'Looney Moretti', -1429.57, 6755.92, 11.781, 0, 80145553, -24713);
-/*!40000 ALTER TABLE `yachts` ENABLE KEYS */;
-
-/*!40101 SET SQL_MODE=IFNULL(@OLD_SQL_MODE, '') */;
-/*!40014 SET FOREIGN_KEY_CHECKS=IFNULL(@OLD_FOREIGN_KEY_CHECKS, 1) */;
-/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
-/*!40111 SET SQL_NOTES=IFNULL(@OLD_SQL_NOTES, 1) */;
+INSERT INTO `VehicleShowCases` (`id`, `model`, `trunk`, `x`, `y`, `z`, `h`) VALUES
+	(1, 'Journey', 'false', 1669.5, 3835.8, 34.3791, 221.532),
+	(2, 'Reaper', 'false', -786.078, -243.463, 36.5447, 75.2947),
+	(3, 'Thrax', 'false', -789.016, -238.292, 36.2904, 78.8554),
+	(4, 'Nexus', 'false', -792.447, -233.016, 36.5757, 84.1652),
+	(5, 'Glendale', 'false', -43.6665, -1666.98, 29.2198, -81.9584),
+	(6, 'Tampa', 'false', -16.0316, -1655.74, 28.9926, 101.155),
+	(7, 'Blista2', 'false', -38.7912, -1660.93, 29.0194, -145.255),
+	(8, 'Pigalle', 'false', -25.9875, -1657.97, 28.953, 38.6246),
+	(9, 'Warrener', 'false', -35.2865, -1657.19, 28.708, -117.742),
+	(10, 'Picador', 'false', -19.9703, -1660.4, 29.1796, -15.3025),
+	(11, 'RancherXL', 'false', -25.1164, -1645.54, 29.1534, -130.603),
+	(12, 'Stratum', 'false', -17.7829, -1645.07, 28.9182, 175.956),
+	(13, 'Stalion', 'false', -32.3139, -1653.3, 28.9898, -69.0711),
+	(14, 'Cavalcade', 'false', -21.8178, -1642.36, 29.3264, -171.348),
+	(15, 'Dukes', 'false', -12.9665, -1649.12, 29.089, 75.9237),
+	(16, 'Raiden', 'false', -43.1217, -1094.36, 26.1152, 108.534),
+	(17, 'Elegy2', 'false', -47.1982, -1102.18, 25.7419, 294.197),
+	(18, 'Drafter', 'false', -49.051, -1092.71, 25.9383, 143.697),
+	(19, 'Baller3', 'false', -37.8934, -1100.16, 26.3503, 70.486),
+	(20, 'Benson', 'false', 1002.15, -2353.31, 30.4856, 270.59),
+	(21, 'Hauler', 'false', 1002, -2343.94, 30.7522, 268.172),
+	(22, 'Mule', 'false', 1008.65, -2366.99, 30.7504, 351.297),
+	(23, 'Mule3', 'false', 1016.17, -2367.85, 30.7504, 351.297),
+	(24, 'Packer', 'false', 1003.12, -2332.94, 30.5954, 265.35),
+	(25, 'Phantom', 'false', 1003.43, -2322.53, 30.5746, 264.75),
+	(26, 'Pounder', 'false', 1006.25, -2308.19, 30.5837, 201.769),
+	(27, 'Guardian', 'false', 1028, -2308.7, 30.0463, 84.8737),
+	(28, 'Speedo', 'false', 1028.61, -2317.19, 30.0439, 81.355),
+	(29, 'Tractor2', 'false', 1027.06, -2324.09, 30.2812, 85.9046),
+	(30, 'GBurrito', 'false', 1027.04, -2332.8, 30.33, 83.6021),
+	(31, 'Burrito3', 'false', 1025.55, -2341.57, 30.3299, 86.2272),
+	(32, 'Youga2', 'false', 1024.93, -2350.58, 30.3039, 87.2838),
+	(33, 'Emperor2', 'false', 1658.94, 3811.51, 34.3295, 292.028),
+	(34, 'Bodhi2', 'false', 1664.9, 3830.94, 34.846, 287.468),
+	(35, 'BfInjection', 'false', 1672.16, 3808.89, 34.5568, 57.4416),
+	(36, 'Voodoo2', 'false', 1659.65, 3798.12, 34.3213, 306.921),
+	(37, 'Ratbike', 'false', 1662.59, 3824.88, 34.3524, 236.565),
+	(38, 'Taco', 'true', -1706.23, -763.425, 10.0896, 44.5123),
+	(39, 'Taco', 'true', -1651.18, -951.051, 7.6472, 341.601),
+	(40, 'Taco', 'true', 4970.87, -5154.93, 2.38579, 38.3741),
+	(41, 'Taco', 'true', 5052.81, -4639.89, 2.27691, 340.481),
+	(42, 'Taco', 'true', 4520.54, -4508.64, 4.32011, 149.208),
+	(43, 'Taco', 'true', -265.593, -2034.24, 30.0464, 124.571);

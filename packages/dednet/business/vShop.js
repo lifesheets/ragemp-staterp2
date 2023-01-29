@@ -86,7 +86,7 @@ vShop.checkPosForOpenMenu = function(player) {
 
         let vList = [];
         let where = '';
-        enums.vehicleInfo.forEach(item => {
+        WixCore.Array.Vehicles.Features.forEach(item => {
             if (enums.carShopList[shopId].auto != item.type)
                 return;
             where += ` OR name = '${item.display_name}'`

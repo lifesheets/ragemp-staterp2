@@ -1,9 +1,5 @@
 
-let methods = require('./modules/methods');
-
 let enums = exports;
-
-enums.vehicleInfo = [];
 
 enums.offsets = {
     house: 100000,

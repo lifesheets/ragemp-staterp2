@@ -130,7 +130,7 @@ methods.checkTeleportVeh = function(player, pos1, pos2) {
 };
 
 methods.getVehicleInfo = function (model) {
-    let vehInfo = enums.vehicleInfo;
+    let vehInfo = WixCore.Array.Vehicles.Features;
     for (let item in vehInfo) {
         let vItem = vehInfo[item];
         if (vItem.hash == model || vItem.display_name == model || vItem.display_name.toLowerCase() == model.toString().toLowerCase() || mp.joaat(vItem.display_name.toString().toLowerCase()) == model)
