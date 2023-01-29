@@ -910,8 +910,11 @@ vehicles.respawn = (vehicle) => {
                let fractionId = vehicle.getVariable('fraction_id');
                if (fractionId) {
                    let info = vehicles.getFractionVehicleInfo(vehicle.getVariable('veh_id'));
-                   if (info.is_default || info.fraction_id < 0)
-                       vehicles.spawnFractionCar(info.id);
+                   if (info !== undefined) {
+                    if (info.is_default || info.fraction_id < 0) {
+                        vehicles.spawnFractionCar(info.id);
+                    }
+                }
                }
                vehicle.destroy();
            }
