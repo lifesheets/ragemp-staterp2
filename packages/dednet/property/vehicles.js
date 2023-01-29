@@ -1553,35 +1553,32 @@ vehicles.spawnJobCar = (cb2, position, heading, nameOrModel, jobId = 0) => {
 
 vehicles.lockStatus = (player, vehicle) => {
     WixCore.Debug.Server('vehicles.lockStatus');
-    if (!user.isLogin(player))
+    if (!user.isLogin(player)) {
         return;
-    if (!vehicles.exists(vehicle))
+    }
+    if (!vehicles.exists(vehicle)) {
         return;
+    }
     try {
         vehicle.locked = !vehicle.locked;
-        //let lockStatus = !vSync.getLockState(vehicle);
         vSync.setLockStatus(vehicle, vehicle.locked);
-        if (!vehicle.locked)
+        vehicle.setVariable('locked', vehicle.locked);
+        if (!vehicle.locked) {
             player.notify('Вы ~g~открыли~s~ транспорт');
-        else
+        } else {
             player.notify('Вы ~r~закрыли~s~ транспорт');
-
+        }
         if (!player.vehicle) {
             user.playAnimation(player, "anim@mp_player_intmenu@key_fob@", "fob_click", 48);
             player.addAttachment('pickPick');
             setTimeout(function () {
-                try {
-                    if (!user.isLogin(player))
-                        return;
-                    player.addAttachment('pickPick', true);
+                if (!user.isLogin(player)) {
+                    return;
                 }
-                catch (e) {
-
-                }
+                player.addAttachment('pickPick', true);
             }, 2500)
         }
-    }
-    catch (e) {
+    } catch (e) {
         console.log(e);
     }
 };
