@@ -10,10 +10,10 @@ module.exports = async () => {
         global.WixCore          = new Map;
         
         WixCore.MySQL           = require('./libraries/sequelize');
-        WixCore.commands        = require('./commands');
-        WixCore.debug           = require('./debug');
-        WixCore.functions       = require('./functions');
-        WixCore.player          = require('./player');
+        // WixCore.Commands        = require('./commands');
+        WixCore.Debug           = require('./debug');
+        WixCore.Functions       = require('./functions');
+        // WixCore.Player          = require('./player');
 
         await WixCore.MySQL.connect();
     } catch (err) {
