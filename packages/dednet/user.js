@@ -1983,11 +1983,13 @@ user.getPlayerById = function(id) {
 
 user.getVehicleDriver = function(vehicle) {
     let driver = null;
-    if (!mp.vehicles.exists(vehicle))
+    if (!mp.vehicles.exists(vehicle)) {
         return driver;
-    vehicle.getOccupants().forEach((p) => {
-        if (p.seat == -1)
-            driver = p;
+    }
+    vehicle.getOccupants().forEach((veh) => {
+        if (veh.seat == 0) {
+            driver = veh;
+        }
     });
     return driver;
 };

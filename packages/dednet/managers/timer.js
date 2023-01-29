@@ -403,8 +403,10 @@ timer.sec5Timer = function() {
                     }
                     return;
                 }
-                if (p.seat > 0)
+                if (p.seat > 1) {
                     return;
+                }
+                    
                 if (veh.getVariable('fraction_id') === 2 || veh.getVariable('fraction_id') === 3 || veh.getVariable('fraction_id') === 4 || veh.getVariable('fraction_id') === 5 || veh.getVariable('fraction_id') === 6)
                     p.call('client:updateBlips', [JSON.stringify(blips)]);
             }
