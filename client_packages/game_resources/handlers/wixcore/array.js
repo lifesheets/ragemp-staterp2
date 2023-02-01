@@ -1,1 +1,0 @@
-"use strict"; // Created by ua.lifesheets on 31.01.2023.
