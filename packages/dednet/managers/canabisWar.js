@@ -36,7 +36,7 @@ let gangList = [];
 let warPool = new Map();
 
 canabisWar.loadAll = function() {
-    WixCore.Debug.Server('canabisWar.loadAll');
+    WixCore.Function.Debug.Server('canabisWar.loadAll');
     mysql.executeQuery(`SELECT * FROM gang_war_2`, function (err, rows, fields) {
 
         rows.forEach(row => {
@@ -59,7 +59,7 @@ canabisWar.loadAll = function() {
 };
 
 canabisWar.save = function(id, ownerId, name) {
-    WixCore.Debug.Server('canabisWar.save');
+    WixCore.Function.Debug.Server('canabisWar.save');
     canabisWar.set(id, 'fraction_id', ownerId);
     canabisWar.set(id, 'fraction_name', name);
     canabisWar.set(id, 'timestamp', methods.getTimeStamp());
@@ -105,7 +105,7 @@ canabisWar.startWar = function(zoneId, attack, def, isArmor, count) {
     if (isStartTimer)
         return;
 
-    WixCore.Debug.Server('canabisWar.startWar');
+    WixCore.Function.Debug.Server('canabisWar.startWar');
 
     isStartTimer = true;
     timerCounter = 300;
@@ -133,7 +133,7 @@ canabisWar.startWar = function(zoneId, attack, def, isArmor, count) {
 };
 
 canabisWar.addWar = function(player, zoneId, count, armorIndex, gunIndex, timeIndex) {
-    WixCore.Debug.Server('canabisWar.addWar');
+    WixCore.Function.Debug.Server('canabisWar.addWar');
     if (!user.isLogin(player))
         return;
 
@@ -195,7 +195,7 @@ canabisWar.addWar = function(player, zoneId, count, armorIndex, gunIndex, timeIn
 };
 
 canabisWar.dropTimer = function(player) {
-    WixCore.Debug.Server('canabisWar.dropTimer');
+    WixCore.Function.Debug.Server('canabisWar.dropTimer');
     if (!user.isLogin(player) && !user.isAdmin(player))
         return;
 

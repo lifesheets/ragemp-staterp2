@@ -163,7 +163,7 @@ let countLobby = 0;
 let timerTake = 5;
 
 copsRacer.loadAll = function() {
-    WixCore.Debug.Server('copsRacer.loadAll');
+    WixCore.Function.Debug.Server('copsRacer.loadAll');
     copsRacer.timer();
 };
 
@@ -255,7 +255,7 @@ copsRacer.createNewLobby = function() {
 };
 
 copsRacer.playerToLobby = function(player, role = 0) {
-    WixCore.Debug.Server('copsRacer.playerToLobby');
+    WixCore.Function.Debug.Server('copsRacer.playerToLobby');
     if (user.isLogin(player)) {
         if (user.hasById(user.getId(player), 'uniform')) {
             player.notify('~r~В форме запрещено учавствовать в Cops & Racer');
@@ -325,7 +325,7 @@ copsRacer.playerToLobby = function(player, role = 0) {
                 }
             }
             catch (e) {
-                WixCore.Debug.Server(e);
+                WixCore.Function.Debug.Server(e);
             }
 
             if (user.isLogin(player))
@@ -337,7 +337,7 @@ copsRacer.playerToLobby = function(player, role = 0) {
 };
 
 copsRacer.playerExitLobby = function(player) {
-    WixCore.Debug.Server('gangZone.playerToLobby');
+    WixCore.Function.Debug.Server('gangZone.playerToLobby');
     if (user.isLogin(player)) {
         vehicles.respawn(player.vehicle);
 

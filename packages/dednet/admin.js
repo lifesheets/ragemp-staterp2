@@ -11,7 +11,7 @@ let admin = exports;
 admin.giveLeader = function(player, type, id, listIndex) {
     try {
 
-        WixCore.Debug.Server('admin.giveLeader');
+        WixCore.Function.Debug.Server('admin.giveLeader');
 
         if (!user.isAdmin(player))
             return;
@@ -48,7 +48,7 @@ admin.giveLeader = function(player, type, id, listIndex) {
         }
     }
     catch (e) {
-        WixCore.Debug.Server(e);
+        WixCore.Function.Debug.Server(e);
     }
 };
 
@@ -81,7 +81,7 @@ admin.blacklist = function(player, type, id, reason) {
         }
     }
     catch (e) {
-        WixCore.Debug.Server(e);
+        WixCore.Function.Debug.Server(e);
     }
 };
 
@@ -168,7 +168,7 @@ admin.ban = function(player, type, id, listIndex, reason) {
         }
     }
     catch (e) {
-        WixCore.Debug.Server(e);
+        WixCore.Function.Debug.Server(e);
     }
 };
 
@@ -250,7 +250,7 @@ admin.banByAnticheat = function(type, id, listIndex, reason) {
         }
     }
     catch (e) {
-        WixCore.Debug.Server(e);
+        WixCore.Function.Debug.Server(e);
     }
 };
 
@@ -283,7 +283,7 @@ admin.unban = function(player, type, id, reason) {
         }
     }
     catch (e) {
-        WixCore.Debug.Server(e);
+        WixCore.Function.Debug.Server(e);
     }
 };
 
@@ -316,7 +316,7 @@ admin.warn = function(player, type, id, reason) {
         }
     }
     catch (e) {
-        WixCore.Debug.Server(e);
+        WixCore.Function.Debug.Server(e);
     }
 };
 
@@ -349,7 +349,7 @@ admin.unwarn = function(player, type, id, reason) {
         }
     }
     catch (e) {
-        WixCore.Debug.Server(e);
+        WixCore.Function.Debug.Server(e);
     }
 };
 
@@ -386,7 +386,7 @@ admin.untimer = function(player, type, id, reason) {
         }
     }
     catch (e) {
-        WixCore.Debug.Server(e);
+        WixCore.Function.Debug.Server(e);
     }
 };
 
@@ -421,7 +421,7 @@ admin.kick = function(player, type, id, reason) {
         }
     }
     catch (e) {
-        WixCore.Debug.Server(e);
+        WixCore.Function.Debug.Server(e);
     }
 };
 
@@ -462,7 +462,7 @@ admin.jail = function(player, type, id, min, reason) {
         }
     }
     catch (e) {
-        WixCore.Debug.Server(e);
+        WixCore.Function.Debug.Server(e);
     }
 };
 
@@ -503,7 +503,7 @@ admin.setArmorById = function(player, type, id, num) {
         }
     }
     catch (e) {
-        WixCore.Debug.Server(e);
+        WixCore.Function.Debug.Server(e);
     }
 };
 
@@ -544,7 +544,7 @@ admin.setHpById = function(player, type, id, num) {
         }
     }
     catch (e) {
-        WixCore.Debug.Server(e);
+        WixCore.Function.Debug.Server(e);
     }
 };
 
@@ -591,7 +591,7 @@ admin.setSkinById = function(player, type, id, skin) {
         }
     }
     catch (e) {
-        WixCore.Debug.Server(e);
+        WixCore.Function.Debug.Server(e);
     }
 };
 
@@ -644,7 +644,7 @@ admin.resetSkinById = function(player, type, id) {
         }
     }
     catch (e) {
-        WixCore.Debug.Server(e);
+        WixCore.Function.Debug.Server(e);
     }
 };
 
@@ -685,7 +685,7 @@ admin.adrenalineById = function(player, type, id) {
         }
     }
     catch (e) {
-        WixCore.Debug.Server(e);
+        WixCore.Function.Debug.Server(e);
     }
 };
 
@@ -726,7 +726,7 @@ admin.freeHospById = function(player, type, id) {
         }
     }
     catch (e) {
-        WixCore.Debug.Server(e);
+        WixCore.Function.Debug.Server(e);
     }
 };
 
@@ -771,7 +771,7 @@ admin.tpToAdmin = function(player, type, id) {
         }
     }
     catch (e) {
-        WixCore.Debug.Server(e);
+        WixCore.Function.Debug.Server(e);
     }
 };
 
@@ -804,7 +804,7 @@ admin.tpToUser = function(player, type, id) {
         }
     }
     catch (e) {
-        WixCore.Debug.Server(e);
+        WixCore.Function.Debug.Server(e);
     }
 };
 
@@ -841,7 +841,7 @@ admin.changeDimension = function(player, type, id, dim) {
         }
     }
     catch (e) {
-        WixCore.Debug.Server(e);
+        WixCore.Function.Debug.Server(e);
     }
 };
 
@@ -872,7 +872,7 @@ admin.getDimension = function(player, type, id) {
         }
     }
     catch (e) {
-        WixCore.Debug.Server(e);
+        WixCore.Function.Debug.Server(e);
     }
 };
 
@@ -891,6 +891,6 @@ admin.inviteMp = function(player) {
         methods.saveLog('log_admin', ['name', 'type', 'do'], [`${user.getRpName(player)}`, 'INVITE_MP', ``]);
     }
     catch (e) {
-        WixCore.Debug.Server(e);
+        WixCore.Function.Debug.Server(e);
     }
 };

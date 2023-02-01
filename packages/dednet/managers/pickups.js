@@ -372,7 +372,7 @@ pickups.BuilderPos = new mp.Vector3(-1585.625, -234.0653, 53.35091);
 
 pickups.checkPressLAlt = function(player) {
 
-    WixCore.Debug.Server('pickups.checkPressLAlt');
+    WixCore.Function.Debug.Server('pickups.checkPressLAlt');
 
     if (!user.isLogin(player))
         return;
@@ -585,7 +585,7 @@ pickups.checkPressLAlt = function(player) {
 };
 
 pickups.checkPressE = function(player) {
-    WixCore.Debug.Server('pickups.checkPressE');
+    WixCore.Function.Debug.Server('pickups.checkPressE');
     if (!user.isLogin(player))
         return;
 
@@ -1027,13 +1027,13 @@ pickups.checkPressE = function(player) {
             player.call('client:menuList:showAveMenu');
     }
     catch (e) {
-        WixCore.Debug.Server('PICKUP', e);
+        WixCore.Function.Debug.Server('PICKUP', e);
     }
 
 };
 
 pickups.createAll = function() {
-    WixCore.Debug.Server('pickups.createPickups');
+    WixCore.Function.Debug.Server('pickups.createPickups');
 
     methods.createCpVector(pickups.EmsGarderobPos1, 'Нажмите ~g~E~s~ чтобы открыть меню', 1, -1, pickups.Blue);
     methods.createCpVector(pickups.EmsGarderobPos2, 'Нажмите ~g~E~s~ чтобы открыть меню', 1, -1, pickups.Blue);

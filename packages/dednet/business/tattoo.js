@@ -15,7 +15,7 @@ tattoo.list = [
 ];
 
 tattoo.loadAll = function() {
-    WixCore.Debug.Server('tattoo.loadAll');
+    WixCore.Function.Debug.Server('tattoo.loadAll');
     tattoo.list.forEach(function (item) {
         let shopPos = new mp.Vector3(item[0], item[1], item[2]);
         methods.createBlip(shopPos, 75, 0, 0.8);
@@ -24,7 +24,7 @@ tattoo.loadAll = function() {
 };
 
 tattoo.getInRadius = function(pos, radius = 2) {
-    WixCore.Debug.Server('tattoo.getInRadius');
+    WixCore.Function.Debug.Server('tattoo.getInRadius');
     let shopId = -1;
     tattoo.list.forEach(function (item, idx) {
         let shopPos = new mp.Vector3(item[0], item[1], item[2]);
@@ -35,7 +35,7 @@ tattoo.getInRadius = function(pos, radius = 2) {
 };
 
 tattoo.checkPosForOpenMenu = function(player) {
-    WixCore.Debug.Server('tattoo.checkPosForOpenMenu');
+    WixCore.Function.Debug.Server('tattoo.checkPosForOpenMenu');
     try {
         let playerPos = player.position;
         let shopId = tattoo.getInRadius(playerPos, 2);
@@ -66,12 +66,12 @@ tattoo.checkPosForOpenMenu = function(player) {
         }
     }
     catch (e) {
-        WixCore.Debug.Server(e);
+        WixCore.Function.Debug.Server(e);
     }
 };
 
 tattoo.findNearest = function(pos) {
-    WixCore.Debug.Server('tattoo.findNearest');
+    WixCore.Function.Debug.Server('tattoo.findNearest');
     let prevPos = new mp.Vector3(9999, 9999, 9999);
     tattoo.list.forEach(function (item) {
         let shopPos = new mp.Vector3(item[0], item[1], item[2]);

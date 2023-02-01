@@ -428,7 +428,7 @@ mp.events.add('s:vSync:setDirtLevel', (player, vId, level) => {
 });
 
 mp.events.add('s:vSync:setEngineStatus', (player, vId, status) => {
-    WixCore.Debug.Server('setEngineStatus', status);
+    WixCore.Function.Debug.Server('setEngineStatus', status);
     let veh = mp.vehicles.at(vId);
     if (mp.players.exists(player) && vehicles.exists(veh))
         vSync.setEngineState(veh, status);
@@ -495,7 +495,7 @@ mp.events.add('s:vSync:setVehicleTyreSmokeColor', (player, vId, r, g, b) => {
 });
 
 mp.events.add('s:vSync:setSpotLightState', (player, vId, status) => {
-    WixCore.Debug.Server('server:vehicles:addFuel', vId, status);
+    WixCore.Function.Debug.Server('server:vehicles:addFuel', vId, status);
     let veh = mp.vehicles.at(vId);
     if (mp.players.exists(player) && vehicles.exists(veh))
         vSync.setSpotLightState(veh, status);

@@ -111,7 +111,7 @@ discord.sendWork = function (url, player, dscrd, text) {
                 });
             }
             catch (e) {
-                WixCore.Debug.Server(e);
+                WixCore.Function.Debug.Server(e);
             }
         }
 

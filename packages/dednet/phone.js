@@ -20,7 +20,7 @@ phone.getUserInfo = function(player, text) {
     if (!user.isLogin(player))
         return;
 
-    WixCore.Debug.Server('phone.getUserInfo');
+    WixCore.Function.Debug.Server('phone.getUserInfo');
 
     text = methods.removeQuotes(text);
 
@@ -306,7 +306,7 @@ phone.getVehInfo = function(player, text) {
     if (!user.isLogin(player))
         return;
 
-    WixCore.Debug.Server('phone.getVehInfo');
+    WixCore.Function.Debug.Server('phone.getVehInfo');
 
     text = methods.removeQuotes(text);
 
@@ -361,7 +361,7 @@ phone.getGunInfo = function(player, text) {
     if (!user.isLogin(player))
         return;
 
-    WixCore.Debug.Server('phone.getGunInfo');
+    WixCore.Function.Debug.Server('phone.getGunInfo');
 
     text = methods.removeQuotes(methods.removeQuotes2(text));
 
@@ -426,7 +426,7 @@ phone.memberAction = function(player, id) {
         return;
     }
 
-    WixCore.Debug.Server('phone.memberAction');
+    WixCore.Function.Debug.Server('phone.memberAction');
     let fractionId = user.get(player, 'fraction_id');
     mysql.executeQuery(`SELECT id, social, name, fraction_id, rank, rank_type, is_sub_leader FROM users WHERE id = '${methods.parseInt(id)}'`, (err, rows, fields) => {
 
@@ -543,7 +543,7 @@ phone.memberAction2 = function(player, id) {
         return;
     }
 
-    WixCore.Debug.Server('phone.memberAction');
+    WixCore.Function.Debug.Server('phone.memberAction');
     let fractionId = user.get(player, 'fraction_id2');
     mysql.executeQuery(`SELECT id, social, name, fraction_id2, rank2, rank_type2, is_sub_leader2 FROM users WHERE id = '${methods.parseInt(id)}'`, (err, rows, fields) => {
 
@@ -674,7 +674,7 @@ phone.memberActionF = function(player, id) {
         return;
     }
 
-    WixCore.Debug.Server('phone.memberAction');
+    WixCore.Function.Debug.Server('phone.memberAction');
     let fractionId = user.get(player, 'family_id');
     mysql.executeQuery(`SELECT id, social, name, family_id, rankf, rank_typef, is_sub_leaderf FROM users WHERE id = '${methods.parseInt(id)}'`, (err, rows, fields) => {
 
@@ -800,7 +800,7 @@ phone.fractionVehicleAction = function(player, id) {
     if (!user.isLogin(player))
         return;
 
-    WixCore.Debug.Server('phone.fractionVehicleAction');
+    WixCore.Function.Debug.Server('phone.fractionVehicleAction');
     let fractionId = user.get(player, 'fraction_id');
 
     let fractionItem = enums.fractionListId[fractionId];
@@ -882,7 +882,7 @@ phone.fractionVehicleAction2 = function(player, id) {
     if (!user.isLogin(player))
         return;
 
-    WixCore.Debug.Server('phone.fractionVehicleAction');
+    WixCore.Function.Debug.Server('phone.fractionVehicleAction');
     let fractionId = user.get(player, 'fraction_id2');
 
     let items = [];
@@ -949,7 +949,7 @@ phone.fractionVehicleAction2 = function(player, id) {
 phone.fractionMoney = function(player) {
     if (!user.isLogin(player))
         return;
-    WixCore.Debug.Server('phone.fractionMoney');
+    WixCore.Function.Debug.Server('phone.fractionMoney');
     let fractionId = user.get(player, 'fraction_id');
     let cofferId = coffer.getIdByFraction(fractionId);
 
@@ -1040,7 +1040,7 @@ phone.fractionMoney = function(player) {
 phone.fractionLog = function(player) {
     if (!user.isLogin(player))
         return;
-    WixCore.Debug.Server('phone.fractionLog');
+    WixCore.Function.Debug.Server('phone.fractionLog');
 
     let fractionId = user.get(player, 'fraction_id');
 
@@ -1078,7 +1078,7 @@ phone.fractionLog = function(player) {
                     )
                 ]));
 
-                WixCore.Debug.Server(e);
+                WixCore.Function.Debug.Server(e);
             }
         }
         else {
@@ -1097,7 +1097,7 @@ phone.fractionLog = function(player) {
 phone.fractionLog2 = function(player) {
     if (!user.isLogin(player))
         return;
-    WixCore.Debug.Server('phone.fractionLog');
+    WixCore.Function.Debug.Server('phone.fractionLog');
 
     let fractionId = user.get(player, 'fraction_id2');
 
@@ -1135,7 +1135,7 @@ phone.fractionLog2 = function(player) {
                     )
                 ]));
 
-                WixCore.Debug.Server(e);
+                WixCore.Function.Debug.Server(e);
             }
         }
         else {
@@ -1154,7 +1154,7 @@ phone.fractionLog2 = function(player) {
 phone.showGangList = function(player) {
     if (!user.isLogin(player))
         return;
-    WixCore.Debug.Server('phone.showGangList');
+    WixCore.Function.Debug.Server('phone.showGangList');
     let items = [];
     gangWar.getZoneList().forEach(zone => {
         let subItems = [];
@@ -1206,7 +1206,7 @@ phone.showGangList = function(player) {
 phone.showGangWarList = function(player) {
     if (!user.isLogin(player))
         return;
-    WixCore.Debug.Server('phone.showGangList');
+    WixCore.Function.Debug.Server('phone.showGangList');
     let items = [];
     gangWar.getZoneWarList().forEach((value, key) => {
         let subItems = [];
@@ -1277,7 +1277,7 @@ phone.showGangWarList = function(player) {
 phone.showCanabisList = function(player) {
     if (!user.isLogin(player))
         return;
-    WixCore.Debug.Server('phone.showCanabisList');
+    WixCore.Function.Debug.Server('phone.showCanabisList');
     let items = [];
     canabisWar.getZoneList().forEach(zone => {
         let subItems = [];
@@ -1329,7 +1329,7 @@ phone.showCanabisList = function(player) {
 phone.showCanabisWarList = function(player) {
     if (!user.isLogin(player))
         return;
-    WixCore.Debug.Server('phone.showCanabisWarList');
+    WixCore.Function.Debug.Server('phone.showCanabisWarList');
     let items = [];
     canabisWar.getZoneWarList().forEach((value, key) => {
         let subItems = [];
@@ -1399,7 +1399,7 @@ phone.showCanabisWarList = function(player) {
 phone.fractionList = function(player) {
     if (!user.isLogin(player))
         return;
-    WixCore.Debug.Server('phone.fractionList');
+    WixCore.Function.Debug.Server('phone.fractionList');
 
     let fractionId = user.get(player, 'fraction_id');
 
@@ -1509,7 +1509,7 @@ phone.fractionList = function(player) {
 phone.fractionList2 = function(player, showStats = false) {
     if (!user.isLogin(player))
         return;
-    WixCore.Debug.Server('phone.fractionList2');
+    WixCore.Function.Debug.Server('phone.fractionList2');
 
     let fractionId = user.get(player, 'fraction_id2');
 
@@ -1605,7 +1605,7 @@ phone.fractionList2 = function(player, showStats = false) {
                 }
             }
             catch (e) {
-                WixCore.Debug.Server(e);
+                WixCore.Function.Debug.Server(e);
             }
         });
 
@@ -1626,7 +1626,7 @@ phone.fractionList2 = function(player, showStats = false) {
             phone.showMenu(player, 'fraction2', `Список членов организации | ${rows.length} чел.`, newItems.concat(items));
         }
         catch (e) {
-            WixCore.Debug.Server(e);
+            WixCore.Function.Debug.Server(e);
         }
     });
 };
@@ -1635,7 +1635,7 @@ phone.fractionList2 = function(player, showStats = false) {
 phone.fractionListF = function(player, showStats = false) {
     if (!user.isLogin(player))
         return;
-    WixCore.Debug.Server('phone.fractionListF');
+    WixCore.Function.Debug.Server('phone.fractionListF');
 
     let fractionId = user.get(player, 'family_id');
 
@@ -1731,7 +1731,7 @@ phone.fractionListF = function(player, showStats = false) {
                 }
             }
             catch (e) {
-                WixCore.Debug.Server(e);
+                WixCore.Function.Debug.Server(e);
             }
         });
 
@@ -1752,7 +1752,7 @@ phone.fractionListF = function(player, showStats = false) {
             phone.showMenu(player, 'family', `Список членов семьи | ${rows.length} чел.`, newItems.concat(items));
         }
         catch (e) {
-            WixCore.Debug.Server(e);
+            WixCore.Function.Debug.Server(e);
         }
     });
 };
@@ -1760,7 +1760,7 @@ phone.fractionListF = function(player, showStats = false) {
 phone.fractionVehicles = function(player) {
     if (!user.isLogin(player))
         return;
-    WixCore.Debug.Server('phone.fractionList');
+    WixCore.Function.Debug.Server('phone.fractionList');
 
     let fractionId = user.get(player, 'fraction_id');
 
@@ -1836,7 +1836,7 @@ phone.fractionVehicles = function(player) {
 phone.fractionVehicles2 = function(player) {
     if (!user.isLogin(player))
         return;
-    WixCore.Debug.Server('phone.fractionList');
+    WixCore.Function.Debug.Server('phone.fractionList');
 
     let fractionId = user.get(player, 'fraction_id2');
 
@@ -1899,7 +1899,7 @@ phone.fractionVehicles2 = function(player) {
 phone.fractionVehiclesBuyList = function(player) {
     if (!user.isLogin(player))
         return;
-    WixCore.Debug.Server('phone.fractionVehiclesBuyList');
+    WixCore.Function.Debug.Server('phone.fractionVehiclesBuyList');
     let fractionId = user.get(player, 'fraction_id');
 
     mysql.executeQuery(`SELECT * FROM cars_fraction WHERE fraction_id = '${fractionId}' AND is_buy = '0' ORDER BY name ASC, price ASC`, (err, rows, fields) => {
@@ -1948,7 +1948,7 @@ phone.fractionVehiclesBuyList = function(player) {
 phone.fractionVehiclesBuyList2 = function(player) {
     if (!user.isLogin(player))
         return;
-    WixCore.Debug.Server('phone.fractionVehiclesBuyList');
+    WixCore.Function.Debug.Server('phone.fractionVehiclesBuyList');
 
     mysql.executeQuery(`SELECT * FROM cars_fraction WHERE fraction_id = '0' AND is_buy = '0' ORDER BY name ASC, price ASC`, (err, rows, fields) => {
 
@@ -1996,7 +1996,7 @@ phone.fractionVehiclesBuyList2 = function(player) {
 phone.userAdList = function(player) {
     if (!user.isLogin(player))
         return;
-    WixCore.Debug.Server('phone.userAdList');
+    WixCore.Function.Debug.Server('phone.userAdList');
 
     mysql.executeQuery(`SELECT * FROM rp_inv_ad ORDER BY id DESC LIMIT 30`, (err, rows, fields) => {
 
@@ -2049,7 +2049,7 @@ phone.userAdList = function(player) {
 phone.userNewsList = function(player) {
     if (!user.isLogin(player))
         return;
-    WixCore.Debug.Server('phone.userAdList');
+    WixCore.Function.Debug.Server('phone.userAdList');
 
     mysql.executeQuery(`SELECT * FROM rp_inv_news ORDER BY id DESC LIMIT 30`, (err, rows, fields) => {
 
@@ -2093,7 +2093,7 @@ phone.userNewsList = function(player) {
 phone.bankHistory = function(player, bankCard) {
     if (!user.isLogin(player))
         return;
-    WixCore.Debug.Server('phone.bankHistory');
+    WixCore.Function.Debug.Server('phone.bankHistory');
 
     if (bankCard === undefined)
         bankCard = user.get(player, 'bank_card');
@@ -2131,7 +2131,7 @@ phone.bankHistory = function(player, bankCard) {
                     )
                 ]));
 
-                WixCore.Debug.Server(e);
+                WixCore.Function.Debug.Server(e);
             }
         }
         else {
@@ -2183,7 +2183,7 @@ phone.openInvaderStatsList = function(player, days = 30) {
                         )
                     ]));
 
-                    WixCore.Debug.Server(e);
+                    WixCore.Function.Debug.Server(e);
                 }
             }
             else {
@@ -2199,14 +2199,14 @@ phone.openInvaderStatsList = function(player, days = 30) {
         });
     }
     catch (e) {
-        WixCore.Debug.Server(e);
+        WixCore.Function.Debug.Server(e);
     }
 };
 
 phone.userHistory = function(player, id) {
     if (!user.isLogin(player))
         return;
-    WixCore.Debug.Server('phone.userHistory');
+    WixCore.Function.Debug.Server('phone.userHistory');
 
     if (id === undefined)
         id = user.get(player, 'id');
@@ -2242,7 +2242,7 @@ phone.userHistory = function(player, id) {
                     )
                 ]));
 
-                WixCore.Debug.Server(e);
+                WixCore.Function.Debug.Server(e);
             }
         }
         else {
@@ -2261,7 +2261,7 @@ phone.userHistory = function(player, id) {
 phone.userTickets = function(player, id) {
     if (!user.isLogin(player))
         return;
-    WixCore.Debug.Server('phone.userTickets');
+    WixCore.Function.Debug.Server('phone.userTickets');
 
     if (id === undefined)
         id = user.getId(player);
@@ -2300,7 +2300,7 @@ phone.userTickets = function(player, id) {
                     )
                 ]));
 
-                WixCore.Debug.Server(e);
+                WixCore.Function.Debug.Server(e);
             }
         }
         else {
@@ -2335,7 +2335,7 @@ phone.changeBg = function(player, str) {
                 }
             }
             catch (e) {
-                WixCore.Debug.Server(e);
+                WixCore.Function.Debug.Server(e);
             }
         });
     });
@@ -2344,7 +2344,7 @@ phone.changeBg = function(player, str) {
 phone.createFraction = function(player) {
     if (!user.isLogin(player))
         return;
-    WixCore.Debug.Server('phone.createFraction');
+    WixCore.Function.Debug.Server('phone.createFraction');
 
     mysql.executeQuery(`SELECT * FROM fraction_list WHERE owner_id = 0`, (err, rows, fields) => {
 
@@ -2381,7 +2381,7 @@ phone.createFraction = function(player) {
 phone.fractionAll = function(player) {
     if (!user.isLogin(player))
         return;
-    WixCore.Debug.Server('phone.fractionAll');
+    WixCore.Function.Debug.Server('phone.fractionAll');
 
     mysql.executeQuery(`SELECT * FROM fraction_list WHERE owner_id > 0`, (err, rows, fields) => {
 
@@ -2416,7 +2416,7 @@ phone.fractionAll = function(player) {
 phone.userVehicleAppMenu = function(player) {
     if (!user.isLogin(player))
         return;
-    WixCore.Debug.Server('phone.fractionVehiclesBuyList');
+    WixCore.Function.Debug.Server('phone.fractionVehiclesBuyList');
 
     mysql.executeQuery(`SELECT * FROM cars WHERE user_id = '${user.getId(player)}' ORDER BY name ASC`, (err, rows, fields) => {
 
@@ -2510,7 +2510,7 @@ phone.userVehicleAppMenu = function(player) {
 phone.fractionVehicleBuyInfo = function(player, id) {
     if (!user.isLogin(player))
         return;
-    WixCore.Debug.Server('phone.fractionVehicleBuyInfo');
+    WixCore.Function.Debug.Server('phone.fractionVehicleBuyInfo');
 
     mysql.executeQuery(`SELECT * FROM cars_fraction WHERE id = '${id}'`, (err, rows, fields) => {
         let items = [];
@@ -2568,7 +2568,7 @@ phone.fractionVehicleBuyInfo = function(player, id) {
 phone.fractionVehicleBuyInfo2 = function(player, id) {
     if (!user.isLogin(player))
         return;
-    WixCore.Debug.Server('phone.fractionVehicleBuyInfo');
+    WixCore.Function.Debug.Server('phone.fractionVehicleBuyInfo');
 
     mysql.executeQuery(`SELECT * FROM cars_fraction WHERE id = '${id}'`, (err, rows, fields) => {
         let items = [];
@@ -2653,7 +2653,7 @@ phone.updateContactList = function(player) {
         });
     }
     catch (e) {
-        WixCore.Debug.Server(e);
+        WixCore.Function.Debug.Server(e);
     }
 };
 
@@ -2706,7 +2706,7 @@ phone.updateDialogList = function(player) {
         });
     }
     catch (e) {
-        WixCore.Debug.Server(e);
+        WixCore.Function.Debug.Server(e);
     }
 };
 
@@ -2775,14 +2775,14 @@ phone.sendMessageByNumber = function(numberFrom, phoneNumber, message) {
         });
     }
     catch (e) {
-        WixCore.Debug.Server(e);
+        WixCore.Function.Debug.Server(e);
     }
 };
 
 phone.showMenu = function(player, uuid, title, items) {
     if (!user.isLogin(player))
         return;
-    WixCore.Debug.Server('phone.showMenu');
+    WixCore.Function.Debug.Server('phone.showMenu');
 
     let menu = {
         UUID: uuid,

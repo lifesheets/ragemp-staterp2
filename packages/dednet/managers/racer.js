@@ -6363,7 +6363,7 @@ racer.finish = function (player) {
             user.save(player);
         }
         catch (e) {
-            WixCore.Debug.Server(e);
+            WixCore.Function.Debug.Server(e);
         }
     }
 };
@@ -6495,7 +6495,7 @@ racer.startRace = function () {
                                 vSync.setAnchorState(veh, false);
                             }
                             catch (e) {
-                                WixCore.Debug.Server(e);
+                                WixCore.Function.Debug.Server(e);
                             }
 
                             if (user.isLogin(p))

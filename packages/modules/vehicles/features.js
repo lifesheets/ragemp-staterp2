@@ -2,7 +2,7 @@
 
 module.exports = {
     init: async function () {
-        var list = await WixCore.MySQL.Models.VehicleFeature.findAll({
+        var list = await WixCore.Library.MySQL.Models.VehicleFeature.findAll({
             attributes: ['id', 'display_name', 'class_name', 'class_name_ru', 'hash', 'stock', 'stock_full', 'fuel_full', 'fuel_min', 'fuel_type', 'type', 'price', 'sb', 'sm'],
             order: [['id', 'DESC'], ['display_name', 'ASC']],
         })

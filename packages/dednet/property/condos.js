@@ -19,7 +19,7 @@ let count = 0;
 let condoOffset = enums.offsets.condoBig - enums.offsets.condo;
 
 condos.loadAll = function() {
-    WixCore.Debug.Server('condos.loadAll');
+    WixCore.Function.Debug.Server('condos.loadAll');
 
     mysql.executeQuery(`SELECT * FROM condos`, function (err, rows, fields) {
         rows.forEach(function(item) {
@@ -55,12 +55,12 @@ condos.loadAll = function() {
             }
         });
         count = rows.length;
-        WixCore.Debug.Server('All Condos Loaded: ' + count);
+        WixCore.Function.Debug.Server('All Condos Loaded: ' + count);
     });
 };
 
 condos.loadBigAll = function() {
-    WixCore.Debug.Server('condos.loadLast');
+    WixCore.Function.Debug.Server('condos.loadLast');
 
     mysql.executeQuery(`SELECT * FROM condos_big`, function (err, rows, fields) {
 
@@ -77,12 +77,12 @@ condos.loadBigAll = function() {
             methods.createBlip(new mp.Vector3(parseFloat(item['x']), parseFloat(item['y']), parseFloat(item['z'])), 40, 0, 0.4);
         });
         count = rows.length;
-        WixCore.Debug.Server('All Condos Big Loaded: ' + count);
+        WixCore.Function.Debug.Server('All Condos Big Loaded: ' + count);
     });
 };
 
 condos.loadLast = function() {
-    WixCore.Debug.Server('condos.loadLast');
+    WixCore.Function.Debug.Server('condos.loadLast');
 
     mysql.executeQuery(`SELECT * FROM condos ORDER BY id DESC LIMIT 1`, function (err, rows, fields) {
 
@@ -128,12 +128,12 @@ condos.loadLast = function() {
             });
         });
         count = rows.length;
-        WixCore.Debug.Server(`Last Condo Loaded`);
+        WixCore.Function.Debug.Server(`Last Condo Loaded`);
     });
 };
 
 condos.loadBigLast = function() {
-    WixCore.Debug.Server('condos.loadLast');
+    WixCore.Function.Debug.Server('condos.loadLast');
 
     mysql.executeQuery(`SELECT * FROM condos_big ORDER BY id DESC LIMIT 1`, function (err, rows, fields) {
 
@@ -152,19 +152,19 @@ condos.loadBigLast = function() {
             chat.sendToAll(`Квартира загружена. ID: ${item['id']}. Name: ${item['number']}`);
         });
         count = rows.length;
-        WixCore.Debug.Server(`Last Condo Big Loaded`);
+        WixCore.Function.Debug.Server(`Last Condo Big Loaded`);
     });
 };
 
 condos.insert = function(player, number, numberBig, street, zone, x, y, z, rot, interior, price) {
-    WixCore.Debug.Server('condos.insert');
+    WixCore.Function.Debug.Server('condos.insert');
 
     mysql.executeQuery(`INSERT INTO condos (number, condo_big_id, street, address, rot, x, y, z, interior, price) VALUES ('${number}', '${numberBig}', '${street}', '${zone}', '${rot}', '${x}', '${y}', '${z - 1}', '${interior}', '${price}')`);
     setTimeout(condos.loadLast, 1000);
 };
 
 condos.insertBig = function(player, number, street, zone, x, y, z) {
-    WixCore.Debug.Server('condos.insert');
+    WixCore.Function.Debug.Server('condos.insert');
 
     mysql.executeQuery(`INSERT INTO condos_big (number, street, address, x, y, z) VALUES ('${number}', '${street}', '${zone}', '${x}', '${y}', '${z - 1}')`);
     setTimeout(condos.loadBigLast, 1000);
@@ -190,12 +190,12 @@ condos.getCountLiveUser = function(id, cb) {
 };
 
 condos.getAll = function() {
-    WixCore.Debug.Server('condos.getAll');
+    WixCore.Function.Debug.Server('condos.getAll');
     return hBlips;
 };
 
 condos.updateOwnerInfo = function (id, userId, userName) {
-    WixCore.Debug.Server('condos.updateOwnerInfo');
+    WixCore.Function.Debug.Server('condos.updateOwnerInfo');
     id = methods.parseInt(id);
     userId = methods.parseInt(userId);
 
@@ -214,7 +214,7 @@ condos.updateOwnerInfo = function (id, userId, userName) {
 };
 
 condos.updatePin = function (id, pin) {
-    WixCore.Debug.Server('condos.updatePin');
+    WixCore.Function.Debug.Server('condos.updatePin');
     id = methods.parseInt(id);
     pin = methods.parseInt(pin);
     condos.set(id, 'pin', pin);
@@ -222,7 +222,7 @@ condos.updatePin = function (id, pin) {
 };
 
 condos.updateSafe = function (id, pin, isLoad = false) {
-    WixCore.Debug.Server('condos.updateSafe');
+    WixCore.Function.Debug.Server('condos.updateSafe');
 
     pin = methods.parseInt(pin);
 
@@ -269,14 +269,14 @@ condos.updateSafe = function (id, pin, isLoad = false) {
 };
 
 condos.lockStatus = function (id, lockStatus) {
-    WixCore.Debug.Server('condos.lockStatus');
+    WixCore.Function.Debug.Server('condos.lockStatus');
     id = methods.parseInt(id);
     condos.set(id, 'is_lock', lockStatus);
     mysql.executeQuery("UPDATE condos SET is_lock = '" + methods.boolToInt(lockStatus) + "' where id = '" + id + "'");
 };
 
 condos.sell = function (player) {
-    WixCore.Debug.Server('condos.sell');
+    WixCore.Function.Debug.Server('condos.sell');
     if (!user.isLogin(player))
         return;
 
@@ -308,7 +308,7 @@ condos.sell = function (player) {
 };
 
 condos.buy = function (player, id) {
-    WixCore.Debug.Server('condos.buy');
+    WixCore.Function.Debug.Server('condos.buy');
 
     if (!user.isLogin(player))
         return;
@@ -344,7 +344,7 @@ condos.buy = function (player, id) {
 };
 
 condos.enter = function (player, id) {
-    WixCore.Debug.Server('condos.enter', id);
+    WixCore.Function.Debug.Server('condos.enter', id);
 
     if (!user.isLogin(player))
         return;

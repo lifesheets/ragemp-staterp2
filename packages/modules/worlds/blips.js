@@ -3,7 +3,7 @@
 let blips = exports;
 
 blips.init = async function () {
-    var list = await WixCore.MySQL.Models.WorldBlip.findAll();
+    var list = await WixCore.Library.MySQL.Models.WorldBlip.findAll();
     list.forEach(arg => {
         var position = new mp.Vector3(arg.position.x, arg.position.y, arg.position.z);
         mp.blips.new(arg.type, position,

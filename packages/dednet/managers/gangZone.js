@@ -167,7 +167,7 @@ let zoneSpawnList = [
 ];
 
 gangZone.loadAll = function() {
-    WixCore.Debug.Server('gangZone.loadAll');
+    WixCore.Function.Debug.Server('gangZone.loadAll');
     gangZone.generateLobby();
 };
 
@@ -187,7 +187,7 @@ gangZone.currentLobby = function() {
 };
 
 gangZone.generateLobby = function() {
-    WixCore.Debug.Server('gangZone.generateLobby');
+    WixCore.Function.Debug.Server('gangZone.generateLobby');
     currentZone = methods.getRandomInt(0, zoneSpawnList.length);
     currentWeapon = weaponList[methods.getRandomInt(0, weaponList.length)];
 
@@ -210,7 +210,7 @@ gangZone.generateLobby = function() {
 };
 
 gangZone.playerToLobby = function(player) {
-    WixCore.Debug.Server('gangZone.playerToLobby');
+    WixCore.Function.Debug.Server('gangZone.playerToLobby');
     if (user.isLogin(player)) {
         if (user.hasById(user.getId(player), 'uniform')) {
             player.notify('~r~В форме запрещено учавствовать в GangZone');
@@ -242,7 +242,7 @@ gangZone.playerToLobby = function(player) {
 };
 
 gangZone.playerExitLobby = function(player) {
-    WixCore.Debug.Server('gangZone.playerToLobby');
+    WixCore.Function.Debug.Server('gangZone.playerToLobby');
     if (user.isLogin(player)) {
         user.blockKeys(player, false);
 
@@ -324,7 +324,7 @@ mp.events.add("playerDeath", (player, reason, killer) => {
                 });
             }
         } catch (e) {
-            WixCore.Debug.Server(e);
+            WixCore.Function.Debug.Server(e);
         }
     }
 });

@@ -1493,7 +1493,7 @@ trucker.generateOffer = function (type) {
         }
     }
     catch (e) {
-        WixCore.Debug.Server(e);
+        WixCore.Function.Debug.Server(e);
     }
 };
 
@@ -1546,7 +1546,7 @@ trucker.addOffer = function (type, price, name, x, y, z, tr = 'trailers4') {
         count++;
     }
     catch (e) {
-        WixCore.Debug.Server(e);
+        WixCore.Function.Debug.Server(e);
     }
 };
 
@@ -1580,7 +1580,7 @@ trucker.acceptOffer = function (player, offerId) {
         //trucker.removeOffer(offerId);
     }
     catch (e) {
-        WixCore.Debug.Server(e);
+        WixCore.Function.Debug.Server(e);
     }
 };
 
@@ -1808,7 +1808,7 @@ trucker.trySpawnTrailer = function (player, offerId) {
 };
 
 trucker.notify = function(player, text, title = 'Информация') {
-    WixCore.Debug.Server('trucker.notify');
+    WixCore.Function.Debug.Server('trucker.notify');
     if (!user.isLogin(player))
         return;
     player.notifyWithPicture(title, 'Грузоперевозки', text, 'DIA_DRIVER', 2);
@@ -1876,7 +1876,7 @@ trucker.generateOfferStart = function (count = 10) {
             trucker.generateOffer(5);
     }
     catch (e) {
-        WixCore.Debug.Server(e);
+        WixCore.Function.Debug.Server(e);
     }
 };
 
@@ -1886,12 +1886,12 @@ trucker.generateOfferByType = function (count = 10, type) {
             trucker.generateOffer(type);
     }
     catch (e) {
-        WixCore.Debug.Server(e);
+        WixCore.Function.Debug.Server(e);
     }
 };
 
 trucker.loadAll = function () {
-    WixCore.Debug.Server('trucker.loadAll');
+    WixCore.Function.Debug.Server('trucker.loadAll');
     trucker.generateOfferStart(50);
 
     trucker.w1.forEach(item => {
@@ -1920,12 +1920,12 @@ trucker.loadAll = function () {
 };
 
 trucker.poolChecker = function () {
-    WixCore.Debug.Server('trucker.poolChecker');
+    WixCore.Function.Debug.Server('trucker.poolChecker');
     trucker.generateOfferStart(20);
 };
 
 trucker.poolCleaner = function () {
-    WixCore.Debug.Server('trucker.poolCleaner');
+    WixCore.Function.Debug.Server('trucker.poolCleaner');
     /*trucker.offersPool1 = [];
     trucker.offersPool2 = [];
     trucker.offersPool3 = [];*/
@@ -1935,7 +1935,7 @@ trucker.poolCleaner = function () {
             return trucker.has('accept' + item[0]);
         }
         catch (e) {
-            WixCore.Debug.Server(e);
+            WixCore.Function.Debug.Server(e);
             return false;
         }
     });
@@ -1944,7 +1944,7 @@ trucker.poolCleaner = function () {
             return trucker.has('accept' + item[0]);
         }
         catch (e) {
-            WixCore.Debug.Server(e);
+            WixCore.Function.Debug.Server(e);
             return false;
         }
     });
@@ -1953,7 +1953,7 @@ trucker.poolCleaner = function () {
             return trucker.has('accept' + item[0]);
         }
         catch (e) {
-            WixCore.Debug.Server(e);
+            WixCore.Function.Debug.Server(e);
             return false;
         }
     });
@@ -1962,7 +1962,7 @@ trucker.poolCleaner = function () {
             return trucker.has('accept' + item[0]);
         }
         catch (e) {
-            WixCore.Debug.Server(e);
+            WixCore.Function.Debug.Server(e);
             return false;
         }
     });
@@ -1971,7 +1971,7 @@ trucker.poolCleaner = function () {
             return trucker.has('accept' + item[0]);
         }
         catch (e) {
-            WixCore.Debug.Server(e);
+            WixCore.Function.Debug.Server(e);
             return false;
         }
     });
@@ -1982,7 +1982,7 @@ trucker.poolCleaner = function () {
 trucker.showMenu = function(player, offersId) {
     if (!user.isLogin(player))
         return;
-    WixCore.Debug.Server('trucker.showMenu', offersId);
+    WixCore.Function.Debug.Server('trucker.showMenu', offersId);
     switch (offersId) {
         case 0:
 
@@ -2082,7 +2082,7 @@ trucker.has = function(key) {
     try {
         return Container.Data.Has(truckerContainer, truckerContainerPrefix + key);
     } catch (e) {
-        WixCore.Debug.Server(e);
+        WixCore.Function.Debug.Server(e);
     }
     return false;
 };
@@ -2091,7 +2091,7 @@ trucker.get = function(key) {
     try {
         return Container.Data.Get(truckerContainer, truckerContainerPrefix + key);
     } catch (e) {
-        WixCore.Debug.Server(e);
+        WixCore.Function.Debug.Server(e);
     }
     return null;
 };

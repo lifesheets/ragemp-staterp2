@@ -3,7 +3,7 @@
 module.exports = {
     sequelize: null,
     Models: {},
-    connect: function () {
+    Connect: function () {
         this.sequelize = new Sequelize(process.env.dbname, process.env.dbuser, process.env.dbpass, {
             host: process.env.dbhost,
             dialect: 'mysql',

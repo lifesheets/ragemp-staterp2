@@ -25,7 +25,7 @@ gun.list = [
 ];
 
 gun.loadAll = function() {
-    WixCore.Debug.Server('gun.loadAll');
+    WixCore.Function.Debug.Server('gun.loadAll');
     gun.list.forEach(function (item) {
         let shopPos = new mp.Vector3(item[0], item[1], item[2] - 1);
         methods.createBlip(shopPos, 110, 0, 0.8);
@@ -34,7 +34,7 @@ gun.loadAll = function() {
 };
 
 gun.getInRadius = function(pos, radius = 2) {
-    WixCore.Debug.Server('gun.getInRadius');
+    WixCore.Function.Debug.Server('gun.getInRadius');
     let shopId = -1;
     gun.list.forEach(function (item, idx) {
         let shopPos = new mp.Vector3(item[0], item[1], item[2]);
@@ -45,7 +45,7 @@ gun.getInRadius = function(pos, radius = 2) {
 };
 
 gun.checkPosForOpenMenu = function(player) {
-    WixCore.Debug.Server('gun.checkPosForOpenMenu');
+    WixCore.Function.Debug.Server('gun.checkPosForOpenMenu');
     try {
         let playerPos = player.position;
         let shopId = gun.getInRadius(playerPos, 2);
@@ -58,12 +58,12 @@ gun.checkPosForOpenMenu = function(player) {
         player.call('client:menuList:showGunShopMenu', [shopId, business.getPrice(shopId)]);
     }
     catch (e) {
-        WixCore.Debug.Server(e);
+        WixCore.Function.Debug.Server(e);
     }
 };
 
 gun.findNearest = function(pos) {
-    WixCore.Debug.Server('gun.findNearest');
+    WixCore.Function.Debug.Server('gun.findNearest');
     let prevPos = new mp.Vector3(9999, 9999, 9999);
     gun.list.forEach(function (item,) {
         let shopPos = new mp.Vector3(item[0], item[1], item[2]);
@@ -74,7 +74,7 @@ gun.findNearest = function(pos) {
 };
 
 gun.buy = function(player, itemId, price, count, superTint, tint, shopId, payType) {
-    WixCore.Debug.Server('gun.buy');
+    WixCore.Function.Debug.Server('gun.buy');
 
     if (!user.isLogin(player))
         return;

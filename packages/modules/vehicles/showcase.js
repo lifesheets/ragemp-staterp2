@@ -6,7 +6,7 @@ let vehicles = require('../../dednet/property/vehicles');
 
 module.exports = {
     init: async function () {
-        var list = await WixCore.MySQL.Models.VehicleShowCase.findAll();
+        var list = await WixCore.Library.MySQL.Models.VehicleShowCase.findAll();
         if (list === null) {
             return;
         }

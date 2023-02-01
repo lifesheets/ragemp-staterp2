@@ -190,7 +190,7 @@ chat.sendToFamily = function(player, sender, text, color = '#009688') {
 
 chat.getTime = function() {
     let dateTime = new Date();
-    return `${WixCore.Function.DigitFormat(dateTime.getHours())}:${WixCore.Function.DigitFormat(dateTime.getMinutes())}:${WixCore.Function.DigitFormat(dateTime.getSeconds())}`;
+    return `${WixCore.Function.DataTime.DigitFormat(dateTime.getHours())}:${WixCore.Function.DataTime.DigitFormat(dateTime.getMinutes())}:${WixCore.Function.DataTime.DigitFormat(dateTime.getSeconds())}`;
 };
 
 mp.events.add("server:chat:sendBCommand", function (player, text) {
@@ -400,6 +400,6 @@ mp.events.add('playerCommand', (player, command) => {
         }
     }
     catch (e) {
-        WixCore.Debug.Server(e);
+        WixCore.Function.Debug.Server(e);
     }
 });

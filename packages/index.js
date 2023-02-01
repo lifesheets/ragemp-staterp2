@@ -1,12 +1,55 @@
 "use strict"; // Created by ua.lifesheets on 29.01.2023
+require('dotenv').config();
 
-(async () => {
-    await require('./wixcore')();
-    await require('./wixcore/events');
-    await require('./wixcore/modules');
-})();
+//#region Global
+global.fs = require('fs');
+global.path = require('path');
+global.Sequelize = require('sequelize');
+global.Op = Sequelize.Op;
+global.WixCore = {};
+//#endregion
 
-require('./modules/worlds/events');
+//#region Config
+WixCore.Config = {}
+//#endregion
+
+//#region Array
+WixCore.Array = {}
+WixCore.Array.Vehicles = {}
+WixCore.Array.Vehicles.Features = []
+//#endregion
+
+//#region Libraries
+WixCore.Library = {}
+WixCore.Library.MySQL = require('./libraries/sequelize');
+WixCore.Library.MySQL.Connect();
+//#endregion
+
+//#region Function
+WixCore.Function = {}
+WixCore.Function.DataTime = require('./functions/datatime');
+WixCore.Function.SaveFile = require('./functions/savefile');
+WixCore.Function.Debug = require('./functions/debug');
+//#endregion
+
+//#region Commands
+WixCore.Commands = {}
+//#endregion
+
+//#region Player
+WixCore.Player = {}
+//#endregion
+
+//#region Modules
+require('./modules/vehicles');
+require('./modules/worlds');
+//#endregion
+
+//#region events
+require('./events/debug');
+//#endregion
+
+/* Все что ниже, под удаления ..........................*/
 require('./dednet/modules/cli');
 require('./dednet/modules/data');
 require('./dednet/modules/events');
@@ -65,7 +108,7 @@ let enums = require('./dednet/enums');
 
 function init() {
     try {
-        WixCore.Debug.Server('INIT GAMEMODE');
+        WixCore.Function.Debug.Server('INIT GAMEMODE');
 
         mysql.executeQuery('UPDATE users SET is_online=\'0\', st_order_atm_d=\'0\', st_order_drug_d=\'0\', st_order_lamar_d=\'0\' WHERE 1');
 
@@ -139,7 +182,7 @@ function init() {
         }, 10000);
     }
     catch (e) {
-        WixCore.Debug.Server('ERROR INIT', e);
+        WixCore.Function.Debug.Server('ERROR INIT', e);
     }
 }
 

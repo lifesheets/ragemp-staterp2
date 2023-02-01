@@ -70,13 +70,13 @@ methods.saveAllAnother = async function () {
                 await vehicles.save(v.getVariable('container'));
             }
             catch (e) {
-                WixCore.Debug.Server(e);
+                WixCore.Function.Debug.Server(e);
             }
         }
     });
     console.timeEnd('saveVehicle');
 
-    WixCore.Debug.Server('Save All Another');
+    WixCore.Function.Debug.Server('Save All Another');
 };
 
 methods.saveAllUser = async function () {
@@ -89,16 +89,16 @@ methods.saveAllUser = async function () {
                 if (!isSave) {
                     p.notify('~r~Ошибка сохранения аккаунта, сообщите разработчикам');
                     p.notify('~r~Обязательно запомните время');
-                    WixCore.Debug.Server(`SAVE ERROR: ${user.get(p, 'id')} | ${user.has(p, 'id')} | ${methods.getTimeStamp()}`)
+                    WixCore.Function.Debug.Server(`SAVE ERROR: ${user.get(p, 'id')} | ${user.has(p, 'id')} | ${methods.getTimeStamp()}`)
                 }
             }
             catch (e) {
-                WixCore.Debug.Server(e);
+                WixCore.Function.Debug.Server(e);
             }
         }
     });
     console.timeEnd('saveAllUser');
-    WixCore.Debug.Server('Save All User');
+    WixCore.Function.Debug.Server('Save All User');
 };
 
 methods.checkTeleport = function(player, pos1, pos2) {
@@ -111,7 +111,7 @@ methods.checkTeleport = function(player, pos1, pos2) {
             user.teleport(player, pos1.x, pos1.y, pos1.z + 1);
     }
     catch (e) {
-        WixCore.Debug.Server(e);
+        WixCore.Function.Debug.Server(e);
     }
 };
 
@@ -125,7 +125,7 @@ methods.checkTeleportVeh = function(player, pos1, pos2) {
             user.teleportVeh(player, pos1.x, pos1.y, pos1.z);
     }
     catch (e) {
-        WixCore.Debug.Server(e);
+        WixCore.Function.Debug.Server(e);
     }
 };
 
@@ -219,21 +219,21 @@ methods.getRandomPlayer = function () {
 
 methods.unixTimeStampToDateTime = function (timestamp) {
     let dateTime = new Date(timestamp * 1000);
-    return `${WixCore.Function.DigitFormat(dateTime.getHours())}:${WixCore.Function.DigitFormat(dateTime.getMinutes())} ${WixCore.Function.DigitFormat(dateTime.getDate())}/${WixCore.Function.DigitFormat(dateTime.getMonth()+1)}/${dateTime.getFullYear()}`
+    return `${WixCore.Function.DataTime.DigitFormat(dateTime.getHours())}:${WixCore.Function.DataTime.DigitFormat(dateTime.getMinutes())} ${WixCore.Function.DataTime.DigitFormat(dateTime.getDate())}/${WixCore.Function.DataTime.DigitFormat(dateTime.getMonth()+1)}/${dateTime.getFullYear()}`
 };
 
 methods.unixTimeStampToDateTimeShort = function (timestamp) {
     let dateTime = new Date(timestamp * 1000);
-    return `${WixCore.Function.DigitFormat(dateTime.getHours())}:${WixCore.Function.DigitFormat(dateTime.getMinutes())} ${WixCore.Function.DigitFormat(dateTime.getDate())}/${WixCore.Function.DigitFormat(dateTime.getMonth()+1)}`
+    return `${WixCore.Function.DataTime.DigitFormat(dateTime.getHours())}:${WixCore.Function.DataTime.DigitFormat(dateTime.getMinutes())} ${WixCore.Function.DataTime.DigitFormat(dateTime.getDate())}/${WixCore.Function.DataTime.DigitFormat(dateTime.getMonth()+1)}`
 };
 
 methods.unixTimeStampToDate = function (timestamp) {
     let dateTime = new Date(timestamp * 1000);
-    return `${WixCore.Function.DigitFormat(dateTime.getDate())}/${WixCore.Function.DigitFormat(dateTime.getMonth()+1)}/${dateTime.getFullYear()}`
+    return `${WixCore.Function.DataTime.DigitFormat(dateTime.getDate())}/${WixCore.Function.DataTime.DigitFormat(dateTime.getMonth()+1)}/${dateTime.getFullYear()}`
 };
 
 // DELETED
-// WixCore.Function.DigitFormat = function(number) {
+// WixCore.Function.DataTime.DigitFormat = function(number) {
 //     return ("0" + number).slice(-2);
 // };
 
@@ -290,12 +290,12 @@ methods.getTimeStampFull = function () {
 
 methods.getTimeWithoutSec = function() {
     let dateTime = new Date();
-    return `${WixCore.Function.DigitFormat(dateTime.getHours())}:${WixCore.Function.DigitFormat(dateTime.getMinutes())}`;
+    return `${WixCore.Function.DataTime.DigitFormat(dateTime.getHours())}:${WixCore.Function.DataTime.DigitFormat(dateTime.getMinutes())}`;
 };
 
 methods.getDate = function() {
     let dateTime = new Date();
-    return `${WixCore.Function.DigitFormat(dateTime.getDate())}/${WixCore.Function.DigitFormat(dateTime.getMonth() + 1)}/${WixCore.Function.DigitFormat(dateTime.getFullYear())}`;
+    return `${WixCore.Function.DataTime.DigitFormat(dateTime.getDate())}/${WixCore.Function.DataTime.DigitFormat(dateTime.getMonth() + 1)}/${WixCore.Function.DataTime.DigitFormat(dateTime.getFullYear())}`;
 };
 
 methods.daysInMonth = function (month, year) {
@@ -378,7 +378,7 @@ methods.replaceAllGtaSymb = function(str) {
 methods.error = function (message, ...args) {
     try {
         message = 'OMG! EXCEPTION: ' + message;
-        WixCore.Debug.Server(message, args);
+        WixCore.Function.Debug.Server(message, args);
     } catch (e) {
     }
 };
@@ -389,7 +389,7 @@ methods.isValidJSON = function(value){
         return true;
     }
     catch (error){
-        WixCore.Debug.Server(`Invalid JSON string\n${error}`);
+        WixCore.Function.Debug.Server(`Invalid JSON string\n${error}`);
         return false;
     }
 };
@@ -543,7 +543,7 @@ methods.openObject = function(x, y, z, isClose, radius = 10) {
         });
     }
     catch (e) {
-        WixCore.Debug.Server(e);
+        WixCore.Function.Debug.Server(e);
     }
 };
 
@@ -564,7 +564,7 @@ methods.saveFile = function (name, log) {
     fs.appendFile("" + name + ".log", `${log}\n`, function (err) {
         if(err) {
             methods.createFile(name);
-            return WixCore.Debug.Server(err);
+            return WixCore.Function.Debug.Server(err);
         }
     });
 };
@@ -574,12 +574,12 @@ methods.createFile = function (filename) {
         if (err) {
             fs.writeFile(filename, '', function(err) {
                 if(err)
-                    WixCore.Debug.Server(err);
+                    WixCore.Function.Debug.Server(err);
                 else
-                    WixCore.Debug.Server("The file was saved!");
+                    WixCore.Function.Debug.Server("The file was saved!");
             });
         } else {
-            WixCore.Debug.Server("The file exists!");
+            WixCore.Function.Debug.Server("The file exists!");
         }
     });
 };
@@ -635,7 +635,7 @@ methods.updateCheckpointList = function (player) {
             player.call('client:updateCheckpointList', [methods.getCheckPointStaticList().slice(i * 500, i * 500 + 499)]);
     }
     catch (e) {
-        WixCore.Debug.Server(e);
+        WixCore.Function.Debug.Server(e);
     }
 };
 
@@ -807,7 +807,7 @@ methods.getFractionName = function(fractionId) {
         return enums.fractionListId[fractionId].fractionNameShort;
     }
     catch (e) {
-        WixCore.Debug.Server(e);
+        WixCore.Function.Debug.Server(e);
     }
     return 'Отсуствует';
 };
@@ -817,7 +817,7 @@ methods.getFractionNameL = function(fractionId) {
         return enums.fractionListId[fractionId].fractionName;
     }
     catch (e) {
-        WixCore.Debug.Server(e);
+        WixCore.Function.Debug.Server(e);
     }
     return 'Отсуствует';
 };
@@ -827,7 +827,7 @@ methods.getDepartmentName = function(fractionId, depId) {
         return enums.fractionListId[fractionId].departmentList[depId];
     }
     catch (e) {
-        WixCore.Debug.Server(e);
+        WixCore.Function.Debug.Server(e);
     }
     return 'Отсуствует';
 };
@@ -837,7 +837,7 @@ methods.getRankName = function(fractionId, depId, rankId) {
         return enums.fractionListId[fractionId].rankList[depId][rankId];
     }
     catch (e) {
-        WixCore.Debug.Server(e);
+        WixCore.Function.Debug.Server(e);
     }
     return 'Отсуствует';
 };
@@ -847,7 +847,7 @@ methods.getFractionHash = function(fractionId) {
         return enums.fractionListId[fractionId].hash;
     }
     catch (e) {
-        WixCore.Debug.Server(e);
+        WixCore.Function.Debug.Server(e);
     }
     return 'none';
 };

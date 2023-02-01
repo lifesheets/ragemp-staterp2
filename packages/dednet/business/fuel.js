@@ -42,7 +42,7 @@ fuel.list = [
 //1339433404
 
 fuel.loadAll = function() {
-    WixCore.Debug.Server('fuel.loadAll');
+    WixCore.Function.Debug.Server('fuel.loadAll');
     fuel.list.forEach(function (item) {
         let shopPos = new mp.Vector3(item[0], item[1], item[2]);
         if (item[3] === 147 || item[3] === 148 || item[3] === 149 || item[3] === 150)
@@ -55,7 +55,7 @@ fuel.loadAll = function() {
 };
 
 fuel.getInRadius = function(pos, radius = 2) {
-    WixCore.Debug.Server('fuel.fuel');
+    WixCore.Function.Debug.Server('fuel.fuel');
     let shopId = -1;
     fuel.list.forEach(function (item, idx) {
         let shopPos = new mp.Vector3(item[0], item[1], item[2]);
@@ -66,7 +66,7 @@ fuel.getInRadius = function(pos, radius = 2) {
 };
 
 fuel.findNearest = function(pos) {
-    WixCore.Debug.Server('fuel.findNearest');
+    WixCore.Function.Debug.Server('fuel.findNearest');
     let prevPos = new mp.Vector3(9999, 9999, 9999);
     fuel.list.forEach(function (item) {
         let shopPos = new mp.Vector3(item[0], item[1], item[2]);

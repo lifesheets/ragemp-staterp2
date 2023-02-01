@@ -118,7 +118,7 @@ let mapBeach = new Map();
 let mapBlack = new Map();
 
 tradeMarket.loadAll = function() {
-    WixCore.Debug.Server('tradeMarket.loadAll');
+    WixCore.Function.Debug.Server('tradeMarket.loadAll');
     tradeMarket.listBeach.forEach(function (item, idx) {
         let shopPos = new mp.Vector3(item[0], item[1], item[2]);
         let tradePos = new mp.Vector3(item[3], item[4], item[5]);
@@ -202,17 +202,17 @@ tradeMarket.getAllBlackData = function(id) {
 };
 
 tradeMarket.getAllBlack = function() {
-    WixCore.Debug.Server('tradeMarket.getAllBlack');
+    WixCore.Function.Debug.Server('tradeMarket.getAllBlack');
     return mapBlack;
 };
 
 tradeMarket.getAllBeach = function() {
-    WixCore.Debug.Server('tradeMarket.getAllBeach');
+    WixCore.Function.Debug.Server('tradeMarket.getAllBeach');
     return mapBeach;
 };
 
 tradeMarket.getBeachInRadius = function(pos, radius = 2) {
-    WixCore.Debug.Server('tradeMarket.getBeachInRadius');
+    WixCore.Function.Debug.Server('tradeMarket.getBeachInRadius');
     let shopId = -1;
     tradeMarket.listBeach.forEach(function (item, idx) {
         let shopPos = new mp.Vector3(item[0], item[1], item[2]);
@@ -223,7 +223,7 @@ tradeMarket.getBeachInRadius = function(pos, radius = 2) {
 };
 
 tradeMarket.getBeachBuyInRadius = function(pos, radius = 2) {
-    WixCore.Debug.Server('tradeMarket.getBeachBuyInRadius');
+    WixCore.Function.Debug.Server('tradeMarket.getBeachBuyInRadius');
     let shopId = -1;
     tradeMarket.listBeach.forEach(function (item, idx) {
         let shopPos = new mp.Vector3(item[3], item[4], item[5]);
@@ -234,7 +234,7 @@ tradeMarket.getBeachBuyInRadius = function(pos, radius = 2) {
 };
 
 tradeMarket.getBlackInRadius = function(pos, radius = 2) {
-    WixCore.Debug.Server('tradeMarket.getBlackInRadius');
+    WixCore.Function.Debug.Server('tradeMarket.getBlackInRadius');
     let shopId = -1;
     tradeMarket.listBlack.forEach(function (item, idx) {
         let shopPos = new mp.Vector3(item[0], item[1], item[2]);
@@ -245,7 +245,7 @@ tradeMarket.getBlackInRadius = function(pos, radius = 2) {
 };
 
 tradeMarket.getBlackBuyInRadius = function(pos, radius = 2) {
-    WixCore.Debug.Server('tradeMarket.getBlackBuyInRadius');
+    WixCore.Function.Debug.Server('tradeMarket.getBlackBuyInRadius');
     let shopId = -1;
     tradeMarket.listBlack.forEach(function (item, idx) {
         let shopPos = new mp.Vector3(item[3], item[4], item[5]);
@@ -264,7 +264,7 @@ tradeMarket.checkPosForOpenMenu = function(player) {
 };
 
 tradeMarket.checkPosForOpenBeachCreateMenu = function(player) {
-    WixCore.Debug.Server('tradeMarket.checkPosForOpenBeachCreateMenu');
+    WixCore.Function.Debug.Server('tradeMarket.checkPosForOpenBeachCreateMenu');
     try {
         let shopId = tradeMarket.getBeachInRadius(player.position, 2);
         if (shopId == -1)
@@ -272,12 +272,12 @@ tradeMarket.checkPosForOpenBeachCreateMenu = function(player) {
         player.call('client:menuList:showTradeBeachCreateMenu', [shopId]);
     }
     catch (e) {
-        WixCore.Debug.Server(e);
+        WixCore.Function.Debug.Server(e);
     }
 };
 
 tradeMarket.checkPosForOpenBeachBuyMenu = function(player) {
-    WixCore.Debug.Server('tradeMarket.checkPosForOpenBeachBuyMenu');
+    WixCore.Function.Debug.Server('tradeMarket.checkPosForOpenBeachBuyMenu');
     try {
         let shopId = tradeMarket.getBeachBuyInRadius(player.position, 2);
         if (shopId == -1)
@@ -287,12 +287,12 @@ tradeMarket.checkPosForOpenBeachBuyMenu = function(player) {
             inventory.getItemListTrade(player, rentId, inventory.types.TradeBeach);
     }
     catch (e) {
-        WixCore.Debug.Server(e);
+        WixCore.Function.Debug.Server(e);
     }
 };
 
 tradeMarket.checkPosForOpenBlackCreateMenu = function(player) {
-    WixCore.Debug.Server('tradeMarket.checkPosForOpenBlackCreateMenu');
+    WixCore.Function.Debug.Server('tradeMarket.checkPosForOpenBlackCreateMenu');
     try {
         let shopId = tradeMarket.getBlackInRadius(player.position, 2);
         if (shopId == -1)
@@ -300,12 +300,12 @@ tradeMarket.checkPosForOpenBlackCreateMenu = function(player) {
         player.call('client:menuList:showTradeBlackCreateMenu', [shopId]);
     }
     catch (e) {
-        WixCore.Debug.Server(e);
+        WixCore.Function.Debug.Server(e);
     }
 };
 
 tradeMarket.checkPosForOpenBlackBuyMenu = function(player) {
-    WixCore.Debug.Server('tradeMarket.checkPosForOpenBlackBuyMenu');
+    WixCore.Function.Debug.Server('tradeMarket.checkPosForOpenBlackBuyMenu');
     try {
         let shopId = tradeMarket.getBlackBuyInRadius(player.position, 2);
         if (shopId == -1)
@@ -315,6 +315,6 @@ tradeMarket.checkPosForOpenBlackBuyMenu = function(player) {
             inventory.getItemListTrade(player, rentId, inventory.types.TradeBlack);
     }
     catch (e) {
-        WixCore.Debug.Server(e);
+        WixCore.Function.Debug.Server(e);
     }
 };

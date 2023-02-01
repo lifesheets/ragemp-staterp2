@@ -168,6 +168,6 @@ mp.events.add('server:casino:wheel:finalRoll', (player) => {
         user.achiveDoneDailyById(player, 10);
     }
     catch (e) {
-        WixCore.Debug.Server(e);
+        WixCore.Function.Debug.Server(e);
     }
 });

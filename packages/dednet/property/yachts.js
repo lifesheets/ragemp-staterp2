@@ -13,7 +13,7 @@ let hBlips = new Map();
 let count = 0;
 
 yachts.loadAll = function() {
-    WixCore.Debug.Server('yachts.loadAll');
+    WixCore.Function.Debug.Server('yachts.loadAll');
 
     mysql.executeQuery(`SELECT * FROM yachts`, function (err, rows, fields) {
         rows.forEach(function(item) {
@@ -36,7 +36,7 @@ yachts.loadAll = function() {
             hBlips.set(item['id'], hBlip);
         });
         count = rows.length;
-        WixCore.Debug.Server('All Yachts Loaded: ' + count);
+        WixCore.Function.Debug.Server('All Yachts Loaded: ' + count);
     });
 };
 
@@ -53,12 +53,12 @@ yachts.set = function(id, key, val) {
 };
 
 yachts.getAll = function() {
-    WixCore.Debug.Server('yachts.getAll');
+    WixCore.Function.Debug.Server('yachts.getAll');
     return hBlips;
 };
 
 yachts.updateOwnerInfo = function (id, userId, userName) {
-    WixCore.Debug.Server('yachts.updateOwnerInfo');
+    WixCore.Function.Debug.Server('yachts.updateOwnerInfo');
     id = methods.parseInt(id);
     userId = methods.parseInt(userId);
 
@@ -75,7 +75,7 @@ yachts.updateOwnerInfo = function (id, userId, userName) {
 };
 
 yachts.updateName = function (id, name) {
-    WixCore.Debug.Server('yachts.updateName');
+    WixCore.Function.Debug.Server('yachts.updateName');
     id = methods.parseInt(id);
     name = methods.removeQuotes2(methods.removeQuotes(name));
     yachts.set(id, 'name', name);
@@ -83,7 +83,7 @@ yachts.updateName = function (id, name) {
 };
 
 yachts.sell = function (player) {
-    WixCore.Debug.Server('yachts.sell');
+    WixCore.Function.Debug.Server('yachts.sell');
     if (!user.isLogin(player))
         return;
 
@@ -118,7 +118,7 @@ yachts.sell = function (player) {
 };
 
 yachts.buy = function (player, id) {
-    WixCore.Debug.Server('yachts.buy');
+    WixCore.Function.Debug.Server('yachts.buy');
 
     if (!user.isLogin(player))
         return;
