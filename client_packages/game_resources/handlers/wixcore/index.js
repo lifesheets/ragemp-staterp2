@@ -3,9 +3,10 @@
 global.WixCore = {};
 
 WixCore.Kernel          = './game_resources/handlers/wixcore/';
-WixCore.Events          = './game_resources/handlers/events/';
-WixCore.Libraries       = './game_resources/handlers/wixcore/libraries/';
-WixCore.Module          = './game_resources/handlers/wixcore/modules/';
+WixCore.Config          = './game_resources/handlers/configs/';
+WixCore.Event           = './game_resources/handlers/events/';
+WixCore.Librarie        = './game_resources/handlers/libraries/';
+WixCore.Module          = './game_resources/handlers/modules/';
 
-WixCore.Array           = require('./game_resources/handlers/wixcore/array');
-WixCore.Function        = require('./game_resources/handlers/wixcore/functions');``
+WixCore.Array           = require(WixCore.Kernel + 'array');
+WixCore.Function        = require(WixCore.Kernel + 'functions');``
