@@ -1,44 +1,43 @@
 "use strict"; // Created by ua.lifesheets on 29.01.2023
 
-require('dotenv').config();
-
 //#region Global
-global.fs = require('fs');
-global.path = require('path');
-global.Sequelize = require('sequelize');
-global.Op = Sequelize.Op;
-global.WixCore = {};
+global.fs                       = require('fs');
+global.path                     = require('path');
+global.Sequelize                = require('sequelize');
+global.Op                       = Sequelize.Op;
+global.WixCore                  = {};
 //#endregion
 
 //#region Config
-WixCore.Config = {}
+WixCore.Config                  = {}
+WixCore.Config.discord          = require('./configs/discord');
 //#endregion
 
 //#region Array
-WixCore.Array = {}
-WixCore.Array.Vehicles = {}
+WixCore.Array                   = {}
+WixCore.Array.Vehicles          = {}
 WixCore.Array.Vehicles.Features = []
 //#endregion
 
 //#region Libraries
-WixCore.Library = {}
-WixCore.Library.MySQL = require('./libraries/sequelize');
+WixCore.Library                 = {}
+WixCore.Library.MySQL           = require('./libraries/sequelize');
 WixCore.Library.MySQL.Connect();
 //#endregion
 
 //#region Function
 WixCore.Function = {}
-WixCore.Function.DataTime = require('./functions/datatime');
-WixCore.Function.SaveFile = require('./functions/savefile');
-WixCore.Function.Debug = require('./functions/debug');
+WixCore.Function.DataTime       = require('./functions/datatime');
+WixCore.Function.SaveFile       = require('./functions/savefile');
+WixCore.Function.Debug          = require('./functions/debug');
 //#endregion
 
 //#region Commands
-WixCore.Commands = {}
+WixCore.Commands                = {}
 //#endregion
 
 //#region Player
-WixCore.Player = {}
+WixCore.Player                  = {}
 //#endregion
 
 //#region Modules
@@ -51,6 +50,16 @@ require('./events/debug');
 //#endregion
 
 /* Все что ниже, под удаления ..........................*/
+/* Все что ниже, под удаления ..........................*/
+/* Все что ниже, под удаления ..........................*/
+/* Все что ниже, под удаления ..........................*/
+/* Все что ниже, под удаления ..........................*/
+/* Все что ниже, под удаления ..........................*/
+/* Все что ниже, под удаления ..........................*/
+/* Все что ниже, под удаления ..........................*/
+/* Все что ниже, под удаления ..........................*/
+/* Все что ниже, под удаления ..........................*/
+
 require('./dednet/modules/cli');
 require('./dednet/modules/data');
 require('./dednet/modules/events');

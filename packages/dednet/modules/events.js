@@ -2735,37 +2735,37 @@ mp.events.addRemoteCounted('server:business:log', (player, id) => {
 mp.events.addRemoteCounted('server:discord:sendWorkGov', (player, dscrd, text) => {
     if (!user.isLogin(player))
         return;
-    discord.sendWork(process.env.discord_webhooks_workGov, player, dscrd, text);
+    discord.sendWork(WixCore.Config.discord.Work.Gov, player, dscrd, text);
 });
 
 mp.events.addRemoteCounted('server:discord:sendWorkEms', (player, dscrd, text) => {
     if (!user.isLogin(player))
         return;
-    discord.sendWork(process.env.discord_webhooks_workEms, player, dscrd, text);
+    discord.sendWork(WixCore.Config.discord.Work.Ems, player, dscrd, text);
 });
 
 mp.events.addRemoteCounted('server:discord:sendWorkNews', (player, dscrd, text) => {
     if (!user.isLogin(player))
         return;
-    discord.sendWork(process.env.discord_webhooks_workNews, player, dscrd, text);
+    discord.sendWork(WixCore.Config.discord.Work.News, player, dscrd, text);
 });
 
 mp.events.addRemoteCounted('server:discord:sendWorkBcsd', (player, dscrd, text) => {
     if (!user.isLogin(player))
         return;
-    discord.sendWork(process.env.discord_webhooks_workBcsd, player, dscrd, text);
+    discord.sendWork(WixCore.Config.discord.Work.Bcsd, player, dscrd, text);
 });
 
 mp.events.addRemoteCounted('server:discord:sendWorkLspd', (player, dscrd, text) => {
     if (!user.isLogin(player))
         return;
-    discord.sendWork(process.env.discord_webhooks_workLspd, player, dscrd, text);
+    discord.sendWork(WixCore.Config.discord.Work.Lspd, player, dscrd, text);
 });
 
 mp.events.addRemoteCounted('server:discord:sendWorkUsmc', (player, dscrd, text) => {
     if (!user.isLogin(player))
         return;
-    discord.sendWork(process.env.discord_webhooks_workUsmc, player, dscrd, text);
+    discord.sendWork(WixCore.Config.discord.Work.Usmc, player, dscrd, text);
 });
 
 mp.events.addRemoteCounted('server:invader:sendNews', (player, title, text) => {

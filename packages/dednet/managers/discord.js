@@ -26,7 +26,7 @@ discord.colorEms = "#f44336";
 discord.colorInvader = "#FFEB3B";
 
 discord.sendFractionList = function (title, sender, message, senderImg = discord.dednetImg, avatar = discord.imgGov, color = "#f44336") {
-    const Hook = new webhook.Webhook(process.env.discord_webhooks_fractionNews);
+    const Hook = new webhook.Webhook(WixCore.Config.discord.Fraction.News);
 
     const msg = new webhook.MessageBuilder()
         .setName('Новости Штата')
@@ -41,7 +41,7 @@ discord.sendFractionList = function (title, sender, message, senderImg = discord
 };
 
 discord.sendDeadList = function (target, desc, reason, sender = 'Server', senderImg = discord.dednetImg, color = "#f44336") {
-    const Hook = new webhook.Webhook(process.env.discord_webhooks_deadlist );
+    const Hook = new webhook.Webhook(WixCore.Config.discord.Player.DeadList);
 
     const msg = new webhook.MessageBuilder()
         .setName("DEAD LIST")
@@ -56,7 +56,7 @@ discord.sendDeadList = function (target, desc, reason, sender = 'Server', sender
 };
 
 discord.sendAd = function (title, name, text, phone, editor, editorImg) {
-    const Hook = new webhook.Webhook(process.env.discord_webhooks_invaderAd);
+    const Hook = new webhook.Webhook(WixCore.Config.discord.Invader.Ads);
 
     let color = "#607D8B";
     if (title === 'Покупка')
@@ -81,7 +81,7 @@ discord.sendAd = function (title, name, text, phone, editor, editorImg) {
 };
 
 discord.sendNews = function (title, text, editor, editorImg) {
-    const Hook = new webhook.Webhook(process.env.discord_webhooks_invaderNews);
+    const Hook = new webhook.Webhook(WixCore.Config.discord.Invader.News);
     const msg = new webhook.MessageBuilder()
         .setName('Новости')
         .setTitle(title)
@@ -136,7 +136,7 @@ discord.sendWork = function (url, player, dscrd, text) {
 };
 
 discord.sendMarketProperty = function (title, text) {
-    const Hook = new webhook.Webhook(process.env.discord_webhooks_marketProperty);
+    const Hook = new webhook.Webhook(WixCore.Config.discord.market.Property);
     const msg = new webhook.MessageBuilder()
         .setName('Новости имущества')
         .setTitle(title)
@@ -148,7 +148,7 @@ discord.sendMarketProperty = function (title, text) {
 };
 
 discord.sendMarketBusiness = function (title, text) {
-    const Hook = new webhook.Webhook(process.env.discord_webhooks_marketBusiness);
+    const Hook = new webhook.Webhook(WixCore.Config.discord.market.Business);
     const msg = new webhook.MessageBuilder()
         .setName('Новости бизнеса')
         .setTitle(title)
@@ -160,7 +160,7 @@ discord.sendMarketBusiness = function (title, text) {
 };
 
 discord.sendMarketVehicles = function (title, text, imgUrl) {
-    const Hook = new webhook.Webhook(process.env.discord_webhooks_marketVehicles);
+    const Hook = new webhook.Webhook(WixCore.Config.discord.market.Vehicles);
     const msg = new webhook.MessageBuilder()
         .setName('Новости транспорта')
         .setTitle(title)
