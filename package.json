@@ -20,10 +20,6 @@
     "sequelize": "^6.28.0",
     "webhook-discord": "^3.7.8"
   },
-  "devDependencies": {
-    "@types/ragemp-s": "github:CocaColaBear/types-ragemp-s#v1.0",
-    "@types/ragemp-c": "github:CocaColaBear/types-ragemp-c#v2.0"
-  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/wixcore/ragemp.git"
