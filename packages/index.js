@@ -10,6 +10,7 @@ global.WixCore                  = {};
 
 //#region Config
 WixCore.Config                  = {}
+WixCore.Config.Debug            = require('./configs/debug');
 WixCore.Config.discord          = require('./configs/discord');
 //#endregion
 

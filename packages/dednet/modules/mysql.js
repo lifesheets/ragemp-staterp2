@@ -12,11 +12,11 @@ let business = require('../property/business');
 let mysql = exports;
 
 const pool = mysql2.createPool({
-    host: process.env.dbhost,
-    user: process.env.dbuser,
-    password: process.env.dbpass,
-    database: process.env.dbname,
-    port: process.env.dbport,
+    host: WixCore.Config.MySQL.Host,
+    user: WixCore.Config.MySQL.User,
+    password: WixCore.Config.MySQL.Pass,
+    database: WixCore.Config.MySQL.Name,
+    port: WixCore.Config.MySQL.Port,
     waitForConnections: true,
     connectionLimit: 500,
     queueLimit: 0,

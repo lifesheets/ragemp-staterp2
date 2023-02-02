@@ -4,10 +4,10 @@ module.exports = {
     sequelize: null,
     Models: {},
     Connect: function () {
-        this.sequelize = new Sequelize(process.env.dbname, process.env.dbuser, process.env.dbpass, {
-            host: process.env.dbhost,
+        this.sequelize = new Sequelize(WixCore.Config.MySQL.Name, WixCore.Config.MySQL.User, WixCore.Config.MySQL.Pass, {
+            host: WixCore.Config.MySQL.Host,
             dialect: 'mysql',
-            port: process.env.dbport || 3306,
+            port: WixCore.Config.MySQL.Port || 3306,
             logging: false,
             pool: {
                 max: 50,
